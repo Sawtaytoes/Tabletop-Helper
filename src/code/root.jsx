@@ -2,9 +2,8 @@ import React, { Component } from 'react'
 import { Router, Route, Redirect, Link } from 'react-router'
 import { Provider } from 'react-redux'
 
+// Store and Routes
 import { history, store } from './store'
-
-// Routes
 import routes from './routes'
 
 // Nav Items
