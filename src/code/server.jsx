@@ -1,9 +1,12 @@
 import React from 'react'
 import { renderToString } from 'react-dom/server'
-import { RouterContext, match } from 'react-router'
-import { createMemoryHistory } from 'history/lib/createMemoryHistory'
+import { RoutingContext, match } from 'react-router'
 import { Provider } from 'react-redux'
 import { compose, createStore } from 'redux'
+import { createMemoryHistory } from 'history/lib/createMemoryHistory'
+
+// Polyfills
+import './utilities/polyfills'
 
 // Reducers & Routes
 import rootReducer from './reducers'
@@ -15,18 +18,14 @@ import routes from './routes'
  * @param initial state of the store, so that the client can be hydrated with the same state as the server
  * @param head - optional arguments to be placed into the head
  */
-function renderFullPage(renderedContent, initialState, head={
-	title: 'React Webpack Node',
-	meta: '<meta name="viewport" content="width=device-width, initial-scale=1" />',
-	link: '<link rel="stylesheet" href="/assets/styles/main.css"/>'
-}) {
+function renderFullPage(renderedContent, initialState) {
 	return `
 		<!doctype html>
 		<html lang="en">
 		<head>
-				${head.title}
-				${head.meta}
-				${head.link}
+				<title>Randomizer - Smash Up</title>
+				<meta name="viewport" content="width=device-width, initial-scale=1" />
+				<link rel="stylesheet" href="/css/main.css" />
 		</head>
 		<body>
 		<div id="app">${renderedContent}</div>
@@ -45,8 +44,8 @@ function renderFullPage(renderedContent, initialState, head={
  * and pass it into the Router.run function.
  */
 module.exports = function render(req, res) {
-	const history = createMemoryHistory()
-	const store = compose()(createStore)(rootReducer, initialState)
+	// const history = createMemoryHistory()
+	const store = compose()(createStore)(rootReducer)
 
 	/*
 	 * From the react-router docs:
@@ -76,12 +75,14 @@ module.exports = function render(req, res) {
 			res.redirect(302, redirectLocation.pathname + redirectLocation.search)
 		} else if (renderProps) {
 			const initialState = store.getState()
+
 			const renderedContent = renderToString(
 				<Provider store={store}>
-					<RouterContext {...renderProps} />
+					<RoutingContext {...renderProps} />
 				</Provider>
 			)
-			const renderedPage = renderFullPage(renderedContent, initialState, {})
+
+			const renderedPage = renderFullPage(renderedContent, initialState)
 			res.status(200).send(renderedPage)
 		} else {
 			res.status(404).send('Not Found')
