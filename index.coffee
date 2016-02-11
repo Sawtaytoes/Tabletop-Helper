@@ -73,7 +73,6 @@ if __production
 		.all '*', (req, res) ->
 			viewPath = require('path').resolve './web/backend.js'
 			require(viewPath)(req, res)
-			# res.sendFile(__base + paths.root.dest + 'index.html')
 		.listen Number(__port), ->
 			console.info 'Web Server running on port', __port
 
