@@ -1,7 +1,7 @@
 global.__base = __dirname + '/'
 global.__includes = __base + '/includes/'
 
-global.__production = process.env.NODE_ENV == 'production'
+global.__production = true||process.env.NODE_ENV == 'production'
 
 try global.__production = require __includes + 'node-env'
 
@@ -71,7 +71,9 @@ if __production
 		.use bodyParser.urlencoded extended: false
 		.post __sendEmailUri, sendEmail
 		.all '*', (req, res) ->
-			res.sendFile(__base + paths.root.dest + 'index.html')
+			viewPath = require('path').resolve './web/bundle.js'
+			require(viewPath)(req, res)
+			# res.sendFile(__base + paths.root.dest + 'index.html')
 		.listen Number(__port), ->
 			console.info 'Web Server running on port', __port
 
