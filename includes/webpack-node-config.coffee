@@ -119,12 +119,12 @@ module.exports =
 		new webpack.optimize.DedupePlugin()
 		new webpack.optimize.MinChunkSizePlugin minChunkSize: 10000
 		new webpack.optimize.OccurenceOrderPlugin()
-		new webpack.optimize.UglifyJsPlugin
-			compress: warnings: false
-			mangle: except: ['$super', '$', 'exports', 'require']
-			output:
-				comments: false
-				screw_ie8: true
+		# new webpack.optimize.UglifyJsPlugin
+		# 	compress: warnings: false
+		# 	mangle: except: ['$super', '$', 'exports', 'require']
+		# 	output:
+		# 		comments: false
+		# 		screw_ie8: true
 	] or [
 		new ExtractTextPlugin 'css/[name].css', allChunks: false
 		new webpack.HotModuleReplacementPlugin()
