@@ -38,7 +38,6 @@ class DeckFilter extends Component {
 			allFactionsSelected = allFactionsSelected && selectedFactionIds.includes(decks[i].id)
 		}
 
-		console.log(set.title, allFactionsSelected);
 		return allFactionsSelected
 	}
 
