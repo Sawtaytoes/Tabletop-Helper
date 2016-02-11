@@ -1,5 +1,5 @@
 import React from 'react'
-import { renderToString } from 'react-dom/server'
+import { renderToString, renderToStaticMarkup } from 'react-dom/server'
 import { RoutingContext, match } from 'react-router'
 import { Provider } from 'react-redux'
 import { compose, createStore } from 'redux'
@@ -19,23 +19,30 @@ import routes from './routes'
  * @param head - optional arguments to be placed into the head
  */
 function renderFullPage(renderedContent, initialState) {
-	return `
-		<!doctype html>
+	return '<!doctype html>' + renderToStaticMarkup(
 		<html lang="en">
 		<head>
-				<title>Randomizer - Smash Up</title>
+				<meta charset="utf-8" />
+
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
+				<meta name="author" content="Kevin Ghadyani" />
+				<meta name="copyright" content="Copyright Kevin Ghadyani. All Rights Reserved." />
+				<meta name="description" content="A mechanism for randomizing Smash Up deck configurations" />
+				<meta name="keywords" content="" />
+
+				<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,700,400italic" />
+				<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" />
 				<link rel="stylesheet" href="/css/main.css" />
 		</head>
 		<body>
-		<div id="app">${renderedContent}</div>
+		<div id="root" dangerouslySetInnerHTML={{__html: renderedContent}} />
 			<script>
-				window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}
+				window.__INITIAL_STATE__ = {JSON.stringify(initialState)}
 			</script>
 			<script src="/bundle.js"></script>
 		</body>
 		</html>
-	`
+	)
 }
 
 /*
