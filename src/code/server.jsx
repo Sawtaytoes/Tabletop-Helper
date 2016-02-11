@@ -22,20 +22,20 @@ function renderFullPage(renderedContent, initialState) {
 	return '<!doctype html>' + renderToStaticMarkup(
 		<html lang="en">
 		<head>
-				<meta charset="utf-8" />
+			<meta charset="utf-8" />
 
-				<meta name="viewport" content="width=device-width, initial-scale=1" />
-				<meta name="author" content="Kevin Ghadyani" />
-				<meta name="copyright" content="Copyright Kevin Ghadyani. All Rights Reserved." />
-				<meta name="description" content="A mechanism for randomizing Smash Up deck configurations" />
-				<meta name="keywords" content="" />
+			<meta name="viewport" content="width=device-width, initial-scale=1" />
+			<meta name="author" content="Kevin Ghadyani" />
+			<meta name="copyright" content="Copyright Kevin Ghadyani. All Rights Reserved." />
+			<meta name="description" content="A mechanism for randomizing Smash Up deck configurations" />
+			<meta name="keywords" content="" />
 
-				<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,700,400italic" />
-				<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" />
-				<link rel="stylesheet" href="/css/main.css" />
+			<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,700,400italic" />
+			<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" />
+			<link rel="stylesheet" href="/css/main.css" />
 		</head>
 		<body>
-		<div id="root" dangerouslySetInnerHTML={{__html: renderedContent}} />
+			<div id="root" dangerouslySetInnerHTML={{__html: renderedContent}} />
 			<script>
 				window.__INITIAL_STATE__ = {JSON.stringify(initialState)}
 			</script>
