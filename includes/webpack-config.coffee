@@ -113,10 +113,10 @@ module.exports =
 			# include: [fontFiles]
 		]
 	output:
+		filename: 'bundle.js'
 		path: __production and './web/' or '/'
 		pathinfo: not __production
 		publicPath: '/'
-		filename: 'bundle.js'
 	plugins: __production and [
 		# new ExtractTextPlugin 'css/[name].css', allChunks: false
 		new webpack.IgnorePlugin /^\.\/locale$/, [/moment$/]
