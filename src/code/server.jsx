@@ -4,7 +4,7 @@ import { renderToString, renderToStaticMarkup } from 'react-dom/server'
 import { RoutingContext, match } from 'react-router'
 import { Provider } from 'react-redux'
 import { compose, createStore } from 'redux'
-import { createMemoryHistory } from 'history/lib/createMemoryHistory'
+import createMemoryHistory from 'history/lib/createMemoryHistory'
 
 // Polyfills
 import './utilities/polyfills'
@@ -55,7 +55,7 @@ module.exports = function render(req, res) {
 	// const params = qs.parse(req.query)
 	// const numberOfPlayers = parseInt(params.numberOfPlayers, 10) || 0
 
-	// const history = createMemoryHistory()
+	const history = createMemoryHistory()
 	const store = compose()(createStore)(rootReducer, {
 		// factions: { numberOfPlayers }
 	})
@@ -91,7 +91,7 @@ module.exports = function render(req, res) {
 			const initialState = store.getState()
 
 			const renderedContent = renderToString(
-				<Provider store={store}>
+				<Provider store={store} history={history}>
 					<RoutingContext {...renderProps} />
 				</Provider>
 			)
