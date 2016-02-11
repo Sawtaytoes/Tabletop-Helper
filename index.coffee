@@ -71,7 +71,7 @@ if __production
 		.use bodyParser.urlencoded extended: false
 		.post __sendEmailUri, sendEmail
 		.all '*', (req, res) ->
-			viewPath = require('path').resolve './web/bundle.js'
+			viewPath = require('path').resolve './web/backend.js'
 			require(viewPath)(req, res)
 			# res.sendFile(__base + paths.root.dest + 'index.html')
 		.listen Number(__port), ->
