@@ -1,6 +1,7 @@
-# Pulsen Website
+# Tabletop Helper Website
 
-Source code for [PulsenGame.com](http://pulsengame.com).
+<!-- WEBSITE DOESN'T EXIST YET -->
+Source code for [example.com](http://example.com).
 
 ## Prerequisites
 
