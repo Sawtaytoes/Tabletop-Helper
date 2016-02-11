@@ -1,6 +1,7 @@
 import React from 'react'
 import { renderToString } from 'react-dom/server'
-import { RouterContext, match, createMemoryHistory } from 'react-router'
+import { RouterContext, match } from 'react-router'
+import { createMemoryHistory } from 'history/lib/createMemoryHistory'
 import { Provider } from 'react-redux'
 import { compose, createStore } from 'redux'
 
@@ -43,7 +44,7 @@ function renderFullPage(renderedContent, initialState, head={
  * We grab the state passed in from the server and the req object from Express/Koa
  * and pass it into the Router.run function.
  */
-export default function render(req, res) {
+module.exports = function render(req, res) {
 	const history = createMemoryHistory()
 	const store = compose()(createStore)(rootReducer, initialState)
 

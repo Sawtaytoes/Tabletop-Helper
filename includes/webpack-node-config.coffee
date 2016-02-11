@@ -110,7 +110,6 @@ module.exports =
 		path: __production and './web/' or '/'
 		pathinfo: not __production
 		publicPath: '/'
-		target: 'node'
 	plugins: __production and [
 		new ExtractTextPlugin 'css/[name].css', allChunks: false
 		new webpack.IgnorePlugin /^\.\/locale$/, [/moment$/]
@@ -137,3 +136,4 @@ module.exports =
 		[autoprefixer browsers: ['last 4 versions', '> 5%']]
 	prerender: __production
 	resolve: extensions: ['', '.js', '.jsx', '.cjsx', '.css', '.styl']
+	target: 'node'
