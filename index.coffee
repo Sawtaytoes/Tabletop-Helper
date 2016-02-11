@@ -56,6 +56,7 @@ if __production
 			.enable 'trust proxy'
 			.use express_enforces_ssl()
 			.use helmet()
+			.use helmet.hidePoweredBy()
 			# .use helmet.csp
 			# 	directives:
 			# 		defaultSrc: ['self']
