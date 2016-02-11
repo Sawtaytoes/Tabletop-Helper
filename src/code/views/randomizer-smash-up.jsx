@@ -64,6 +64,12 @@ class Randomizer extends Component {
 		dispatch(updateNumberOfPlayers(e.target.value))
 	}
 
+	handleRandomizeClicked(e) {
+		e.preventDefault()
+
+		this.setState({randomize: true}) // Hack to force React to redraw on click
+	}
+
 	renderNumberOfPlayers() {
 		let htmlId = 'number-of-players'
 
@@ -73,6 +79,7 @@ class Randomizer extends Component {
 					Players:
 					<input id="number-of-players" type="number" value={this.props.numberOfPlayers} onChange={this.handlePlayersChanged.bind(this)} />
 				</label>
+				<button onClick={this.handleRandomizeClicked.bind(this)}>Randomize</button>
 			</form>
 		)
 	}
