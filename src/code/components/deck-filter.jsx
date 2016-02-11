@@ -13,6 +13,9 @@ import {
 	deselectAllFactions
 } from './../actions'
 
+// Utilities
+import convertTextToId from './../utilities/convert-text-to-id'
+
 // Styles
 // import './../../assets/styl/deck-filter'
 
@@ -39,10 +42,6 @@ class DeckFilter extends Component {
 		}
 
 		return allFactionsSelected
-	}
-
-	getIdFromTitle(title) {
-		return title.toLowerCase().replace(/\s/g, '-').replace(/'/g, '')
 	}
 
 	handleSelectAllClicked(e) {
@@ -91,7 +90,7 @@ class DeckFilter extends Component {
 	}
 
 	renderSet(set, setId) {
-		let htmlId = this.getIdFromTitle(set.title)
+		let htmlId = convertTextToId(set.title)
 
 		return (
 			<div key={setId + htmlId}>
@@ -110,7 +109,7 @@ class DeckFilter extends Component {
 	}
 
 	renderDeck(deck, deckId) {
-		let htmlId = this.getIdFromTitle(deck.title),
+		let htmlId = convertTextToId(deck.title),
 			{ selectedFactionIds } = this.props
 
 		return (
