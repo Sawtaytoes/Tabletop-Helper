@@ -13,6 +13,7 @@ includes/node-env.coffee
 node_modules
 
 ## Public ##
+web/*backend.*js
 web/*bundle.*js
 web/*.eot
 web/*.jpg
