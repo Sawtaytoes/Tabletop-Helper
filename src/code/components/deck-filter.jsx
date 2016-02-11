@@ -42,7 +42,7 @@ class DeckFilter extends Component {
 	}
 
 	getIdFromTitle(title) {
-		return title.toLowerCase().replace(' ', '-').replace('\'', '')
+		return title.toLowerCase().replace(/\s/g, '-').replace(/'/g, '')
 	}
 
 	handleSelectAllClicked(e) {
