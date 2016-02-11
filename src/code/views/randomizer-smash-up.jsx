@@ -74,7 +74,7 @@ class Randomizer extends Component {
 		let htmlId = 'number-of-players'
 
 		return (
-			<form action="POST">
+			<form action="" method="post">
 				<label htmlFor="number-of-players">
 					Players:
 					<input id="number-of-players" type="number" value={this.props.numberOfPlayers} onChange={this.handlePlayersChanged.bind(this)} />

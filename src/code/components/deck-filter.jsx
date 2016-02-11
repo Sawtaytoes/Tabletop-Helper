@@ -124,7 +124,7 @@ class DeckFilter extends Component {
 	}
 
 	render() { return (
-		<form action="POST">
+		<form action="" method="post">
 			<fieldset className={this.props.containerClass}>
 				{this.renderSelectAll()}
 				{this.props.sets.map((set, setId) => {
