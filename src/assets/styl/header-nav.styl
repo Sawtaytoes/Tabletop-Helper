@@ -1,0 +1,136 @@
+@charset 'UTF-8'
+@require './includes/**/*'
+
+
+//-------------------------------------------
+// Containers
+//-------------------------------------------
+
+.header-nav
+	padding-top header-padding
+	width 100%
+	background-color background-color--alternate
+
+	@media large-up
+		padding-top 0
+		width site-content-width
+
+.header-nav__items
+	display none
+	flex-direction column
+	margin 0
+	padding-left 0
+	list-style none
+	text-align left
+
+	@media large-up
+		display flex
+		flex-direction row
+		text-align center
+
+	&.is-open
+		display flex
+
+.header-nav__subitems
+	display none
+	flex-direction column
+	padding-left rem(12)
+
+	&.is-open
+		display flex
+
+		@media large-up
+			padding-left 0
+			flex-direction row
+
+
+//-------------------------------------------
+// Content
+//-------------------------------------------
+
+.header-nav__item
+	display inline-block
+	flex 1 1 auto
+	margin-bottom 0
+	font-size rem(20)
+	font-weight bold
+	line-height 1.4
+
+.header-nav__item--image
+	font-size 0
+
+.header-nav__item--subitem
+	font-size rem(16)
+	font-weight normal
+
+.header-nav__link
+	display inline-block
+	width 100%
+	padding rem(12 16)
+	color text-color--alternate
+	text-decoration none
+	white-space nowrap
+
+	&:hover
+	&:focus
+		background-color background-color--muted
+
+	&.is-active
+		background-color background-color--wild
+
+.header-nav__link--subitem
+	&:hover
+	&:focus
+		background-color lighten(background-color--muted, 8)
+
+	&.is-active
+		background-color lighten(background-color--wild, 8)
+
+.header-nav__link__icon
+	padding-left rem(5)
+
+
+//-------------------------------------------
+// Logo
+//-------------------------------------------
+
+.header-nav__logo__link
+	display block
+	width 100%
+	overflow hidden
+
+	&:hover
+	&:focus
+		background-color background-color--muted
+
+	&.is-active
+		background-color background-color--wild
+
+
+.header-nav__logo__image
+	display inline-block
+	width rem(138)
+
+
+//-------------------------------------------
+// Menu
+//-------------------------------------------
+
+.header-nav__menu-accessor
+	position absolute
+	top 0
+	left 0
+	width 100%
+
+	@media large-up
+		display none
+
+.header-nav__menu-accessor__button
+	button()
+	padding rem(4) bubble-spacing
+	font-size rem(40)
+	text-align left
+	background-color transparent
+
+	&:hover
+		background-color background-color--wild
