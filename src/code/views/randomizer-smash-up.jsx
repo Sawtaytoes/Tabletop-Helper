@@ -123,13 +123,9 @@ class Randomizer extends Component {
 			{this.renderNumberOfPlayers()}
 			{this.renderDeckPairs()}
 
-			{/*
 			<DeckFilter
-				items={sets}
-			/>
-			*/}
-			<DeckFilter
-				items={factions}
+				sets={sets}
+				decks={factions}
 			/>
 		</article>
 	)}

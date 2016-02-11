@@ -331,6 +331,18 @@ factions = [
 	set: setNames.iyf
 ]
 
+deckSetList = []
+deckSetListReverse = {}
+
+for set, setId in sets
+	deckSetList.push Object.assign decks: [], set
+	deckSetListReverse[set.title] = deckSetList.length - 1
+
+for faction, factionId in factions
+	faction = factions[factionId]
+	setId = deckSetListReverse[faction.set]
+	deckSetList[setId].decks.push(Object.assign({ id: factionId }, faction))
+
 module.exports =
-	sets: sets
+	sets: deckSetList
 	factions: factions

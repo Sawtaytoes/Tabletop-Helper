@@ -1,11 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-// Actions
-import {
-	addRandomFaction
-} from './../actions'
-
 // Styles
 // import './../../assets/styl/deck-pair'
 
