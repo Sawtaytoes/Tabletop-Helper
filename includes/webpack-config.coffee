@@ -4,7 +4,7 @@ path = require 'path'
 paths = require __includes + 'paths'
 webpack = require 'webpack'
 
-entryFile = './' + paths.code.src + 'index'
+entryFile = './' + paths.code.src + 'client'
 
 p = (dir) ->
 	path.join(__base, dir)
