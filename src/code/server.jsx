@@ -1,3 +1,4 @@
+// import qs from 'qs'
 import React from 'react'
 import { renderToString, renderToStaticMarkup } from 'react-dom/server'
 import { RoutingContext, match } from 'react-router'
@@ -51,8 +52,14 @@ function renderFullPage(renderedContent, finalState) {
  * and pass it into the Router.run function.
  */
 module.exports = function render(req, res) {
+	// const params = qs.parse(req.query)
+	// const numberOfPlayers = parseInt(params.numberOfPlayers, 10) || 0
+
 	// const history = createMemoryHistory()
-	const store = compose()(createStore)(rootReducer)
+	const store = compose()(createStore)(rootReducer, {
+		// factions: { numberOfPlayers }
+	})
+	// console.log(store.getState().factions);
 
 	/*
 	 * From the react-router docs:
