@@ -82,7 +82,7 @@ class DeckFilter extends Component {
 		return (
 			<div>
 				<label htmlFor={htmlId}>
-					<input id={htmlId} type="checkbox" title="Select all items in the list" value={htmlId} checked={decks.length === selectedFactionIds.length} onChange={this.handleSelectAllClicked.bind(this)}
+					<input id={htmlId} name={htmlId} type="checkbox" title="Select all items in the list" value={htmlId} checked={decks.length === selectedFactionIds.length} onChange={this.handleSelectAllClicked.bind(this)}
 					/>
 					<span> <em>Select All</em></span>
 				</label>
@@ -96,7 +96,7 @@ class DeckFilter extends Component {
 		return (
 			<div key={setId + htmlId}>
 				<label htmlFor={htmlId}>
-					<input id={htmlId} type="checkbox" title={set.description} value={htmlId} checked={this.isSetChecked(set)} onChange={this.handleSetSelection.bind(this, setId)} />
+					<input id={htmlId} name={htmlId} type="checkbox" title={set.description} value={htmlId} checked={this.isSetChecked(set)} onChange={this.handleSetSelection.bind(this, setId)} />
 					<span> <strong>{set.title}</strong></span>
 				</label>
 
@@ -116,7 +116,7 @@ class DeckFilter extends Component {
 		return (
 			<div key={deckId + htmlId}>
 				<label htmlFor={htmlId}>
-					<input id={htmlId} type="checkbox" title={deck.description} value={htmlId} checked={selectedFactionIds.includes(deckId)} onChange={this.handleDeckSelection.bind(this, deckId)} />
+					<input id={htmlId} name={htmlId} type="checkbox" title={deck.description} value={htmlId} checked={selectedFactionIds.includes(deckId)} onChange={this.handleDeckSelection.bind(this, deckId)} />
 					<span> {deck.title}</span>
 				</label>
 			</div>
@@ -124,14 +124,12 @@ class DeckFilter extends Component {
 	}
 
 	render() { return (
-		<form action="" method="post">
-			<fieldset className={this.props.containerClass}>
-				{this.renderSelectAll()}
-				{this.props.sets.map((set, setId) => {
-					return this.renderSet(set, setId)
-				})}
-			</fieldset>
-		</form>
+		<fieldset className={this.props.containerClass}>
+			{this.renderSelectAll()}
+			{this.props.sets.map((set, setId) => {
+				return this.renderSet(set, setId)
+			})}
+		</fieldset>
 	)}
 }
 

@@ -71,13 +71,13 @@ class Randomizer extends Component {
 		let htmlId = 'number-of-players'
 
 		return (
-			<form action="" method="post">
-				<label htmlFor="number-of-players">
+			<fieldset>
+				<label htmlFor={htmlId}>
 					Players:
-					<input id="number-of-players" type="number" value={this.props.numberOfPlayers} onChange={this.handlePlayersChanged.bind(this)} />
+					<input id={htmlId} name={htmlId} type="number" value={this.props.numberOfPlayers} onChange={this.handlePlayersChanged.bind(this)} />
 				</label>
 				<button onClick={this.handleRandomizeClicked.bind(this)}>Randomize</button>
-			</form>
+			</fieldset>
 		)
 	}
 
@@ -124,13 +124,15 @@ class Randomizer extends Component {
 			/>
 			*/}
 
-			{this.renderNumberOfPlayers()}
-			{this.renderDeckPairs()}
+			<form action="" method="post">
+				{this.renderNumberOfPlayers()}
+				{this.renderDeckPairs()}
 
-			<DeckFilter
-				sets={sets}
-				decks={factions}
-			/>
+				<DeckFilter
+					sets={sets}
+					decks={factions}
+				/>
+			</form>
 		</article>
 	)}
 }
