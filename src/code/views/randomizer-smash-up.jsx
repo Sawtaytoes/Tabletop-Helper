@@ -54,9 +54,6 @@ class Randomizer extends Component {
 		for (let i = 0; i < numberOfFactions; i++) {
 			playerFactionIds.push(this.getRandomDeckId())
 		}
-
-
-		return
 	}
 
 	handlePlayersChanged(e) {
