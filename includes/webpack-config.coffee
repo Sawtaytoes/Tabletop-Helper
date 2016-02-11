@@ -14,6 +14,7 @@ fontFiles = p(paths.assets.src + 'font/')
 imgFiles = p(paths.assets.src + 'img/')
 sassFiles = p(paths.assets.src + 'sass/')
 stylFiles = p(paths.assets.src + 'styl/')
+
 module.exports =
 	cache: true
 	colors: not __production
