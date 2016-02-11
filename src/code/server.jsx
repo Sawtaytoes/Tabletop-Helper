@@ -18,7 +18,7 @@ import routes from './routes'
  * @param initial state of the store, so that the client can be hydrated with the same state as the server
  * @param head - optional arguments to be placed into the head
  */
-function renderFullPage(renderedContent, initialState) {
+function renderFullPage(renderedContent, finalState) {
 	return '<!doctype html>' + renderToStaticMarkup(
 		<html lang="en">
 		<head>
@@ -37,7 +37,7 @@ function renderFullPage(renderedContent, initialState) {
 		<body>
 			<div id="root" dangerouslySetInnerHTML={{__html: renderedContent}} />
 			<script>
-				window.__INITIAL_STATE__ = {JSON.stringify(initialState)}
+				window.__INITIAL_STATE__ = {JSON.stringify(finalState)}
 			</script>
 			<script src="/bundle.js"></script>
 		</body>
@@ -89,7 +89,8 @@ module.exports = function render(req, res) {
 				</Provider>
 			)
 
-			const renderedPage = renderFullPage(renderedContent, initialState)
+			const finalState = store.getState()
+			const renderedPage = renderFullPage(renderedContent, finalState)
 			res.status(200).send(renderedPage)
 		} else {
 			res.status(404).send('Not Found')
