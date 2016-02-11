@@ -27,11 +27,11 @@ module.exports =
 						cb null, require './views/randomizer-smash-up'
 			]
 		,
-			path: 'contact'
-			getComponent: (location, cb) =>
-				require.ensure [], (require) =>
-					cb null, require './views/contact'
-		,
+		# 	path: 'contact'
+		# 	getComponent: (location, cb) =>
+		# 		require.ensure [], (require) =>
+		# 			cb null, require './views/contact'
+		# ,
 			path: '*'
 			getComponent: (location, cb) =>
 				require.ensure [], (require) =>
