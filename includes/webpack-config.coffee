@@ -60,9 +60,10 @@ module.exports =
 			include: [codeFiles]
 		,
 			test: /\.css$/
-			loader: __production and ExtractTextPlugin.extract 'style',
-				'css?modules&importLoaders=1&localIdentName=[local]!postcss'
-			loaders: not __production and [
+			# loader: __production and ExtractTextPlugin.extract 'style',
+			# 	'css?modules&importLoaders=1&localIdentName=[local]!postcss'
+			# loaders: not __production and [
+			loaders: [
 				'style'
 				'css'
 				'postcss'
@@ -84,9 +85,10 @@ module.exports =
 			include: [sassFiles, p(paths.npm.slickCarousel.src)]
 		,
 			test: /\.styl$/
-			loader: __production and ExtractTextPlugin.extract 'style',
-				'css?modules&importLoaders=1&localIdentName=[local]!postcss!stylus?compress=true&linenos=false'
-			loaders: not __production and [
+			# loader: __production and ExtractTextPlugin.extract 'style',
+			# 	'css?modules&importLoaders=1&localIdentName=[local]!postcss!stylus?compress=true&linenos=false'
+			# loaders: not __production and [
+			loaders: [
 				'style'
 				'css'
 				'postcss'
@@ -115,7 +117,7 @@ module.exports =
 		publicPath: '/'
 		filename: 'bundle.js'
 	plugins: __production and [
-		new ExtractTextPlugin 'css/[name].css', allChunks: false
+		# new ExtractTextPlugin 'css/[name].css', allChunks: false
 		new webpack.IgnorePlugin /^\.\/locale$/, [/moment$/]
 		new webpack.NoErrorsPlugin()
 		new webpack.optimize.AggressiveMergingPlugin()
