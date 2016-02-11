@@ -1,23 +1,30 @@
-export const ADD_FACTION = 'ADD_FACTION'
-export const REMOVE_FACTION = 'REMOVE_FACTION'
+export const UPDATE_PLAYERS_COUNT = 'UPDATE_PLAYERS_COUNT'
 
-export const ADD_ALL_FACTIONS = 'ADD_ALL_FACTIONS'
-export const REMOVE_ALL_FACTIONS = 'REMOVE_ALL_FACTIONS'
+export const SELECT_FACTION = 'SELECT_FACTION'
+export const DESELECT_FACTION = 'DESELECT_FACTION'
 
-export const ADD_RANDOM_DECK = 'ADD_RANDOM_DECK'
-export const RESET_RANDOM_DECKS = 'RESET_RANDOM_DECKS'
+export const SELECT_ALL_FACTIONS = 'SELECT_ALL_FACTIONS'
+export const DESELECT_ALL_FACTIONS = 'DESELECT_ALL_FACTIONS'
+
+// Players
+export function updateNumberOfPlayers(numberOfPlayers) {
+	return {
+		type: UPDATE_PLAYERS_COUNT,
+		numberOfPlayers
+	}
+}
 
 // Single Item
 export function addFaction(id) {
 	return {
-		type: ADD_FACTION,
+		type: SELECT_FACTION,
 		id
 	}
 }
 
 export function removeFaction(id) {
 	return {
-		type: REMOVE_FACTION,
+		type: DESELECT_FACTION,
 		id
 	}
 }
@@ -25,25 +32,12 @@ export function removeFaction(id) {
 // All Items
 export function addAllFactions() {
 	return {
-		type: ADD_ALL_FACTIONS
+		type: SELECT_ALL_FACTIONS
 	}
 }
 
 export function removeAllFactions() {
 	return {
-		type: REMOVE_ALL_FACTIONS
-	}
-}
-
-// Random Items
-export function addRandomFaction(id) {
-	return {
-		type: ADD_RANDOM_FACTION
-	}
-}
-
-export function resetRandomFaction() {
-	return {
-		type: RESET_RANDOM_ITEMS
+		type: DESELECT_ALL_FACTIONS
 	}
 }
