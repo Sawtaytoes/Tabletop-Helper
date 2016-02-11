@@ -31,7 +31,7 @@ express = require 'express'
 paths = require __includes + 'paths'
 
 webpack = require 'webpack'
-webpackConfig = require __includes + 'webpack-config'
+webpackConfig = require __includes + 'webpack-node-config'
 
 # Setup Functions
 runServer && sendEmail = (req, res) ->

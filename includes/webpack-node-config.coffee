@@ -61,14 +61,8 @@ module.exports =
 			include: [codeFiles]
 		,
 			test: /\.css$/
-			# loader: __production and ExtractTextPlugin.extract 'style',
-			# 	'css?modules&importLoaders=1&localIdentName=[local]!postcss'
-			# loaders: not __production and [
-			loaders: [
-				'style'
-				'css'
-				'postcss'
-			]
+			loader: ExtractTextPlugin.extract 'style',
+				'css?modules&importLoaders=1&localIdentName=[local]!postcss'
 			# include: [p(paths.npm.normalize.src)]
 		,
 			test: /\.s[ac]ss$/
@@ -86,15 +80,13 @@ module.exports =
 			include: [sassFiles, p(paths.npm.slickCarousel.src)]
 		,
 			test: /\.styl$/
-			# loader: __production and ExtractTextPlugin.extract 'style',
-			# 	'css?modules&importLoaders=1&localIdentName=[local]!postcss!stylus?compress=true&linenos=false'
-			# loaders: not __production and [
-			loaders: [
-				'style'
-				'css'
-				'postcss'
-				'stylus?linenos=false'
-			]
+			loader: __production and ExtractTextPlugin.extract(
+				'style',
+				'css?modules&importLoaders=1&localIdentName=[local]!postcss!stylus?compress=true&linenos=false'
+			) or ExtractTextPlugin.extract(
+				'style',
+				'css?modules&importLoaders=1&localIdentName=[local]!postcss!stylus?linenos=false'
+			)
 			include: [stylFiles]
 		,
 		# 	test: /\.(jpe?g|png|gif|svg)$/i,
@@ -113,12 +105,14 @@ module.exports =
 			# include: [fontFiles]
 		]
 	output:
-		filename: 'bundle.js'
+		filename: 'backend.js'
+		libraryTarget: 'commonjs2'
 		path: __production and './web/' or '/'
 		pathinfo: not __production
 		publicPath: '/'
+		target: 'node'
 	plugins: __production and [
-		# new ExtractTextPlugin 'css/[name].css', allChunks: false
+		new ExtractTextPlugin 'css/[name].css', allChunks: false
 		new webpack.IgnorePlugin /^\.\/locale$/, [/moment$/]
 		new webpack.NoErrorsPlugin()
 		new webpack.optimize.AggressiveMergingPlugin()
@@ -132,6 +126,7 @@ module.exports =
 				comments: false
 				screw_ie8: true
 	] or [
+		new ExtractTextPlugin 'css/[name].css', allChunks: false
 		new webpack.HotModuleReplacementPlugin()
 		new webpack.IgnorePlugin /^\.\/locale$/, [/moment$/]
 		new webpack.optimize.OccurenceOrderPlugin true
