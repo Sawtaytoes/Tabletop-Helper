@@ -1,20 +1,28 @@
+require 'babel-core/register'
 paths = require __includes + 'paths'
-webpackConfig = require __includes + 'webpack-config'
+webpackClientConfig = require __includes + 'webpack-dev-client-config'
+indexHtml = require(__base + 'src/code/utilities/render-full-page.jsx')()
 
-webpackDevServerConfig =
+renderIndex = (req, res) ->
+	if req.headers.accept.indexOf('html') != -1
+		res.send(indexHtml)
+
+webpackServerConfig =
 	contentBase: './' + paths.root.dest
 	historyApiFallback: true
 	hot: true
 	https: __secure
-	publicPath: webpackConfig.output.publicPath
+	publicPath: webpackClientConfig.output.publicPath
 	stats: colors: true
 	proxy: {}
 
-webpackDevServerConfig.proxy[__sendEmailUri] =
+webpackServerConfig.proxy['/'] =
+	secure: __secure
+	bypass: renderIndex
+
+webpackServerConfig.proxy[__sendEmailUri] =
 	target: __protocol + '://' + __proxyServerHostname + ':' + __proxyServerPort
 	secure: __secure
-	bypass: (req, res, proxyOptions) ->
-		if req.headers.accept.indexOf('html') != -1
-			return './index.html'
+	bypass: renderIndex
 
-module.exports = webpackDevServerConfig
+module.exports = webpackServerConfig

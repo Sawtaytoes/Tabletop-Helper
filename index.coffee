@@ -1,5 +1,5 @@
 global.__base = __dirname + '/'
-global.__includes = __base + '/includes/'
+global.__includes = __base + 'includes/'
 
 global.__production = true||process.env.NODE_ENV == 'production'
 
@@ -24,71 +24,10 @@ runningMode = process.argv[2]
 runCompiler = !runningMode || runningMode == 'compile'
 runServer = !runningMode || runningMode == 'server'
 
-# Load Required
-bodyParser = require 'body-parser'
-compression = require 'compression'
-express = require 'express'
-paths = require __includes + 'paths'
-
-webpack = require 'webpack'
-webpackConfig = require __includes + 'webpack-node-config'
-
-# Setup Functions
-runServer && sendEmail = (req, res) ->
-	require(__includes + 'send-email')(req.body, res)
-
 # Start Webserver(s)
 if __production
-	runCompiler and webpack webpackConfig, (err, stats) ->
-		throw (console.error)('webpack', err) if err
-		console.info '[webpack]', stats.toString colors: true
-
-	unless runServer
-		return
-
-	app = express()
-
-	if __secure
-		express_enforces_ssl = require 'express-enforces-ssl'
-		helmet = require 'helmet'
-
-		app
-			.enable 'trust proxy'
-			.use express_enforces_ssl()
-			.use helmet()
-			.use helmet.hidePoweredBy()
-			# .use helmet.csp
-			# 	directives:
-			# 		defaultSrc: ['self']
-			# 		scriptSrc: ['self', 'www.google-analytics.com', 'ajax.googleapis.com']
-			# 		sandbox: ['allow-forms', 'allow-scripts']
-			# 	reportOnly: false
-			# 	setAllHeaders: false
-
-	app
-		.use compression()
-		.use express.static(__base + paths.root.dest)
-		.use bodyParser.urlencoded extended: false
-		.post __sendEmailUri, sendEmail
-		.all '*', (req, res) ->
-			viewPath = require('path').resolve './web/backend.js'
-			require(viewPath)(req, res)
-		.listen Number(__port), ->
-			console.info 'Web Server running on port', __port
+	runCompiler and require __includes + 'compiler-prod'
+	runServer and require __includes + 'server-prod'
 
 else # Development
-	webpackDevServer = require 'webpack-dev-server'
-	webpackDevServerConfig = require __includes + 'webpack-dev-server-config'
-
-	new webpackDevServer webpack(webpackConfig), webpackDevServerConfig
-	.listen Number(__port), __hostname, (err, stats) ->
-		if err
-			throw (console.error)('webpack-dev-server', err)
-		console.info '[webpack-dev-server]', __protocol + '://' + __hostname + ':' + __port + '/webpack-dev-server/'
-
-	express()
-		.use bodyParser.urlencoded extended: false
-		.post __sendEmailUri, sendEmail
-		.listen Number(__proxyServerPort), __hostname, (err) ->
-			console.error err if err
-			console.info '[express-server]', __protocol + '://' + __hostname + ':' + __proxyServerPort
+	require __includes + 'server-dev'
