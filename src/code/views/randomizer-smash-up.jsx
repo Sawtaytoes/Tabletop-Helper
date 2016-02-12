@@ -74,7 +74,7 @@ class Randomizer extends Component {
 			<fieldset>
 				<label htmlFor={htmlId}>
 					Players:
-					<input id={htmlId} name={htmlId} type="number" value={this.props.numberOfPlayers} onChange={this.handlePlayersChanged.bind(this)} />
+					<input id={htmlId} type="number" value={this.props.numberOfPlayers} onChange={this.handlePlayersChanged.bind(this)} />
 				</label>
 				<button onClick={this.handleRandomizeClicked.bind(this)}>Randomize</button>
 			</fieldset>
@@ -132,6 +132,8 @@ class Randomizer extends Component {
 					sets={sets}
 					decks={factions}
 				/>
+
+				<input name="state" type="hidden" value={JSON.stringify(this.props.state)} />
 			</form>
 		</article>
 	)}
@@ -139,6 +141,7 @@ class Randomizer extends Component {
 
 module.exports = connect(
 	state => ({
+		state: state,
 		numberOfPlayers: state.factions.numberOfPlayers,
 		numberOfFactions: state.factions.numberOfFactions,
 		selectedFactionIds: state.factions.selectedFactionIds
