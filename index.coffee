@@ -7,7 +7,7 @@ try global.__production = require __includes + 'node-env'
 
 global.__protocol = process.env.PROTOCOL || 'http'
 global.__hostname = process.env.HOSTNAME || 'localhost'
-global.__port = process.env.PORT || 37453
+global.__port = process.env.PORT || 37457
 
 try global.__protocol = require __includes + 'network-protocol'
 try global.__hostname = require __includes + 'network-hostname'
