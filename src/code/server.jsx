@@ -1,6 +1,6 @@
 // import qs from 'qs'
 import React from 'react'
-import { renderToString, renderToStaticMarkup } from 'react-dom/server'
+import { renderToString } from 'react-dom/server'
 import { RoutingContext, match } from 'react-router'
 import { Provider } from 'react-redux'
 import { compose, createStore } from 'redux'
@@ -8,43 +8,11 @@ import createMemoryHistory from 'history/lib/createMemoryHistory'
 
 // Polyfills
 import './utilities/polyfills'
+import renderFullPage from './utilities/render-full-page'
 
 // Reducers & Routes
 import rootReducer from './reducers'
 import routes from './routes'
-
-/*
- * Our html template file
- * @param {String} renderedContent
- * @param initial state of the store, so that the client can be hydrated with the same state as the server
- * @param head - optional arguments to be placed into the head
- */
-function renderFullPage(renderedContent, finalState) {
-	return '<!doctype html>' + renderToStaticMarkup(
-		<html lang="en">
-		<head>
-			<meta charSet="utf-8" />
-
-			<meta name="viewport" content="width=device-width, initial-scale=1" />
-			<meta name="author" content="Kevin Ghadyani" />
-			<meta name="copyright" content="Copyright Kevin Ghadyani. All Rights Reserved." />
-			<meta name="description" content="A mechanism for randomizing Smash Up deck configurations" />
-			<meta name="keywords" content="" />
-
-			<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,700,400italic" />
-			<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" />
-			<link rel="stylesheet" href="/css/main.css" />
-		</head>
-		<body>
-			<div id="root" dangerouslySetInnerHTML={{__html: renderedContent}} />
-			<script>
-				window.__INITIAL_STATE__ = {JSON.stringify(finalState)}
-			</script>
-			<script src="/bundle.js"></script>
-		</body>
-		</html>
-	)
-}
 
 /*
  * Export render function to be used in server/config/routes.js
@@ -52,14 +20,14 @@ function renderFullPage(renderedContent, finalState) {
  * and pass it into the Router.run function.
  */
 module.exports = function render(req, res) {
+	// console.log(res.body.state);
+	console.log(req.body.state);
+	const initialState = req.body && req.body.state ? JSON.parse(req.body.state) : {}
 	// const params = qs.parse(req.query)
 	// const numberOfPlayers = parseInt(params.numberOfPlayers, 10) || 0
 
 	const history = createMemoryHistory()
-	const store = compose()(createStore)(rootReducer, {
-		// factions: { numberOfPlayers }
-	})
-	// console.log(store.getState().factions);
+	const store = compose()(createStore)(rootReducer, initialState)
 
 	/*
 	 * From the react-router docs:
@@ -88,8 +56,6 @@ module.exports = function render(req, res) {
 		} else if (redirectLocation) {
 			res.redirect(302, redirectLocation.pathname + redirectLocation.search)
 		} else if (renderProps) {
-			const initialState = store.getState()
-
 			const renderedContent = renderToString(
 				<Provider store={store} history={history}>
 					<RoutingContext {...renderProps} />
