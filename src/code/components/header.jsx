@@ -13,15 +13,13 @@ export default class Header extends Component {
 
 	constructor(props) {
 		super()
-
-		this.store = props.state.store
 	}
 
 	handleLogoClick(e) {
 		e.stopPropagation()
 		e.nativeEvent.stopImmediatePropagation()
 
-		this.store.dispatch({
+		this.props.dispatch({
 			type: 'CLOSE_MENU',
 			menuIsOpen: false,
 			submenuIsOpen: false
@@ -30,14 +28,13 @@ export default class Header extends Component {
 
 	render() { return (
 		<div className="header">
-
 			<HeaderNav />
 		</div>
 	)}
 }
 
 export default connect(
-	state => ({ state: state }),
+	state => ({}),
 	null, null,
 	{ pure: false }
 )(Header);

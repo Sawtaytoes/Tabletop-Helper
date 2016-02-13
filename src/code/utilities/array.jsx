@@ -1,14 +1,16 @@
-// Takes a range or a max value
-// Creates an array of integers in that range
+export default class ArrayUtilities {
 
-export function createArrayFromRange(low, high, interval = 1) {
-	!high && (high = low - 1) && (low = 0)
+	// Takes a range or a max value
+	// Creates an array of integers in that range
+	static createArrayFromRange(low, high, interval = 1) {
+		!high && (high = low) && (low = 0)
 
-	let array = []
+		let array = []
 
-	for(let i = low; i <= high; i+=interval) {
-		array.push(i)
+		for(let i = low; i <= high; i+=interval) {
+			array.push(i)
+		}
+
+		return array
 	}
-
-	return array
 }

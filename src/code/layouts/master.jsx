@@ -6,6 +6,9 @@ import { connect } from 'react-redux'
 import Header from './../components/header'
 import Footer from './../components/footer'
 
+// Actions
+// import { closeMenu } from './../actions'
+
 // Styles
 import 'normalize.css'
 import './../../assets/styl/global'
@@ -15,20 +18,12 @@ class Master extends Component {
 	constructor(props) {
 		super()
 
-		// this.navItemsClass = {
-		// 	open: 'is-open',
-		// 	closed: ''
-		// }
+		this.navItemsClass = {
+			open: 'is-open',
+			closed: ''
+		}
 
-		// this.state = {
-		// 	headerNav: props.state.headerNav,
-		// 	menuIsOpen: props.state.headerNav.menuIsOpen || ''
-		// }
-
-		// this.bodyClickSelector = '.js-click-body'
-
-		// this.store = props.state.store
-		// this.storeUnsubscribe = this.store.subscribe(this.handleStateChange.bind(this))
+		this.bodyClickSelector = '.js-click-body'
 	}
 
 	componentDidMount() {
@@ -36,7 +31,6 @@ class Master extends Component {
 	}
 
 	componentWillUnmount() {
-		// this.storeUnsubscribe()
 		// this.unsubscribeBodyClicked()
 	}
 
@@ -50,8 +44,11 @@ class Master extends Component {
 		document.querySelector(this.bodyClickSelector).onclick = false
 	}
 
-	setHeaderOpenState() {
-		this.state.menuIsOpen = ' ' + (this.store.getState().headerNav.menuIsOpen ? this.navItemsClass.open : this.navItemsClass.closed)
+	getMenuOpenClass() {
+		let { menuIsOpen } = this.props,
+			{ open, closed } = this.navItemsClass
+
+		return ' ' + (menuIsOpen ? open : closed)
 	}
 
 	handleGoToTop(e) {
@@ -61,20 +58,8 @@ class Master extends Component {
 		window.scroll(0, 0)
 	}
 
-	handleStateChange() {
-		if (this.state.headerNav !== this.store.getState().headerNav) {
-			this.state.headerNav = this.store.getState().headerNav
-
-			this.setHeaderOpenState()
-		}
-	}
-
 	closeHeaderNav() {
-		return this.store.dispatch({
-			type: 'CLOSE_MENU',
-			menuIsOpen: false,
-			submenuIsOpen: false
-		})
+		return this.props.dispatch(closeMenu())
 	}
 
 	render() { return (
@@ -91,7 +76,7 @@ class Master extends Component {
 
 			<div className="site-container">
 				{/*
-				<header className={'site-header' + this.state.menuIsOpen}>
+				<header className={'site-header' + this.getMenuOpenClass()}>
 					<Header />
 				</header>
 				*/}
@@ -115,5 +100,5 @@ class Master extends Component {
 }
 
 export default connect(
-	state => ({ state: state })
+	// state => ({ menuIsOpen: state.collapsibleMenu.menuIsOpen })
 )(Master);

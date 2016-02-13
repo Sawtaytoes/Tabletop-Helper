@@ -1,4 +1,3 @@
-// import qs from 'qs'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { RoutingContext, match } from 'react-router'
@@ -20,11 +19,8 @@ import routes from './routes'
  * and pass it into the Router.run function.
  */
 module.exports = function render(req, res) {
-	// console.log(res.body.state);
-	console.log(req.body.state);
-	const initialState = req.body && req.body.state ? JSON.parse(req.body.state) : {}
-	// const params = qs.parse(req.query)
-	// const numberOfPlayers = parseInt(params.numberOfPlayers, 10) || 0
+	// const initialState = req.body && req.body.state ? JSON.parse(req.body.state) : {}
+	const initialState = {}
 
 	const history = createMemoryHistory()
 	const store = compose()(createStore)(rootReducer, initialState)
