@@ -1,5 +1,6 @@
 bodyParser = require 'body-parser'
 express = require 'express'
+paths = require __includes + 'paths'
 
 webpack = require 'webpack'
 webpackDevServer = require 'webpack-dev-server'
@@ -9,6 +10,9 @@ webpackServerConfig = require __includes + 'webpack-dev-server-config'
 
 sendEmail = (req, res) ->
 	require(__includes + 'send-email')(req.body, res)
+
+loadSite = (req, res) ->
+	res.end(require(__base + 'src/code/utilities/render-full-page.jsx')())
 
 module.exports = do ->
 	new webpackDevServer webpack(webpackClientConfig), webpackServerConfig
@@ -22,8 +26,11 @@ module.exports = do ->
 		console.info '[webpack-server]', stats.toString colors: true
 
 	express()
+		.use express.static __base + paths.root.dest
+		.use bodyParser.json()
 		.use bodyParser.urlencoded extended: false
 		.post __sendEmailUri, sendEmail
+		.all '*', loadSite
 		.listen Number(__proxyServerPort), __hostname, (err) ->
 			console.error err if err
 			console.info '[express-server]', __protocol + '://' + __hostname + ':' + __proxyServerPort

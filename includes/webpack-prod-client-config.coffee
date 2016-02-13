@@ -72,6 +72,13 @@ module.exports =
 			]
 			include: [stylFiles]
 		,
+			test: /\.(jpe?g|png|gif|svg)$/i,
+			loaders: [
+				'url?limit=10000'
+				'img?-minimize'
+			]
+			# include: [imgFiles]
+		,
 			test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
 			loader: 'url-loader?limit=10000&minetype=application/font-woff'
 			# include: [fontFiles]

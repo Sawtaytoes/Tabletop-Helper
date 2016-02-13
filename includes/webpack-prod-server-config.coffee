@@ -48,25 +48,23 @@ module.exports =
 			include: [codeFiles]
 		,
 			test: /\.css$/
-			loader: ExtractTextPlugin.extract 'style',
-				'css?modules&importLoaders=1&localIdentName=[local]!postcss'
+			loader: ExtractTextPlugin.extract 'css?modules&importLoaders=1&localIdentName=[local]!postcss'
 			# include: [p(paths.npm.normalize.src)]
 		,
 			test: /\.s[ac]ss$/
-			loaders: [
-				'style'
-				'css'
-				'postcss'
-				'sass?compress=true'
-			]
+			loader: ExtractTextPlugin.extract 'css?modules&importLoaders=1&localIdentName=[local]!postcss!sass?compress=true'
 			include: [sassFiles, p(paths.npm.slickCarousel.src)]
 		,
 			test: /\.styl$/
-			loader: ExtractTextPlugin.extract(
-				'style',
-				'css?modules&importLoaders=1&localIdentName=[local]!postcss!stylus?compress=true&linenos=false'
-			)
+			loader: ExtractTextPlugin.extract 'css?modules&importLoaders=1&localIdentName=[local]!postcss!stylus?compress=true&linenos=false'
 			include: [stylFiles]
+		,
+			test: /\.(jpe?g|png|gif|svg)$/i,
+			loaders: [
+				'url?limit=10000'
+				'img?-minimize'
+			]
+			# include: [imgFiles]
 		,
 			test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
 			loader: 'url-loader?limit=10000&minetype=application/font-woff'
@@ -83,7 +81,7 @@ module.exports =
 		pathinfo: false
 		publicPath: '/'
 	plugins: [
-		new ExtractTextPlugin 'css/[name].css', allChunks: false
+		new ExtractTextPlugin 'main.css', allChunks: true
 		new webpack.IgnorePlugin /^\.\/locale$/, [/moment$/]
 		new webpack.NoErrorsPlugin()
 		new webpack.optimize.AggressiveMergingPlugin()

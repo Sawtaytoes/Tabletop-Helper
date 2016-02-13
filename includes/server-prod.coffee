@@ -23,6 +23,9 @@ secureServer = (app) ->
 sendEmail = (req, res) ->
 	require(__includes + 'send-email')(req.body, res)
 
+loadSite = (req, res) ->
+	require(__base + 'web/backend.js')(req, res)
+
 module.exports = do ->
 	app = express()
 	__secure and secureServer app
@@ -33,6 +36,7 @@ module.exports = do ->
 		.use bodyParser.json()
 		.use bodyParser.urlencoded extended: false
 		.post __sendEmailUri, sendEmail
-		.all '*', require __base + 'web/backend.js'
-		.listen Number(__port), ->
+		.all '*', loadSite
+		.listen Number(__port), (err) ->
+			console.error err if err
 			console.info 'Web Server running on port', __port

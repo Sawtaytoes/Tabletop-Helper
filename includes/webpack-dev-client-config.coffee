@@ -24,15 +24,6 @@ module.exports =
 		'webpack/hot/dev-server'
 		entryFile
 	]
-	imagemin:
-		gifsicle: interlaced: false
-		jpegtran:
-			progressive: true
-			arithmetic: false
-		pngquant:
-			floyd: 0.5
-			speed: 2
-		svgo: plugins: [removeTitle: true, convertPathData: false]
 	minimize: false
 	module:
 		loaders: [
@@ -77,6 +68,13 @@ module.exports =
 				'stylus?linenos=false'
 			]
 			include: [stylFiles]
+		,
+			test: /\.(jpe?g|png|gif|svg)$/i,
+			loaders: [
+				'url?limit=10000'
+				'img?-minimize'
+			]
+			# include: [imgFiles]
 		,
 			test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
 			loader: 'url-loader?limit=10000&minetype=application/font-woff'
