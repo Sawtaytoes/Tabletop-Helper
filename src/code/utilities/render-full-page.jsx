@@ -21,10 +21,10 @@ module.exports = function renderFullPage(renderedContent = '', state = {}) {
 
 			<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,700,400italic" />
 			<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" />
-			<link rel="stylesheet" href="/css/main.css" />
+			{typeof __production !== 'undefined' && __production === true && <link id="css" rel="stylesheet" href="/main.css" />}
 		</head>
 		<body>
-			<div id="root" dangerouslySetInnerHTML={{__html: renderedContent}} />
+			<div id="root"><div dangerouslySetInnerHTML={{__html: renderedContent}}></div></div>
 			<script dangerouslySetInnerHTML={{__html: 'window.__INITIAL_STATE__ =' + JSON.stringify(state)}} />
 			<script src="/bundle.js"></script>
 		</body>
