@@ -1,3 +1,10 @@
 #/bin/bash
+cd $( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
-pm2 start index.coffee -i 0 --name ${PWD##*/} -- server
+numberOfServers=$1
+
+if [[ ! $numberOfServers ]]; then
+	numberOfServers=0
+fi
+
+pm2 start index.coffee -i $numberOfServers --name ${PWD##*/} -- server
