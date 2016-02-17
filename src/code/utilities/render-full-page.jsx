@@ -58,7 +58,7 @@ module.exports = function renderFullPage(renderedContent = undefined, state = {}
 		</head>
 		<body>
 			<div id="root" dangerouslySetInnerHTML={{__html: renderedContent}}></div>
-			<script dangerouslySetInnerHTML={{__html: 'window.__INITIAL_STATE__ =' + JSON.stringify(state)}} />
+			{__production && <script dangerouslySetInnerHTML={{__html: 'window.__INITIAL_STATE__ =' + JSON.stringify(state)}} />}
 			<script src="/bundle.js"></script>
 		</body>
 		</html>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { RoutingContext, match } from 'react-router'
+import cookie, { plugToRequest } from 'react-cookie'
 import { Provider } from 'react-redux'
 import { compose, createStore } from 'redux'
 import createMemoryHistory from 'history/lib/createMemoryHistory'
@@ -19,7 +20,7 @@ import routes from './routes'
  * and pass it into the Router.run function.
  */
 module.exports = function render(req, res) {
-	const initialState = {}
+	const initialState = { factions: plugToRequest(req, res) }
 
 	const history = createMemoryHistory()
 	const store = compose()(createStore)(rootReducer, initialState)

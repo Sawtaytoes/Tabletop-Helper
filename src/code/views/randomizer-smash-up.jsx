@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import cookie from 'react-cookie'
 
 // Components
 import DeckFilter from 'components/deck-filter'
@@ -19,7 +20,15 @@ import MuiThemeProvider from 'material-ui/lib/MuiThemeProvider';
 // Content
 import { sets, factions } from 'content/smash-up-decks'
 
-const muiTheme = getMuiTheme()
+const saveFactionsState = (factionsState) => {
+	cookie.save('factions', factionsState, {
+		path: '/',
+		secure: location.protocol === 'https:'
+	})
+
+	return factionsState
+}
+
 
 class Randomizer extends Component {
 	constructor() {
@@ -70,8 +79,7 @@ class Randomizer extends Component {
 
 	handleRandomizeClicked(e) {
 		e.preventDefault()
-
-		this.setState({randomize: true}) // Hack to force React to redraw on click
+		this.setState({}) // Hack to force React to redraw on click
 	}
 
 	renderNumberOfPlayers() {
@@ -141,7 +149,7 @@ class Randomizer extends Component {
 					decks={factions}
 				/>
 
-				<input name="state" type="hidden" value={JSON.stringify(this.props.state)} />
+				{/*<input name="factionsState" type="hidden" value={JSON.stringify(this.props.factionsState)} />*/}
 			</form>
 		</MuiThemeProvider>
 	)}
@@ -149,7 +157,7 @@ class Randomizer extends Component {
 
 module.exports = connect(
 	state => ({
-		state: state,
+		factionsState: saveFactionsState(state.factions),
 		numberOfPlayers: state.factions.numberOfPlayers,
 		numberOfFactions: state.factions.numberOfFactions,
 		selectedFactionIds: state.factions.selectedFactionIds

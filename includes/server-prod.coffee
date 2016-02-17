@@ -1,6 +1,7 @@
 bodyParser = require 'body-parser'
 compression = require 'compression'
 express = require 'express'
+cookieParser = require 'cookie-parser'
 paths = require __includes + 'paths'
 
 secureServer = (app) ->
@@ -32,6 +33,7 @@ module.exports = do ->
 
 	app
 		.use compression()
+		.use cookieParser()
 		.use express.static __base + paths.root.dest
 		.use bodyParser.json()
 		.use bodyParser.urlencoded extended: false
