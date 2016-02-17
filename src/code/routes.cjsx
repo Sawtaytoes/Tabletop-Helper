@@ -23,8 +23,8 @@ module.exports =
 			childRoutes: [
 				path: 'smash-up'
 				getComponent: (location, cb) =>
-					require.ensure [], (require) =>
-						cb null, require './views/randomizer-smash-up'
+					# require.ensure [], (require) =>
+					cb null, require './views/randomizer-smash-up'
 			]
 		,
 		# 	path: 'contact'
@@ -34,7 +34,7 @@ module.exports =
 		# ,
 			path: '*'
 			getComponent: (location, cb) =>
-				require.ensure [], (require) =>
-					cb null, require './views/404'
+				# require.ensure [], (require) =>
+				cb null, require './views/404'
 		]
 	]
