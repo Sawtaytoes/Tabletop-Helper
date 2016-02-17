@@ -1,16 +1,18 @@
 global.__base = __dirname + '/'
 global.__includes = __base + 'includes/'
 
-global.__production = true||process.env.NODE_ENV == 'production'
+global.__env = process.env.NODE_ENV || 'production'
+try global.__env = require __includes + 'node-env'
 
-try global.__production = require __includes + 'node-env'
+global.__production = __env == 'production'
 
 global.__protocol = process.env.PROTOCOL || 'http'
-global.__hostname = process.env.HOSTNAME || 'localhost'
-global.__port = process.env.PORT || 37457
-
 try global.__protocol = require __includes + 'network-protocol'
+
+global.__hostname = process.env.HOSTNAME || 'localhost'
 try global.__hostname = require __includes + 'network-hostname'
+
+global.__port = process.env.PORT || 37453
 try global.__port = require __includes + 'network-port'
 
 global.__secure = __protocol == 'https'
@@ -26,7 +28,7 @@ runServer = !runningMode || runningMode == 'server'
 
 # Start Webserver(s)
 if __production
-	runCompiler and require __includes + 'compiler-prod'
+	runCompiler and require(__includes + 'compiler-prod')(runServer)
 	runServer and require __includes + 'server-prod'
 
 else # Development
