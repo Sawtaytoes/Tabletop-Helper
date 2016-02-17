@@ -16,7 +16,10 @@ import {
 import convertTextToId from 'utilities/convert-text-to-id'
 
 // Styles
-// import './../../assets/styl/deck-filter'
+import { styleHelper } from 'utilities/style-helper'
+const styles = [
+	require('styl/deck-filter')
+]
 
 class DeckFilter extends Component {
 	// static propTypes = {
@@ -26,6 +29,11 @@ class DeckFilter extends Component {
 
 	constructor() {
 		super()
+
+		this.icons = {
+			checked: 'fa-check-circle',
+			unchecked: 'fa-check-circle-o'
+		}
 
 		this.deckSetList = []
 		this.deckSetListReverse = {}
@@ -41,6 +49,11 @@ class DeckFilter extends Component {
 		}
 
 		return allFactionsSelected
+	}
+
+	getCheckedIcon(isChecked) {
+		let { checked, unchecked } = this.icons
+		return 'fa ' + (isChecked ? checked : unchecked)
 	}
 
 	handleSelectAllClicked(e) {
@@ -75,30 +88,30 @@ class DeckFilter extends Component {
 
 	renderSelectAll() {
 		let htmlId = 'select-all-' + (Math.random() * 1000000),
-			{ decks, selectedFactionIds } = this.props
+			{ decks, selectedFactionIds } = this.props,
+			isChecked = decks.length === selectedFactionIds.length
 
 		return (
-			<div>
-				<label htmlFor={htmlId}>
-					<input id={htmlId} type="checkbox" title="Select all items in the list" value={htmlId} checked={decks.length === selectedFactionIds.length} onChange={this.handleSelectAllClicked.bind(this)}
-					/>
-					<span> <em>Select All</em></span>
-				</label>
-			</div>
+			<label htmlFor={htmlId} className="deck-filter__item deck-filter__item--select-all">
+				<input id={htmlId} className="deck-filter__checkbox" type="checkbox" title="Select all items in the list" value={htmlId} checked={isChecked} onChange={this.handleSelectAllClicked.bind(this)}
+				/>
+				<span><i className={this.getCheckedIcon(isChecked)}></i> <em>Select All</em></span>
+			</label>
 		)
 	}
 
 	renderSet(set, setId) {
-		let htmlId = convertTextToId(set.title)
+		let htmlId = convertTextToId(set.title),
+			isChecked = this.isSetChecked(set)
 
 		return (
-			<div key={setId + htmlId}>
-				<label htmlFor={htmlId}>
-					<input id={htmlId} type="checkbox" title={set.description} value={htmlId} checked={this.isSetChecked(set)} onChange={this.handleSetSelection.bind(this, setId)} />
-					<span> <strong>{set.title}</strong></span>
+			<div key={setId + htmlId} className="deck-filter__items">
+				<label htmlFor={htmlId} className="deck-filter__item deck-filter__item--group">
+					<input id={htmlId} className="deck-filter__checkbox" type="checkbox" title={set.description} value={htmlId} checked={isChecked} onChange={this.handleSetSelection.bind(this, setId)} />
+					<span><i className={this.getCheckedIcon(isChecked)}></i> <strong>{set.title}</strong></span>
 				</label>
 
-				<div>
+				<div className="deck-filter__subitems">
 					{set.decks.map((deck) => {
 						return this.renderDeck(deck, deck.id)
 					})}
@@ -109,20 +122,19 @@ class DeckFilter extends Component {
 
 	renderDeck(deck, deckId) {
 		let htmlId = convertTextToId(deck.title),
-			{ selectedFactionIds } = this.props
+			{ selectedFactionIds } = this.props,
+			isChecked = selectedFactionIds.includes(deckId)
 
 		return (
-			<div key={deckId + htmlId}>
-				<label htmlFor={htmlId}>
-					<input id={htmlId} type="checkbox" title={deck.description} value={htmlId} checked={selectedFactionIds.includes(deckId)} onChange={this.handleDeckSelection.bind(this, deckId)} />
-					<span> {deck.title}</span>
-				</label>
-			</div>
+			<label key={deckId + htmlId} htmlFor={htmlId} className="deck-filter__subitem">
+				<input id={htmlId} className="deck-filter__checkbox" type="checkbox" title={deck.description} value={htmlId} checked={isChecked} onChange={this.handleDeckSelection.bind(this, deckId)} />
+				<span><i className={this.getCheckedIcon(isChecked)}></i> {deck.title}</span>
+			</label>
 		)
 	}
 
 	render() { return (
-		<fieldset className={this.props.containerClass}>
+		<fieldset className={this.props.containerClass + ' deck-filter'}>
 			{this.renderSelectAll()}
 			{this.props.sets.map((set, setId) => {
 				return this.renderSet(set, setId)
@@ -133,4 +145,4 @@ class DeckFilter extends Component {
 
 export default connect(
 	state => ({ selectedFactionIds: state.factions.selectedFactionIds })
-)(DeckFilter);
+)(styleHelper(DeckFilter, styles));
