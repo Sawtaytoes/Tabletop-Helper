@@ -4,14 +4,14 @@ import { Router, Route, Redirect, Link } from 'react-router'
 import { Provider } from 'react-redux'
 
 // Polyfills
-import './utilities/polyfills'
+import 'utilities/polyfills'
 
 // Store and Routes
-import { history, store } from './store'
+import { history, store } from 'utilities/store'
 import routes from './routes'
 
 // Nav Items
-import navItems from './content/nav-items'
+import navItems from 'content/nav-items'
 
 // Router
 render(

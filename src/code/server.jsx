@@ -1,17 +1,18 @@
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { RoutingContext, match } from 'react-router'
-import cookie, { setRawCookie } from 'react-cookie'
+import { setRawCookie } from 'react-cookie'
 import { Provider } from 'react-redux'
 import { compose, createStore } from 'redux'
 import createMemoryHistory from 'history/lib/createMemoryHistory'
 
 // Polyfills
-import './utilities/polyfills'
-import renderFullPage from './utilities/render-full-page'
+import 'utilities/polyfills'
+import { getInitialState } from 'utilities/initial-state'
+import renderFullPage from 'utilities/render-full-page'
 
 // Reducers & Routes
-import rootReducer from './reducers'
+import rootReducer from 'reducers'
 import routes from './routes'
 
 /*
@@ -21,7 +22,7 @@ import routes from './routes'
  */
 module.exports = function render(req, res) {
 	setRawCookie(req.headers.cookie) // Initialize cookies
-	const initialState = { factions: cookie.load('factions') }
+	const initialState = getInitialState()
 
 	const history = createMemoryHistory()
 	const store = compose()(createStore)(rootReducer, initialState)
