@@ -10,10 +10,10 @@ import {
 	deselectFaction,
 	deselectSetFactions,
 	deselectAllFactions
-} from './../actions'
+} from 'actions'
 
 // Utilities
-import convertTextToId from './../utilities/convert-text-to-id'
+import convertTextToId from 'utilities/convert-text-to-id'
 
 // Styles
 // import './../../assets/styl/deck-filter'
