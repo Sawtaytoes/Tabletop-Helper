@@ -14,10 +14,6 @@ const styles = [
 ]
 
 class NoMatch extends Component {
-	constructor() {
-		super()
-	}
-
 	handleGoBack(e) {
 		e.preventDefault()
 		this.props.pushPath(this.props.dispatch(pushPath('/game')))

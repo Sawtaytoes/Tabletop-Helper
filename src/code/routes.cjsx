@@ -29,8 +29,8 @@ module.exports =
 		,
 		# 	path: 'contact'
 		# 	getComponent: (location, cb) =>
-		# 		require.ensure [], (require) =>
-		# 			cb null, require './views/contact'
+		# 		# require.ensure [], (require) =>
+		# 		cb null, require './views/contact'
 		# ,
 			path: '*'
 			getComponent: (location, cb) =>

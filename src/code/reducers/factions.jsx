@@ -6,11 +6,11 @@ import {
 	DESELECT_FACTION,
 	DESELECT_SET_FACTIONS,
 	DESELECT_ALL_FACTIONS
-} from './../actions'
-import { createArrayFromRange } from './../utilities/array'
+} from 'actions'
+import { createArrayFromRange } from 'utilities/array'
 
 // Content
-import { sets, factions } from './../content/smash-up-decks'
+import { sets, factions } from 'content/smash-up-decks'
 
 let allFactionsList = () => {
 	return createArrayFromRange(factions.length)

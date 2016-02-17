@@ -2,17 +2,24 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 // Components
-import DeckFilter from './../components/deck-filter'
-import DeckPair from './../components/deck-pair'
-import PageDescription from './../components/page-description'
+import DeckFilter from 'components/deck-filter'
+import DeckPair from 'components/deck-pair'
+import PageDescription from 'components/page-description'
+import RaisedButton from 'material-ui/lib/raised-button';
 
 // Actions
 import {
 	updateNumberOfPlayers
-} from './../actions'
+} from 'actions'
+
+// Styles
+import getMuiTheme from 'material-ui/lib/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/lib/MuiThemeProvider';
 
 // Content
-import { sets, factions } from './../content/smash-up-decks'
+import { sets, factions } from 'content/smash-up-decks'
+
+const muiTheme = getMuiTheme()
 
 class Randomizer extends Component {
 	constructor() {
@@ -76,6 +83,7 @@ class Randomizer extends Component {
 					Players:
 					<input id={htmlId} type="number" value={this.props.numberOfPlayers} onChange={this.handlePlayersChanged.bind(this)} />
 				</label>
+				<RaisedButton label="Randomize" />
 				<button onClick={this.handleRandomizeClicked.bind(this)}>Randomize</button>
 			</fieldset>
 		)
@@ -116,7 +124,7 @@ class Randomizer extends Component {
 	}
 
 	render() { return (
-		<article>
+		<MuiThemeProvider muiTheme={muiTheme}>
 			{/*
 			<PageDescription
 				title="Smash Up Randomizer"
@@ -135,7 +143,7 @@ class Randomizer extends Component {
 
 				<input name="state" type="hidden" value={JSON.stringify(this.props.state)} />
 			</form>
-		</article>
+		</MuiThemeProvider>
 	)}
 }
 
@@ -146,4 +154,4 @@ module.exports = connect(
 		numberOfFactions: state.factions.numberOfFactions,
 		selectedFactionIds: state.factions.selectedFactionIds
 	})
-)(Randomizer);
+)(Randomizer)
