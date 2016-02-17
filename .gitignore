@@ -14,7 +14,7 @@ node_modules
 
 ## Public ##
 web/*
-!web/favicon.*
+!web/favicons
 
 ## Misc ##
 .DS_Store

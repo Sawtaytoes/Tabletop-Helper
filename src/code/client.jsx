@@ -19,6 +19,3 @@ render(
 		<Router history={history} routes={routes} />
 	</Provider>
 , document.getElementById('root'))
-
-// Remove main.css as it's no longer needed
-document.getElementById('css').remove()

@@ -5,13 +5,17 @@ import { connect } from 'react-redux'
 // Components
 import HeaderNav from './header-nav'
 
-// Styles
-import './../../assets/styl/header'
+// Utilities
+import { styleHelper } from 'utilities/style-helper'
 
-export default class Header extends Component {
+const styles = [
+	require('styl/header')
+]
+
+class Header extends Component {
 	// static propTypes = {};
 
-	constructor(props) {
+	constructor() {
 		super()
 	}
 
@@ -37,4 +41,4 @@ export default connect(
 	state => ({}),
 	null, null,
 	{ pure: false }
-)(Header);
+)(styleHelper(Header, styles));

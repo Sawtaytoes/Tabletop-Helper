@@ -1,9 +1,14 @@
 import React, { Component, PropTypes } from 'react'
 
-// Styles
-import './../../assets/styl/footer'
+// Utilities
+import { styleHelper } from 'utilities/style-helper'
 
-export default class Footer extends Component {
+// Styles
+const styles = [
+	require('styl/footer')
+]
+
+class Footer extends Component {
 	// static propTypes = {};
 
 	render() { return (
@@ -14,3 +19,5 @@ export default class Footer extends Component {
 		</div>
 	)}
 }
+
+export default styleHelper(Footer, styles)

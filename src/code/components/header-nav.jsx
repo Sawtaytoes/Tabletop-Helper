@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 import { connect } from 'react-redux'
 
 // Components
-import ExternalLink from './../components/external-link'
+import ExternalLink from 'components/external-link'
 
 // Actions
 import {
@@ -11,15 +11,19 @@ import {
 	closeMenu,
 	openSubMenu,
 	closeSubMenu
-} from './../actions'
+} from 'actions'
 
-// Styles
-import './../../assets/styl/header-nav'
+// Utilities
+import { styleHelper } from 'utilities/style-helper'
+
+const styles = [
+	require('styl/header-nav')
+]
 
 class HeaderNav extends Component {
 	// static propTypes = {};
 
-	constructor(props) {
+	constructor() {
 		super()
 
 		this.navItemsClass = {
@@ -115,7 +119,7 @@ class HeaderNav extends Component {
 			</div>
 
 			<ul className={'header-nav__items' + this.getNavItemsClass()}>
-				{this.renderLinks(require('./../content/nav-items'), '')}
+				{this.renderLinks(require('content/nav-items'), '')}
 			</ul>
 		</nav>
 	)}
@@ -129,5 +133,5 @@ export default connect(
 	}),
 	null, null,
 	{ pure: false }
-)(HeaderNav);
+)(styleHelper(HeaderNav, styles));
 

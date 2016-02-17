@@ -3,10 +3,15 @@ import { connect } from 'react-redux'
 import { pushPath } from 'redux-simple-router'
 
 // Components
-import PageDescription from './../components/page-description'
+import PageDescription from 'components/page-description'
+
+// Utilities
+import { styleHelper } from 'utilities/style-helper'
 
 // Styles
-import './../../assets/styl/contact'
+const styles = [
+	require('styl/contact')
+]
 
 class NoMatch extends Component {
 	constructor() {
@@ -35,4 +40,4 @@ class NoMatch extends Component {
 module.exports = connect(
 	state => ({}),
 	dispatch => ({ dispatch, pushPath })
-)(NoMatch)
+)(styleHelper(NoMatch, styles))

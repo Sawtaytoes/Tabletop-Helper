@@ -3,19 +3,23 @@ import GoogleAnalytics from 'react-g-analytics'
 import { connect } from 'react-redux'
 
 // Components
-import Header from './../components/header'
-import Footer from './../components/footer'
+import Header from 'components/header'
+import Footer from 'components/footer'
 
 // Actions
-// import { closeMenu } from './../actions'
+import { closeMenu } from 'actions'
 
-// Styles
-import 'normalize.css'
-import './../../assets/styl/global'
-import './../../assets/styl/site'
+// Utilities
+import { styleHelper } from 'utilities/style-helper'
+
+const styles = [
+	require('normalize.css'),
+	require('styl/global'),
+	require('styl/site')
+]
 
 class Master extends Component {
-	constructor(props) {
+	constructor() {
 		super()
 
 		this.navItemsClass = {
@@ -70,7 +74,7 @@ class Master extends Component {
 			<hr className="site-background" />
 
 			<div className="site-go-to-top" id="js-go-to-top">
-				<p><a className="site-go-to-top__link" href="#top" onClick={this.handleGoToTop}><i className="fa fa-arrow-up"></i></a></p>
+				<a className="site-go-to-top__link" href="#top" onClick={this.handleGoToTop}><i className="fa fa-arrow-up"></i></a>
 			</div>
 			*/}
 
@@ -100,5 +104,5 @@ class Master extends Component {
 }
 
 export default connect(
-	// state => ({ menuIsOpen: state.collapsibleMenu.menuIsOpen })
-)(Master);
+	state => ({ menuIsOpen: state.collapsibleMenu.menuIsOpen })
+)(styleHelper(Master, styles))

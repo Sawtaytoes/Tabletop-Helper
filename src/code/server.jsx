@@ -19,33 +19,11 @@ import routes from './routes'
  * and pass it into the Router.run function.
  */
 module.exports = function render(req, res) {
-	// const initialState = req.body && req.body.state ? JSON.parse(req.body.state) : {}
 	const initialState = {}
 
 	const history = createMemoryHistory()
 	const store = compose()(createStore)(rootReducer, initialState)
 
-	/*
-	 * From the react-router docs:
-	 *
-	 * This function is to be used for server-side rendering. It matches a set of routes to
-	 * a location, without rendering, and calls a callback(error, redirectLocation, renderProps)
-	 * when it's done.
-	 *
-	 * The function will create a `history` for you, passing additional `options` to create it.
-	 * These options can include `basename` to control the base name for URLs, as well as the pair
-	 * of `parseQueryString` and `stringifyQuery` to control query string parsing and serializing.
-	 * You can also pass in an already instantiated `history` object, which can be constructured
-	 * however you like.
-	 *
-	 * The three arguments to the callback function you pass to `match` are:
-	 * - error: A javascript Error object if an error occured, `undefined` otherwise.
-	 * - redirectLocation: A `Location` object if the route is a redirect, `undefined` otherwise
-	 * - renderProps: The props you should pass to the routing context if the route matched, `undefined`
-	 *                otherwise.
-	 * If all three parameters are `undefined`, this means that there was no route found matching the
-	 * given location.
-	 */
 	match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
 		if (error) {
 			res.status(500).send(error.message)
@@ -53,7 +31,7 @@ module.exports = function render(req, res) {
 			res.redirect(302, redirectLocation.pathname + redirectLocation.search)
 		} else if (renderProps) {
 			const renderedContent = renderToString(
-				<Provider store={store} history={history}>
+				<Provider store={store}>
 					<RoutingContext {...renderProps} />
 				</Provider>
 			)
