@@ -148,8 +148,8 @@ service nginx stop
 
 /usr/share/letsencrypt/letsencrypt-auto certonly \
 -a standalone \
--d www.SERVER_NAME \
 -d SERVER_NAME \
+-d www.SERVER_NAME \
 --server https://acme-v01.api.letsencrypt.org/directory
 
 service nginx start
@@ -160,8 +160,8 @@ Or try this experimental approach:
 ```shell
 /usr/share/letsencrypt/letsencrypt-auto certonly \
 -a nginx \
--d www.SERVER_NAME \
 -d SERVER_NAME \
+-d www.SERVER_NAME \
 --server https://acme-v01.api.letsencrypt.org/directory
 ```
 
