@@ -2,8 +2,6 @@ import cookie from 'react-cookie'
 
 import { compose, createStore } from 'redux'
 import { syncReduxAndRouter } from 'redux-simple-router'
-// import { devTools } from 'redux-devtools';
-// import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react'
 
 import rootReducer from './reducers'
 import createBrowserHistory from 'history/lib/createBrowserHistory'
