@@ -8,6 +8,10 @@ webpackDevServer = require 'webpack-dev-server'
 webpackClientConfig = require __includes + 'webpack-dev-client-config'
 webpackServerConfig = require __includes + 'webpack-dev-server-config'
 
+onBuild = (taskName, err, stats) ->
+	throw (console.error)('webpack', err) if err
+	console.info taskName, __protocol + '://' + __hostname + ':' + __port
+
 sendEmail = (req, res) ->
 	require(__includes + 'send-email')(req.body, res)
 
@@ -16,14 +20,7 @@ loadSite = (req, res) ->
 
 module.exports = do ->
 	new webpackDevServer webpack(webpackClientConfig), webpackServerConfig
-	.listen Number(__port), __hostname, (err, stats) ->
-		if err
-			throw (console.error)('webpack-dev-server', err)
-		console.info '[webpack-dev-server]', __protocol + '://' + __hostname + ':' + __port + '/webpack-dev-server/'
-
-	webpack webpackServerConfig, (err, stats) ->
-		throw (console.error)('webpack', err) if err
-		console.info '[webpack-server]', stats.toString colors: true
+		.listen Number(__port), __hostname, onBuild.bind null, '[webpack-dev-server]'
 
 	express()
 		.use express.static __base + paths.root.dest

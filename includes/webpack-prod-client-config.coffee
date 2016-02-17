@@ -48,7 +48,7 @@ module.exports =
 		,
 			test: /\.css$/
 			loaders: [
-				'style'
+				'isomorphic-style'
 				'css'
 				'postcss'
 			]
@@ -56,7 +56,7 @@ module.exports =
 		,
 			test: /\.s[ac]ss$/
 			loaders: [
-				'style'
+				'isomorphic-style'
 				'css'
 				'postcss'
 				'sass?compress=true'
@@ -65,7 +65,7 @@ module.exports =
 		,
 			test: /\.styl$/
 			loaders: [
-				'style'
+				'isomorphic-style'
 				'css'
 				'postcss'
 				'stylus?linenos=false&compress=true'
@@ -109,4 +109,9 @@ module.exports =
 	postcss: ->
 		[autoprefixer browsers: ['last 4 versions', '> 5%']]
 	prerender: true
-	resolve: extensions: ['', '.js', '.jsx', '.cjsx', '.css', '.styl']
+	resolve:
+		extensions: ['', '.js', '.jsx', '.cjsx', '.css', '.styl']
+		root: [
+			p 'src/assets'
+			p 'src/code'
+		]

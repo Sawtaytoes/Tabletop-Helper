@@ -6,7 +6,7 @@ webpack = require 'webpack'
 entryFile = './' + paths.code.src + 'client'
 
 p = (dir) ->
-	path.join(__base, dir)
+	path.join __base, dir
 
 codeFiles = p(paths.code.src)
 fontFiles = p(paths.assets.src + 'font/')
@@ -45,7 +45,7 @@ module.exports =
 		,
 			test: /\.css$/
 			loaders: [
-				'style'
+				'isomorphic-style'
 				'css'
 				'postcss'
 			]
@@ -53,7 +53,7 @@ module.exports =
 		,
 			test: /\.s[ac]ss$/
 			loaders: [
-				'style'
+				'isomorphic-style'
 				'css?sourceMap'
 				'postcss?sourceMap'
 				'sass?sourceMap'
@@ -62,7 +62,7 @@ module.exports =
 		,
 			test: /\.styl$/
 			loaders: [
-				'style'
+				'isomorphic-style'
 				'css'
 				'postcss'
 				'stylus?linenos=false'
@@ -99,4 +99,9 @@ module.exports =
 	postcss: ->
 		[autoprefixer browsers: ['last 4 versions', '> 5%']]
 	prerender: false
-	resolve: extensions: ['', '.js', '.jsx', '.cjsx', '.css', '.styl']
+	resolve:
+		extensions: ['', '.js', '.jsx', '.cjsx', '.css', '.styl']
+		root: [
+			p 'src/assets'
+			p 'src/code'
+		]

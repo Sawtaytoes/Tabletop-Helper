@@ -1,5 +1,4 @@
 autoprefixer = require 'autoprefixer'
-ExtractTextPlugin = require 'extract-text-webpack-plugin'
 path = require 'path'
 paths = require __includes + 'paths'
 webpack = require 'webpack'
@@ -48,15 +47,29 @@ module.exports =
 			include: [codeFiles]
 		,
 			test: /\.css$/
-			loader: ExtractTextPlugin.extract 'css?modules&importLoaders=1&localIdentName=[local]!postcss'
+			loaders: [
+				'isomorphic-style'
+				'css'
+				'postcss'
+			]
 			# include: [p(paths.npm.normalize.src)]
 		,
 			test: /\.s[ac]ss$/
-			loader: ExtractTextPlugin.extract 'css?modules&importLoaders=1&localIdentName=[local]!postcss!sass?compress=true'
+			loaders: [
+				'isomorphic-style'
+				'css'
+				'postcss'
+				'sass?compress=true'
+			]
 			include: [sassFiles, p(paths.npm.slickCarousel.src)]
 		,
 			test: /\.styl$/
-			loader: ExtractTextPlugin.extract 'css?modules&importLoaders=1&localIdentName=[local]!postcss!stylus?compress=true&linenos=false'
+			loaders: [
+				'isomorphic-style'
+				'css'
+				'postcss'
+				'stylus?linenos=false&compress=true'
+			]
 			include: [stylFiles]
 		,
 			test: /\.(jpe?g|png|gif|svg)$/i,
@@ -81,7 +94,6 @@ module.exports =
 		pathinfo: false
 		publicPath: '/'
 	plugins: [
-		new ExtractTextPlugin 'main.css', allChunks: true
 		new webpack.IgnorePlugin /^\.\/locale$/, [/moment$/]
 		new webpack.NoErrorsPlugin()
 		new webpack.optimize.AggressiveMergingPlugin()
@@ -98,5 +110,10 @@ module.exports =
 	postcss: ->
 		[autoprefixer browsers: ['last 4 versions', '> 5%']]
 	prerender: true
-	resolve: extensions: ['', '.js', '.jsx', '.cjsx', '.css', '.styl']
+	resolve:
+		extensions: ['', '.js', '.jsx', '.cjsx', '.css', '.styl']
+		root: [
+			p 'src/assets'
+			p 'src/code'
+		]
 	target: 'node'
