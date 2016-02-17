@@ -21,5 +21,5 @@ syncReduxAndRouter(history, store)
 
 export {
 	history,
-	store,
+	store
 }
