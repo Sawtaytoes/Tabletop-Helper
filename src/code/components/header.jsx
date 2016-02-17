@@ -5,23 +5,25 @@ import { connect } from 'react-redux'
 // Components
 import HeaderNav from './header-nav'
 
-// Styles
-import './../../assets/styl/header'
+// Utilities
+import { styleHelper } from 'utilities/style-helper'
 
-export default class Header extends Component {
+const styles = [
+	require('styl/header')
+]
+
+class Header extends Component {
 	// static propTypes = {};
 
-	constructor(props) {
+	constructor() {
 		super()
-
-		this.store = props.state.store
 	}
 
 	handleLogoClick(e) {
 		e.stopPropagation()
 		e.nativeEvent.stopImmediatePropagation()
 
-		this.store.dispatch({
+		this.props.dispatch({
 			type: 'CLOSE_MENU',
 			menuIsOpen: false,
 			submenuIsOpen: false
@@ -30,14 +32,13 @@ export default class Header extends Component {
 
 	render() { return (
 		<div className="header">
-
 			<HeaderNav />
 		</div>
 	)}
 }
 
 export default connect(
-	state => ({ state: state }),
+	state => ({}),
 	null, null,
 	{ pure: false }
-)(Header);
+)(styleHelper(Header, styles));

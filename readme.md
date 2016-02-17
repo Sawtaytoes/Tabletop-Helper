@@ -1,6 +1,7 @@
-# Pulsen Website
+# Tabletop Helper Website
 
-Source code for [PulsenGame.com](http://pulsengame.com).
+<!-- WEBSITE DOESN'T EXIST YET -->
+Source code for [example.com](http://example.com).
 
 ## Prerequisites
 
@@ -81,6 +82,12 @@ Start the SMTP server using `maildev`.
 ### Development: Local
 
 ```shell
+bash local.sh
+```
+
+OR
+
+```shell
 coffee index.coffee
 ```
 
@@ -104,14 +111,32 @@ git push heroku master
 
 #### Start the Server
 
+Start a single server for testing:
+
 ```shell
 bash server.sh
 ```
+
+Start a cluster of 3 servers for load balancing in production:
+
+```shell
+bash server.sh 3
+```
+
+The number 3 can be replaced with any number. The default is 0: equal to the number of CPU cores.
 
 #### Update from Git and Restart
 
 ```shell
 bash update.sh
+```
+
+If you update the update.sh file, make sure to run `git pull` prior to running the update script.
+
+#### Stop the Server
+
+```shell
+bash stop-server.sh
 ```
 
 ### Create SSL Cert
@@ -123,8 +148,8 @@ service nginx stop
 
 /usr/share/letsencrypt/letsencrypt-auto certonly \
 -a standalone \
--d www.SERVER_NAME \
 -d SERVER_NAME \
+-d www.SERVER_NAME \
 --server https://acme-v01.api.letsencrypt.org/directory
 
 service nginx start
@@ -135,8 +160,8 @@ Or try this experimental approach:
 ```shell
 /usr/share/letsencrypt/letsencrypt-auto certonly \
 -a nginx \
--d www.SERVER_NAME \
 -d SERVER_NAME \
+-d www.SERVER_NAME \
 --server https://acme-v01.api.letsencrypt.org/directory
 ```
 

@@ -1,49 +1,61 @@
-export const ADD_FACTION = 'ADD_FACTION'
-export const REMOVE_FACTION = 'REMOVE_FACTION'
+export const UPDATE_PLAYERS_COUNT = 'UPDATE_PLAYERS_COUNT'
 
-export const ADD_ALL_FACTIONS = 'ADD_ALL_FACTIONS'
-export const REMOVE_ALL_FACTIONS = 'REMOVE_ALL_FACTIONS'
+export const SELECT_FACTION = 'SELECT_FACTION'
+export const DESELECT_FACTION = 'DESELECT_FACTION'
 
-export const ADD_RANDOM_DECK = 'ADD_RANDOM_DECK'
-export const RESET_RANDOM_DECKS = 'RESET_RANDOM_DECKS'
+export const SELECT_SET_FACTIONS = 'SELECT_SET_FACTIONS'
+export const DESELECT_SET_FACTIONS = 'DESELECT_SET_FACTIONS'
 
-// Single Item
-export function addFaction(id) {
+export const SELECT_ALL_FACTIONS = 'SELECT_ALL_FACTIONS'
+export const DESELECT_ALL_FACTIONS = 'DESELECT_ALL_FACTIONS'
+
+// Players
+export function updateNumberOfPlayers(numberOfPlayers) {
 	return {
-		type: ADD_FACTION,
+		type: UPDATE_PLAYERS_COUNT,
+		numberOfPlayers
+	}
+}
+
+// Single Faction
+export function selectFaction(id) {
+	return {
+		type: SELECT_FACTION,
 		id
 	}
 }
 
-export function removeFaction(id) {
+export function deselectFaction(id) {
 	return {
-		type: REMOVE_FACTION,
+		type: DESELECT_FACTION,
 		id
 	}
 }
 
-// All Items
-export function addAllFactions() {
+// Set of Factions
+export function selectSetFactions(setId) {
 	return {
-		type: ADD_ALL_FACTIONS
+		type: SELECT_SET_FACTIONS,
+		setId
 	}
 }
 
-export function removeAllFactions() {
+export function deselectSetFactions(setId) {
 	return {
-		type: REMOVE_ALL_FACTIONS
+		type: DESELECT_SET_FACTIONS,
+		setId
 	}
 }
 
-// Random Items
-export function addRandomFaction(id) {
+// All Factions
+export function selectAllFactions() {
 	return {
-		type: ADD_RANDOM_FACTION
+		type: SELECT_ALL_FACTIONS
 	}
 }
 
-export function resetRandomFaction() {
+export function deselectAllFactions() {
 	return {
-		type: RESET_RANDOM_ITEMS
+		type: DESELECT_ALL_FACTIONS
 	}
 }

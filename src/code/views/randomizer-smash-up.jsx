@@ -1,17 +1,128 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import cookie from 'react-cookie'
 
 // Components
-import DeckFilter from './../components/deck-filter'
-import PageDescription from './../components/page-description'
-import RandomDeckPair from './../components/random-deck-pair'
+import DeckFilter from 'components/deck-filter'
+import DeckPair from 'components/deck-pair'
+import PageDescription from 'components/page-description'
+
+// Actions
+import {
+	updateNumberOfPlayers
+} from 'actions'
 
 // Content
-import { sets, factions } from './../content/smash-up-decks'
+import { sets, factions } from 'content/smash-up-decks'
+
+const saveFactionsState = (factionsState) => {
+	typeof window !== 'undefined' && cookie.save('factions', factionsState, {
+		path: '/',
+		secure: location.protocol === 'https:'
+	})
+
+	return factionsState
+}
 
 class Randomizer extends Component {
 	constructor() {
 		super()
+
+		this.playerFactionIds = []
+	}
+
+	getRandomDeckId() {
+		let { selectedFactionIds, dispatch } = this.props,
+			{ playerFactionIds } = this,
+			index, id
+		var ids = selectedFactionIds.slice()
+
+		playerFactionIds.forEach((id) => {
+			ids.splice(ids.indexOf(id), 1)
+		})
+
+		index = Math.floor(Math.random() * ids.length),
+		id = ids[index]
+
+		return id
+	}
+
+	resetPlayerFactions() {
+		let { playerFactionIds } = this
+
+		while (playerFactionIds.length) {
+			playerFactionIds.pop()
+		}
+	}
+
+	setDeckList() {
+		let { numberOfFactions, dispatch } = this.props,
+			{ playerFactionIds } = this
+
+		this.resetPlayerFactions()
+
+		for (let i = 0; i < numberOfFactions; i++) {
+			playerFactionIds.push(this.getRandomDeckId())
+		}
+	}
+
+	handlePlayersChanged(e) {
+		let { dispatch } = this.props
+		dispatch(updateNumberOfPlayers(e.target.value))
+	}
+
+	handleRandomizeClicked(e) {
+		e.preventDefault()
+		this.setState({}) // Hack to force React to redraw on click
+	}
+
+	renderNumberOfPlayers() {
+		let htmlId = 'number-of-players'
+
+		return (
+			<fieldset>
+				<label htmlFor={htmlId}>
+					Players:
+					<input id={htmlId} type="number" value={this.props.numberOfPlayers} onChange={this.handlePlayersChanged.bind(this)} />
+				</label>
+
+				<button onClick={this.handleRandomizeClicked.bind(this)}>Randomize</button>
+			</fieldset>
+		)
+	}
+
+	renderNotEnoughFactionsForPlayersMessage() {
+		let { numberOfPlayers, numberOfFactions } = this.props
+
+		return (
+			<div>
+				You need at least {numberOfFactions} different factions for {numberOfPlayers} players.
+			</div>
+		)
+	}
+
+	renderDeckPairs() {
+		let { numberOfFactions, selectedFactionIds } = this.props,
+			{ playerFactionIds } = this,
+			deckPairs = []
+
+		if (selectedFactionIds.length < numberOfFactions) {
+			return this.renderNotEnoughFactionsForPlayersMessage()
+		}
+
+		this.setDeckList()
+
+		for (let i = 0; i < numberOfFactions; i += 2) {
+			deckPairs.push(
+				<DeckPair key={i}
+					playerNumber={Math.ceil(i / 2) + 1}
+					adjectiveDeck={factions[playerFactionIds[i]]}
+					nounDeck={factions[playerFactionIds[i+1]]}
+				/>
+			)
+		}
+
+		return <div>{deckPairs}</div>
 	}
 
 	render() { return (
@@ -23,23 +134,26 @@ class Randomizer extends Component {
 			/>
 			*/}
 
-			<RandomDeckPair
-				ids={this.props.selectedFactionIds}
-				decks={factions}
-			/>
+			<form action="" method="post">
+				{this.renderNumberOfPlayers()}
+				{this.renderDeckPairs()}
 
-			{/*
-			<DeckFilter
-				items={sets}
-			/>
-			*/}
-			<DeckFilter
-				items={factions}
-			/>
+				<DeckFilter
+					sets={sets}
+					decks={factions}
+				/>
+
+				{/*<input name="factionsState" type="hidden" value={JSON.stringify(this.props.factionsState)} />*/}
+			</form>
 		</article>
 	)}
 }
 
 module.exports = connect(
-	state => ({ selectedFactionIds: state.factions.selectedFactionIds })
-)(Randomizer);
+	state => ({
+		factionsState: saveFactionsState(state.factions),
+		numberOfPlayers: state.factions.numberOfPlayers,
+		numberOfFactions: state.factions.numberOfFactions,
+		selectedFactionIds: state.factions.selectedFactionIds
+	})
+)(Randomizer)

@@ -1,64 +1,89 @@
 import {
-	ADD_FACTION,
-	ADD_ALL_FACTIONS,
-	REMOVE_FACTION,
-	REMOVE_ALL_FACTIONS,
-	ADD_RANDOM_DECK,
-	RESET_RANDOM_DECKS
-} from './../actions'
-import { createArrayFromRange } from './../utilities/array'
+	UPDATE_PLAYERS_COUNT,
+	SELECT_FACTION,
+	SELECT_SET_FACTIONS,
+	SELECT_ALL_FACTIONS,
+	DESELECT_FACTION,
+	DESELECT_SET_FACTIONS,
+	DESELECT_ALL_FACTIONS
+} from 'actions'
+import { createArrayFromRange } from 'utilities/array'
 
 // Content
-import { factions } from './../content/smash-up-decks'
+import { sets, factions } from 'content/smash-up-decks'
 
 let allFactionsList = () => {
 	return createArrayFromRange(factions.length)
-}, randomFactionsList = () => {
-	return {}
 }
 
 const initialState = {
+	numberOfPlayers: 2,
+	numberOfFactions: 4, // Should always be 2 times player count
 	selectedFactionIds: allFactionsList(),
-	previousRandomFactionIds: randomFactionsList()
+	playerFactionIds: []
 }
 
 export default (state = initialState, action) => {
-	let { id } = action
+	let { id, type, numberOfPlayers } = action,
+		{ selectedFactionIds } = state,
+		newSelectedFactionIds, set
 
-	switch (action.type) {
-		case ADD_FACTION:
+	switch (type) {
+		case UPDATE_PLAYERS_COUNT:
 			return {
 				...state,
-				id: id,
+				numberOfPlayers: numberOfPlayers,
+				numberOfFactions: numberOfPlayers*2
+			}
+
+		case SELECT_FACTION:
+			return {
+				...state,
+				id,
 				selectedFactionIds: [
-					...state.selectedFactionIds,
-					!state.selectedFactionIds.includes(id) && id
+					...selectedFactionIds,
+					!selectedFactionIds.includes(id) && id
 				]
 			}
 
-		case ADD_ALL_FACTIONS:
+		case SELECT_SET_FACTIONS:
+			set = sets[action.setId]
+			newSelectedFactionIds = [...selectedFactionIds]
+
+			for (let i = 0; i < set.decks.length; i++) {
+				let { id } = set.decks[i]
+				!selectedFactionIds.includes(id) && newSelectedFactionIds.push(id)
+			}
+
+			return {
+				...state,
+				setId: action.setId,
+				selectedFactionIds: newSelectedFactionIds
+			}
+
+		case SELECT_ALL_FACTIONS:
 			return {
 				...state,
 				id: null,
 				selectedFactionIds: allFactionsList()
 			}
 
-		case REMOVE_FACTION:
-			let newselectedFactionIds = selectedFactionIds ? [ ...selectedFactionIds ] : [],
-				selectedFactionIds = state.selectedFactionIds,
-				factionIdIndex = selectedFactionIds && selectedFactionIds.indexOf(id)
+		case DESELECT_FACTION:
+			let factionIdIndex = selectedFactionIds && selectedFactionIds.indexOf(id)
 
-			if (factionIdIndex) {
+			newSelectedFactionIds = selectedFactionIds ? [ ...selectedFactionIds ] : []
+
+			if (factionIdIndex || factionIdIndex == 0) {
 
 				// If this is the only faction, we'll just reinitialize the entire array
 				if (selectedFactionIds.length === 1) {
-					newselectedFactionIds = []
+					newSelectedFactionIds = []
 				} else if (factionIdIndex === 0) {
-					newselectedFactionIds = [
+					newSelectedFactionIds = [
 						...selectedFactionIds.slice(1, selectedFactionIds.length)
 					]
 				} else {
-					newselectedFactionIds = [
+					newSelectedFactionIds = [
 						...selectedFactionIds.slice(0, factionIdIndex),
 						...selectedFactionIds.slice(factionIdIndex + 1, selectedFactionIds.length)
 					]
@@ -67,29 +92,30 @@ export default (state = initialState, action) => {
 
 			return {
 				...state,
-				id: id,
-				selectedFactionIds: newselectedFactionIds
+				id,
+				selectedFactionIds: newSelectedFactionIds
 			}
 
-		case REMOVE_ALL_FACTIONS:
+		case DESELECT_SET_FACTIONS:
+			set = sets[action.setId]
+			newSelectedFactionIds = [...selectedFactionIds]
+
+			for (let i = 0; i < set.decks.length; i++) {
+				let { id } = set.decks[i]
+				selectedFactionIds.includes(id) && newSelectedFactionIds.splice(newSelectedFactionIds.indexOf(id), 1)
+			}
+
+			return {
+				...state,
+				setId: action.setId,
+				selectedFactionIds: newSelectedFactionIds
+			}
+
+		case DESELECT_ALL_FACTIONS:
 			return {
 				...state,
 				id: null,
 				selectedFactionIds: []
-			}
-
-		case ADD_RANDOM_DECK:
-			return {
-				...state,
-				previousRandomFactionIds: {
-					...state.previousRandomFactionIds,
-					id: true
-				}
-			}
-		case RESET_RANDOM_DECKS:
-			return {
-				...state,
-				previousRandomFactionIds: randomFactionsList()
 			}
 
 		default:

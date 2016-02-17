@@ -2,11 +2,19 @@ import React, { Component } from 'react'
 import $ from 'jquery'
 
 // Components
-import IconLink from './../components/icon-link'
-import PageDescription from './../components/page-description'
+import IconLink from 'components/icon-link'
+import PageDescription from 'components/page-description'
+
+// Content
+import socialLinks from 'content/social-links'
+
+// Utilities
+import { styleHelper } from 'utilities/style-helper'
 
 // Styles
-import './../../assets/styl/contact'
+const styles = [
+	require('styl/contact')
+]
 
 class Contact extends Component {
 	constructor() {
@@ -73,7 +81,6 @@ class Contact extends Component {
 				let text = validation.val()
 
 				if (!re.test(text)) {
-					console.log('validation failed for: ', text);
 					validationErrors.push(validation)
 				}
 			}
@@ -136,18 +143,18 @@ class Contact extends Component {
 	renderContactFields() { return (
 		<div>
 			<div className="contact__fields">
-				<div className="contact__field contact__field--spacing">
-					<input className="contact__field__input js-contact-validate" type="text" name="name" placeholder="Name" data-pattern="^([\w\d\s-\.]{2,64})$" required />
+				<label className="contact__field contact__field--spacing">
+					<input className="contact__field__input js-contact-validate" type="text" name="name" placeholder="Name" data-pattern="^([\w\d\s-\.]{2,64})$" required autofocus />
 					<small className="contact__field__error js-contact-error">Please provide a name between 2 and 64 characters.</small>
-				</div>
-				<div className="contact__field contact__field--spacing">
+				</label>
+				<label className="contact__field contact__field--spacing">
 					<input className="contact__field__input js-contact-validate" type="email" name="email" placeholder="Email" data-pattern="^(\S+@\S+\.\S+)$" required />
 					<small className="contact__field__error js-contact-error">Please provide a valid email address.</small>
-				</div>
-				<div className="contact__field contact__field--spacing">
+				</label>
+				<label className="contact__field contact__field--spacing">
 					<input className="contact__field__input js-contact-validate" type="text" name="subject" placeholder="Subject" data-pattern="^(.{2,64})$" required />
 					<small className="contact__field__error js-contact-error">Please provide a subject between 2 and 64 characters.</small>
-				</div>
+				</label>
 			</div>
 
 			<div className="contact__message">
@@ -223,8 +230,40 @@ class Contact extends Component {
 					subtitle="Get in Touch"
 				/>
 			</section>
+
+			<section className="bubble">
+				<div className="contact">
+					{this.renderContactForm()}
+
+					<div className="contact__extras-container">
+						<h2>Social Media</h2>
+						<nav>
+							<ul className="contact__social-links">
+								<li className="contact__social-link">
+									<IconLink href={socialLinks.twitter.link} icon={socialLinks.twitter.icon} external>Twitter</IconLink>
+								</li>
+								<li className="contact__social-link">
+									<IconLink href={socialLinks.facebook.link} icon={socialLinks.facebook.icon} external>Facebook</IconLink>
+								</li>
+								<li className="contact__social-link">
+									<IconLink href={socialLinks.youtube.link} icon={socialLinks.youtube.icon} external>YouTube</IconLink>
+								</li>
+							</ul>
+						</nav>
+
+						<h2>Subscribe to Newsletter</h2>
+						<form className="contact__form validate" action="//pulsengame.us2.list-manage.com/subscribe/post?u=c8a5409b150cb22ef3549dd35&amp;id=67c909b1a6" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" _lpchecked="1">
+							<div className="contact__field">
+								<input className="contact__field__input" type="email" name="EMAIL" placeholder="Email" required />
+							</div>
+
+							<button className="contact__field__input contact__send-button" type="submit" name="subscribe" value="Subscribe">Subscribe</button>
+						</form>
+					</div>
+				</div>
+			</section>
 		</article>
 	)}
 }
 
-module.exports = Contact
+module.exports = styleHelper(Contact, styles)

@@ -14,16 +14,15 @@ class IconLink extends Component {
 		noUnderline: PropTypes.bool,
 	};
 
-	constructor(props) {
+	constructor() {
 		super()
-
-		this.dispatch = props.state.store.dispatch
 	}
 
 	handleLocalLink(e) {
-		e.preventDefault
+		let { href, dispatch } = this.props
 
-		pushPath(this.dispatch(pushPath(this.props.href)))
+		e.preventDefault()
+		dispatch(pushPath(href))
 	}
 
 	render() { return (
@@ -43,6 +42,5 @@ class IconLink extends Component {
 }
 
 export default connect(
-	state => ({ state: state }),
-	{ pushPath }
-)(IconLink);
+	state => ({})
+)(IconLink)

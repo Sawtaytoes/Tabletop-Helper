@@ -3,32 +3,31 @@ import GoogleAnalytics from 'react-g-analytics'
 import { connect } from 'react-redux'
 
 // Components
-import Header from './../components/header'
-import Footer from './../components/footer'
+import Header from 'components/header'
+import Footer from 'components/footer'
 
-// Styles
-import 'normalize.css'
-import './../../assets/styl/global'
-import './../../assets/styl/site'
+// Actions
+import { closeMenu } from 'actions'
+
+// Utilities
+import { styleHelper } from 'utilities/style-helper'
+
+const styles = [
+	require('normalize.css'),
+	require('styl/global'),
+	require('styl/site')
+]
 
 class Master extends Component {
-	constructor(props) {
+	constructor() {
 		super()
 
-		// this.navItemsClass = {
-		// 	open: 'is-open',
-		// 	closed: ''
-		// }
+		this.navItemsClass = {
+			open: 'is-open',
+			closed: ''
+		}
 
-		// this.state = {
-		// 	headerNav: props.state.headerNav,
-		// 	menuIsOpen: props.state.headerNav.menuIsOpen || ''
-		// }
-
-		// this.bodyClickSelector = '.js-click-body'
-
-		// this.store = props.state.store
-		// this.storeUnsubscribe = this.store.subscribe(this.handleStateChange.bind(this))
+		this.bodyClickSelector = '.js-click-body'
 	}
 
 	componentDidMount() {
@@ -36,7 +35,6 @@ class Master extends Component {
 	}
 
 	componentWillUnmount() {
-		// this.storeUnsubscribe()
 		// this.unsubscribeBodyClicked()
 	}
 
@@ -50,8 +48,11 @@ class Master extends Component {
 		document.querySelector(this.bodyClickSelector).onclick = false
 	}
 
-	setHeaderOpenState() {
-		this.state.menuIsOpen = ' ' + (this.store.getState().headerNav.menuIsOpen ? this.navItemsClass.open : this.navItemsClass.closed)
+	getMenuOpenClass() {
+		let { menuIsOpen } = this.props,
+			{ open, closed } = this.navItemsClass
+
+		return ' ' + (menuIsOpen ? open : closed)
 	}
 
 	handleGoToTop(e) {
@@ -61,20 +62,8 @@ class Master extends Component {
 		window.scroll(0, 0)
 	}
 
-	handleStateChange() {
-		if (this.state.headerNav !== this.store.getState().headerNav) {
-			this.state.headerNav = this.store.getState().headerNav
-
-			this.setHeaderOpenState()
-		}
-	}
-
 	closeHeaderNav() {
-		return this.store.dispatch({
-			type: 'CLOSE_MENU',
-			menuIsOpen: false,
-			submenuIsOpen: false
-		})
+		return this.props.dispatch(closeMenu())
 	}
 
 	render() { return (
@@ -85,13 +74,13 @@ class Master extends Component {
 			<hr className="site-background" />
 
 			<div className="site-go-to-top" id="js-go-to-top">
-				<p><a className="site-go-to-top__link" href="#top" onClick={this.handleGoToTop}><i className="fa fa-arrow-up"></i></a></p>
+				<a className="site-go-to-top__link" href="#top" onClick={this.handleGoToTop}><i className="fa fa-arrow-up"></i></a>
 			</div>
 			*/}
 
 			<div className="site-container">
 				{/*
-				<header className={'site-header' + this.state.menuIsOpen}>
+				<header className={'site-header' + this.getMenuOpenClass()}>
 					<Header />
 				</header>
 				*/}
@@ -115,5 +104,5 @@ class Master extends Component {
 }
 
 export default connect(
-	state => ({ state: state })
-)(Master);
+	state => ({ menuIsOpen: state.collapsibleMenu.menuIsOpen })
+)(styleHelper(Master, styles))

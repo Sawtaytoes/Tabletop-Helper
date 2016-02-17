@@ -1,14 +1,19 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { createArrayFromRange } from './../utilities/array'
 
 // Actions
 import {
-	addFaction,
-	addAllFactions,
-	removeFaction,
-	removeAllFactions
-} from './../actions'
+	selectFaction,
+	selectSetFactions,
+	selectAllFactions,
+
+	deselectFaction,
+	deselectSetFactions,
+	deselectAllFactions
+} from 'actions'
+
+// Utilities
+import convertTextToId from 'utilities/convert-text-to-id'
 
 // Styles
 // import './../../assets/styl/deck-filter'
@@ -21,77 +26,108 @@ class DeckFilter extends Component {
 
 	constructor() {
 		super()
+
+		this.deckSetList = []
+		this.deckSetListReverse = {}
 	}
 
-	getIdFromTitle(title) {
-		return title.toLowerCase().replace(' ', '-')
+	isSetChecked(set) {
+		let { selectedFactionIds } = this.props,
+			{ decks } = set,
+			allFactionsSelected = true
+
+		for (let i = 0; i < decks.length; i++) {
+			allFactionsSelected = allFactionsSelected && selectedFactionIds.includes(decks[i].id)
+		}
+
+		return allFactionsSelected
 	}
 
-	handleSelectAllClicked(items, e) {
+	handleSelectAllClicked(e) {
 		let { dispatch } = this.props
 
 		if (e.target.checked) {
-			dispatch(addAllFactions())
+			dispatch(selectAllFactions())
 		} else {
-			dispatch(removeAllFactions())
+			dispatch(deselectAllFactions())
 		}
 	}
 
-	handleItemClicked(id, e) {
+	handleSetSelection(id, e) {
 		let { dispatch } = this.props
 
 		if (e.target.checked) {
-			dispatch(addFaction(id))
+			dispatch(selectSetFactions(id))
 		} else {
-			dispatch(removeFaction(id))
+			dispatch(deselectSetFactions(id))
+		}
+	}
+
+	handleDeckSelection(id, e) {
+		let { dispatch } = this.props
+
+		if (e.target.checked) {
+			dispatch(selectFaction(id))
+		} else {
+			dispatch(deselectFaction(id))
 		}
 	}
 
 	renderSelectAll() {
-		let htmlId = 'select-all-' + (Math.random() * 10000),
-			{ items, selectedFactionIds } = this.props
+		let htmlId = 'select-all-' + (Math.random() * 1000000),
+			{ decks, selectedFactionIds } = this.props
 
 		return (
 			<div>
 				<label htmlFor={htmlId}>
-					<input id={htmlId} type="checkbox" title="Select all items in the list" value={htmlId} checked={items.length === selectedFactionIds.length} onChange={this.handleSelectAllClicked.bind(this, items)}
+					<input id={htmlId} type="checkbox" title="Select all items in the list" value={htmlId} checked={decks.length === selectedFactionIds.length} onChange={this.handleSelectAllClicked.bind(this)}
 					/>
-					<span> Select All</span>
+					<span> <em>Select All</em></span>
 				</label>
 			</div>
 		)
 	}
 
-	renderItem(item, id) {
-		let htmlId = this.getIdFromTitle(item.title)
+	renderSet(set, setId) {
+		let htmlId = convertTextToId(set.title)
 
 		return (
-			<div key={id + htmlId}>
+			<div key={setId + htmlId}>
 				<label htmlFor={htmlId}>
-					<input id={htmlId} type="checkbox" title={item.description} value={htmlId} checked={this.props.selectedFactionIds.includes(id)} onChange={this.handleItemClicked.bind(this, id)} />
-					<span> {item.title}</span>
+					<input id={htmlId} type="checkbox" title={set.description} value={htmlId} checked={this.isSetChecked(set)} onChange={this.handleSetSelection.bind(this, setId)} />
+					<span> <strong>{set.title}</strong></span>
+				</label>
+
+				<div>
+					{set.decks.map((deck) => {
+						return this.renderDeck(deck, deck.id)
+					})}
+				</div>
+			</div>
+		)
+	}
+
+	renderDeck(deck, deckId) {
+		let htmlId = convertTextToId(deck.title),
+			{ selectedFactionIds } = this.props
+
+		return (
+			<div key={deckId + htmlId}>
+				<label htmlFor={htmlId}>
+					<input id={htmlId} type="checkbox" title={deck.description} value={htmlId} checked={selectedFactionIds.includes(deckId)} onChange={this.handleDeckSelection.bind(this, deckId)} />
+					<span> {deck.title}</span>
 				</label>
 			</div>
 		)
 	}
 
 	render() { return (
-		<form action="POST">
-			<fieldset className={this.props.containerClass}>
-				{this.renderSelectAll()}
-				{this.props.items.sort((a, b) => {
-					if (a.title > b.title) {
-						return 1
-					} else if (a.title < b.title) {
-						return -1
-					}
-
-					return 0
-				}).map((item, id) => {
-					return this.renderItem(item, id)
-				})}
-			</fieldset>
-		</form>
+		<fieldset className={this.props.containerClass}>
+			{this.renderSelectAll()}
+			{this.props.sets.map((set, setId) => {
+				return this.renderSet(set, setId)
+			})}
+		</fieldset>
 	)}
 }
 

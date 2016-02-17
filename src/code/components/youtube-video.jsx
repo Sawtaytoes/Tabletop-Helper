@@ -1,7 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 
+// Utilities
+import { styleHelper } from 'utilities/style-helper'
+
 // Styles
-import './../../assets/styl/flex-video'
+const styles = [
+	require('styl/flex-video')
+]
 
 export default class YouTubeVideo extends Component {
 	static propTypes = {
@@ -10,7 +15,7 @@ export default class YouTubeVideo extends Component {
 	};
 
 	renderFrame() { return (
-		<iframe width="800" height="480" src={'//www.youtube.com/embed/' + this.props.id} frameBorder="0" allowFullScreen></iframe>
+		<iframe width="800" height="480" src={'//www.youtube.com/embed/' + this.props.id} allowFullScreen></iframe>
 	)}
 
 	render() { return (
@@ -19,3 +24,5 @@ export default class YouTubeVideo extends Component {
 		</div>
 	)}
 }
+
+export default styleHelper(YouTubeVideo, styles)
