@@ -13,14 +13,8 @@ includes/node-env.coffee
 node_modules
 
 ## Public ##
-web/*bundle.*js
-web/*.eot
-web/*.jpg
-web/*.png
-web/*.svg
-web/*.ttf
-web/css/*
-!web/favicon.*
+web/*
+!web/favicons
 
 ## Misc ##
 .DS_Store

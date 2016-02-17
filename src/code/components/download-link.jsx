@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 
 // Components
-import IconLink from './../components/icon-link'
+import IconLink from 'components/icon-link'
 
 export default class DownloadLink extends Component {
 	static propTypes = {

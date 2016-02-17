@@ -3,15 +3,27 @@ import { Link } from 'react-router'
 import { connect } from 'react-redux'
 
 // Components
-import ExternalLink from './../components/external-link'
+import ExternalLink from 'components/external-link'
 
-// Styles
-import './../../assets/styl/header-nav'
+// Actions
+import {
+	openMenu,
+	closeMenu,
+	openSubMenu,
+	closeSubMenu
+} from 'actions'
+
+// Utilities
+import { styleHelper } from 'utilities/style-helper'
+
+const styles = [
+	require('styl/header-nav')
+]
 
 class HeaderNav extends Component {
 	// static propTypes = {};
 
-	constructor(props) {
+	constructor() {
 		super()
 
 		this.navItemsClass = {
@@ -23,97 +35,55 @@ class HeaderNav extends Component {
 			open: 'fa-caret-up',
 			closed: 'fa-caret-down'
 		}
-
-		this.store = props.state.store
-		this.storeUnsubscribe = this.store.subscribe(this.handleStateChange.bind(this))
-
-		this.state = {
-			headerNav: this.store.getState().headerNav,
-			menuIsOpen: this.store.getState().headerNav.menuIsOpen,
-			navItemsClass: '',
-			submenuIsOpen: this.store.getState().headerNav.submenuIsOpen,
-			submenuId: ''
-		}
-	}
-
-	componentWillUnmount() {
-		this.storeUnsubscribe()
 	}
 
 	getSubmenuOpenClass(parentLink) {
-		if (parentLink === this.store.getState().headerNav.submenuId) {
-			return this.store.getState().headerNav.submenuIsOpen ? ' ' + this.navItemsClass.open : this.navItemsClass.closed
+		let { submenuId, submenuIsOpen } = this.props,
+			{ open, closed } = this.navItemsClass
+
+		if (parentLink === submenuId) {
+			return submenuIsOpen ? ' ' + open : closed
 		}
 
 		return this.navItemsClass.closed
 	}
 
 	getSubmenuParentIcon(parentLink) {
-		if (parentLink === this.store.getState().headerNav.submenuId) {
-			return this.store.getState().headerNav.submenuIsOpen ? this.submenuIcon.open : this.submenuIcon.closed
+		let { submenuId, submenuIsOpen } = this.props,
+			{ open, closed } = this.submenuIcon
+
+		if (parentLink === submenuId) {
+			return submenuIsOpen ? open : closed
 		}
 
 		return this.submenuIcon.closed
 	}
 
-	setMenuOpenState() {
-		this.state.menuIsOpen = this.store.getState().headerNav.menuIsOpen
+	getNavItemsClass() {
+		let { menuIsOpen } = this.props,
+			{ open, closed } = this.navItemsClass
+
+		return ' ' + (menuIsOpen ? open : closed)
 	}
 
-	setNavItemsClass() {
-		this.state.navItemsClass = this.store.getState().headerNav.menuIsOpen ? ' ' + this.navItemsClass.open
-			: this.navItemsClass.closed
-	}
+	handleMenuClicked(menuShouldOpen, e) {
+		let { menuIsOpen, dispatch } = this.props
 
-	handleStateChange() {
-		if (this.state.headerNav !== this.store.getState().headerNav) {
-			this.state.headerNav = this.store.getState().headerNav
-
-			this.setMenuOpenState()
-			this.setNavItemsClass()
-		}
-	}
-
-	handleMenuOpen(openMenu, e) {
 		e.stopPropagation()
 		e.nativeEvent.stopImmediatePropagation()
 
-		if (openMenu && !this.store.getState().headerNav.menuIsOpen) {
-			return this.store.dispatch({
-				type: 'OPEN_MENU',
-				menuIsOpen: true
-			})
-		}
-
-		return this.store.dispatch({
-			type: 'CLOSE_MENU',
-			menuIsOpen: false,
-			submenuIsOpen: false
-		})
+		menuShouldOpen && !menuIsOpen ? dispatch(openMenu()) : dispatch(closeMenu())
 	}
 
-	handleSubMenuOpen(parentLink, e) {
+	handleSubMenuClicked(parentLink, e) {
+		let { submenuId, submenuIsOpen, dispatch } = this.props
+
 		e.preventDefault()
 		e.stopPropagation()
 		e.nativeEvent.stopImmediatePropagation()
 
-		if (
-			!(this.store.getState().headerNav.submenuIsOpen && this.store.getState().headerNav.submenuId === parentLink)
-			&& (!this.store.getState().headerNav.submenuIsOpen || this.store.getState().headerNav.submenuId !== parentLink)
-		) {
-			return this.store.dispatch({
-				type: 'OPEN_SUBMENU',
-				menuIsOpen: true,
-				submenuId: parentLink,
-				submenuIsOpen: true,
-			})
-		}
-
-		return this.store.dispatch({
-			type: 'CLOSE_SUBMENU',
-			submenuId: null,
-			submenuIsOpen: false,
-		})
+		!(submenuIsOpen && submenuId === parentLink) && (!submenuIsOpen || submenuId !== parentLink)
+			? dispatch(openSubMenu(parentLink)) : dispatch(closeSubMenu())
 	}
 
 	renderSubItems(items, parentLink) { return (
@@ -125,11 +95,11 @@ class HeaderNav extends Component {
 	renderLinks(items, parentLink) { return (
 		items.map((item) =>
 			<li key={item.name} className={'header-nav__item' + (parentLink ? ' header-nav__item--subitem' : item.to === 'game' ? ' header-nav__item--image' : '')}>
-				{(item.to === 'game') && <Link className="header-nav__logo__link" to={'/' + item.to} activeClassName="is-active" onClick={this.handleMenuOpen.bind(this, false)}>
-					<img className="header-nav__logo__image" src="/images/pulsen-logo-mini.png" srcSet="/images/pulsen-logo-mini-1.5x.png 1000w, /images/pulsen-logo-mini-2x.png 2000w" />
+				{(item.to === 'game') && <Link className="header-nav__logo__link" to={'/' + item.to} activeClassName="is-active" onClick={this.handleMenuClicked.bind(this, false)}>
+					<img className="header-nav__logo__image" src="/images/logo/pulsen-logo-mini.png" srcSet="/images/logo/pulsen-logo-mini-1.5x.png 1000w, /images/logo/pulsen-logo-mini-2x.png 2000w" alt="Pulsen Logo" />
 				</Link>}
 
-				{(item.to !== undefined && item.to !== 'game') && <Link className={'header-nav__link' + (parentLink ? ' header-nav__link--subitem' : '')} to={(parentLink ? '/' + parentLink : '') + '/' + item.to} activeClassName="is-active" onClick={!item.subitems ? this.handleMenuOpen.bind(this, false) : this.handleSubMenuOpen.bind(this, item.to)}>
+				{(item.to !== undefined && item.to !== 'game') && <Link className={'header-nav__link' + (parentLink ? ' header-nav__link--subitem' : '')} to={(parentLink ? '/' + parentLink : '') + '/' + item.to} activeClassName="is-active" onClick={!item.subitems ? this.handleMenuClicked.bind(this, false) : this.handleSubMenuClicked.bind(this, item.to)}>
 					{item.name} {item.subitems && <i className={'header-nav__link__icon fa ' + this.getSubmenuParentIcon(item.to)}></i>}
 				</Link>}
 
@@ -143,21 +113,25 @@ class HeaderNav extends Component {
 	)}
 
 	render() { return (
-		<nav className={'header-nav' + this.state.navItemsClass}>
-			<div className="header-nav__menu-accessor" onClick={this.handleMenuOpen.bind(this, true)}>
-				<button className="header-nav__menu-accessor__button"><i className="fa fa-bars"></i></button>
+		<nav className={'header-nav' + this.getNavItemsClass()}>
+			<div className="header-nav__menu-accessor" onClick={this.handleMenuClicked.bind(this, true)}>
+				<button className="header-nav__menu-accessor__button"><i className="fa fa-bars"></i> MENU</button>
 			</div>
 
-			<ul className={'header-nav__items' + this.state.navItemsClass}>
-				{this.renderLinks(require('./../content/nav-items'), '')}
+			<ul className={'header-nav__items' + this.getNavItemsClass()}>
+				{this.renderLinks(require('content/nav-items'), '')}
 			</ul>
 		</nav>
 	)}
 }
 
 export default connect(
-	state => ({ state: state }),
+	state => ({
+		menuIsOpen: state.collapsibleMenu.menuIsOpen,
+		submenuIsOpen: state.collapsibleMenu.submenuIsOpen,
+		submenuId: state.collapsibleMenu.submenuId
+	}),
 	null, null,
 	{ pure: false }
-)(HeaderNav);
+)(styleHelper(HeaderNav, styles));
 
