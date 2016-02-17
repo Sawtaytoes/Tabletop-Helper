@@ -6,29 +6,23 @@ import cookie from 'react-cookie'
 import DeckFilter from 'components/deck-filter'
 import DeckPair from 'components/deck-pair'
 import PageDescription from 'components/page-description'
-import RaisedButton from 'material-ui/lib/raised-button';
 
 // Actions
 import {
 	updateNumberOfPlayers
 } from 'actions'
 
-// Styles
-import getMuiTheme from 'material-ui/lib/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/lib/MuiThemeProvider';
-
 // Content
 import { sets, factions } from 'content/smash-up-decks'
 
 const saveFactionsState = (factionsState) => {
-	cookie.save('factions', factionsState, {
+	typeof window !== 'undefined' && cookie.save('factions', factionsState, {
 		path: '/',
 		secure: location.protocol === 'https:'
 	})
 
 	return factionsState
 }
-
 
 class Randomizer extends Component {
 	constructor() {
@@ -91,7 +85,7 @@ class Randomizer extends Component {
 					Players:
 					<input id={htmlId} type="number" value={this.props.numberOfPlayers} onChange={this.handlePlayersChanged.bind(this)} />
 				</label>
-				<RaisedButton label="Randomize" />
+
 				<button onClick={this.handleRandomizeClicked.bind(this)}>Randomize</button>
 			</fieldset>
 		)
@@ -132,7 +126,7 @@ class Randomizer extends Component {
 	}
 
 	render() { return (
-		<MuiThemeProvider muiTheme={muiTheme}>
+		<article>
 			{/*
 			<PageDescription
 				title="Smash Up Randomizer"
@@ -151,7 +145,7 @@ class Randomizer extends Component {
 
 				{/*<input name="factionsState" type="hidden" value={JSON.stringify(this.props.factionsState)} />*/}
 			</form>
-		</MuiThemeProvider>
+		</article>
 	)}
 }
 
