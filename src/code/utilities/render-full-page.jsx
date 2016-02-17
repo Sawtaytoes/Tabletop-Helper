@@ -52,7 +52,7 @@ module.exports = function renderFullPage(renderedContent = undefined, state = {}
 
 			{/* Styles */}
 			<meta name="viewport" content="width=device-width, initial-scale=1" />
-			<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,700,400italic" />
+			<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,400italic,700" />
 			<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" />
 			<style dangerouslySetInnerHTML={{__html: renderStyles()}} />
 		</head>
