@@ -12,6 +12,13 @@ import {
 	updateNumberOfPlayers
 } from 'actions'
 
+// Styles
+import { styleHelper } from 'utilities/style-helper'
+const styles = [
+	require('styl/message'),
+	require('styl/randomizer')
+]
+
 // Content
 import { sets, factions } from 'content/smash-up-decks'
 
@@ -71,6 +78,16 @@ class Randomizer extends Component {
 		dispatch(updateNumberOfPlayers(e.target.value))
 	}
 
+	handlePlayersIncreased(e) {
+		let { dispatch, numberOfPlayers } = this.props
+		dispatch(updateNumberOfPlayers(numberOfPlayers + 1))
+
+	}
+	handlePlayersDecreased(e) {
+		let { dispatch, numberOfPlayers } = this.props
+		dispatch(updateNumberOfPlayers(numberOfPlayers - 1))
+	}
+
 	handleRandomizeClicked(e) {
 		e.preventDefault()
 		this.setState({}) // Hack to force React to redraw on click
@@ -80,13 +97,20 @@ class Randomizer extends Component {
 		let htmlId = 'number-of-players'
 
 		return (
-			<fieldset>
-				<label htmlFor={htmlId}>
-					Players:
-					<input id={htmlId} type="number" value={this.props.numberOfPlayers} onChange={this.handlePlayersChanged.bind(this)} />
+			<fieldset className="players-selector-container">
+				<label htmlFor={htmlId} className="players-selector">
+					<span className="players-selector__arrows">
+						<span className="players-selector__arrow players-selector__arrow--up" onClick={this.handlePlayersIncreased.bind(this)}>
+							<i className="fa fa-arrow-up"></i>
+						</span>
+						<span className="players-selector__arrow players-selector__arrow--down" onClick={this.handlePlayersDecreased.bind(this)}>
+							<i className="fa fa-arrow-down"></i>
+						</span>
+					</span>
+					<input id={htmlId} className="players-selector__content players-selector__field" value={this.props.numberOfPlayers} onChange={this.handlePlayersChanged.bind(this)} />
+					<span className="players-selector__content players-selector__label">Players</span>
+					<button className="players-selector__content players-selector__button" onClick={this.handleRandomizeClicked.bind(this)}>Randomize</button>
 				</label>
-
-				<button onClick={this.handleRandomizeClicked.bind(this)}>Randomize</button>
 			</fieldset>
 		)
 	}
@@ -95,8 +119,8 @@ class Randomizer extends Component {
 		let { numberOfPlayers, numberOfFactions } = this.props
 
 		return (
-			<div>
-				You need at least {numberOfFactions} different factions for {numberOfPlayers} players.
+			<div className="message message--error">
+				You need at least {numberOfFactions} different factions selected for {numberOfPlayers} players.
 			</div>
 		)
 	}
@@ -156,4 +180,4 @@ module.exports = connect(
 		numberOfFactions: state.factions.numberOfFactions,
 		selectedFactionIds: state.factions.selectedFactionIds
 	})
-)(Randomizer)
+)(styleHelper(Randomizer, styles))

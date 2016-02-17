@@ -1,0 +1,58 @@
+@charset 'UTF-8'
+@require './includes/**/*'
+
+
+//-------------------------------------------
+// Containers
+//-------------------------------------------
+
+.deck-filter
+	margin 0
+	padding 0
+	border 0
+
+
+//-------------------------------------------
+// Items
+//-------------------------------------------
+
+.deck-filter__items
+	padding-bottom rem(10)
+
+.deck-filter__item
+	display block
+	padding rem(10)
+	width 100%
+
+.deck-filter__item--select-all
+	margin rem(10) 0
+	background-color lightyellow
+
+.deck-filter__item--group
+	background-color lightgreen
+
+
+//-------------------------------------------
+// Subitems
+//-------------------------------------------
+
+// .deck-filter__subitems
+
+.deck-filter__subitem
+	display block
+	padding rem(10)
+	width 100%
+
+	&:nth-child(2n+1)
+		background-color grey
+	&:nth-child(2n)
+		background-color lightgrey
+
+
+//-------------------------------------------
+// Misc
+//-------------------------------------------
+
+.deck-filter__checkbox
+	display none
+

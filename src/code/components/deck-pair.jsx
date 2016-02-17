@@ -2,7 +2,10 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
 // Styles
-// import './../../assets/styl/deck-pair'
+import { styleHelper } from 'utilities/style-helper'
+const styles = [
+	require('styl/deck-pair')
+]
 
 export default class DeckPair extends Component {
 	// static propTypes = {
@@ -16,20 +19,24 @@ export default class DeckPair extends Component {
 
 	renderPlayerNumber() {
 		let { playerNumber } = this.props
-		return <span><strong>Player {playerNumber}</strong></span>
+		return (
+			<span className="deck-pair__player">
+				<span className="deck-pair__player__label">Player</span> <span className="deck-pair__player__number">{playerNumber}</span>
+			</span>
+		)
 	}
 
 	renderDeckPair() {
 		let { adjectiveDeck, nounDeck } = this.props
-		return <p>{adjectiveDeck.name.adjective} {nounDeck.name.noun}</p>
+		return <span className="deck-pair__deck-name">{adjectiveDeck.name.adjective} {nounDeck.name.noun}</span>
 	}
 
 	render() { return (
-		<div className={this.props.containerClass}>
+		<div className={this.props.containerClass + ' deck-pair'}>
 			{this.renderPlayerNumber()}
 			{this.renderDeckPair()}
 		</div>
 	)}
 }
 
-export default DeckPair;
+export default styleHelper(DeckPair, styles);
