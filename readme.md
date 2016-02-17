@@ -82,6 +82,12 @@ Start the SMTP server using `maildev`.
 ### Development: Local
 
 ```shell
+bash local.sh
+```
+
+OR
+
+```shell
 coffee index.coffee
 ```
 
@@ -105,14 +111,32 @@ git push heroku master
 
 #### Start the Server
 
+Start a single server for testing:
+
 ```shell
 bash server.sh
 ```
+
+Start a cluster of 3 servers for load balancing in production:
+
+```shell
+bash server.sh 3
+```
+
+The number 3 can be replaced with any number. The default is 0: equal to the number of CPU cores.
 
 #### Update from Git and Restart
 
 ```shell
 bash update.sh
+```
+
+If you update the update.sh file, make sure to run `git pull` prior to running the update script.
+
+#### Stop the Server
+
+```shell
+bash stop-server.sh
 ```
 
 ### Create SSL Cert
