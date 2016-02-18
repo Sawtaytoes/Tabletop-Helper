@@ -70,7 +70,7 @@ factions = [
 	title: "Robots"
 	name:
 		noun: "Robots"
-		adjective: "Robot"
+		adjective: "Robotic"
 	description: "Play lots of weak minions at once that compound eachother."
 	set: setNames.core
 ,
@@ -252,7 +252,7 @@ factions = [
 	title: "Clerics"
 	name:
 		noun: "Clerics"
-		adjective: "Cleric"
+		adjective: "Clerical"
 	description: "Return cards from the discard pile and prevent them from going to the discard pile"
 	set: setNames.munchkin
 ,

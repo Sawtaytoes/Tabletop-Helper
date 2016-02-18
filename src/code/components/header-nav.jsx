@@ -16,9 +16,13 @@ import {
 // Utilities
 import { styleHelper } from 'utilities/style-helper'
 
+// Styles
 const styles = [
 	require('styl/header-nav')
 ]
+
+// Content
+import navItems from 'content/nav-items'
 
 class HeaderNav extends Component {
 	// static propTypes = {};
@@ -119,7 +123,7 @@ class HeaderNav extends Component {
 			</div>
 
 			<ul className={'header-nav__items' + this.getNavItemsClass()}>
-				{this.renderLinks(require('content/nav-items'), '')}
+				{this.renderLinks(navItems, '')}
 			</ul>
 		</nav>
 	)}
@@ -134,4 +138,3 @@ export default connect(
 	null, null,
 	{ pure: false }
 )(styleHelper(HeaderNav, styles));
-

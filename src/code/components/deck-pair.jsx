@@ -32,7 +32,7 @@ export default class DeckPair extends Component {
 	}
 
 	render() { return (
-		<div className={this.props.containerClass + ' deck-pair'}>
+		<div className={'deck-pair ' + (this.props.containerClass || '')}>
 			{this.renderPlayerNumber()}
 			{this.renderDeckPair()}
 		</div>

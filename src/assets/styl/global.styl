@@ -19,12 +19,13 @@
 html
 body
 	height 100%
+	-webkit-tap-highlight-color transparent
 
 html
-	font-family font-family--roboto
-	font-size font-size--base
 	-webkit-font-smoothing antialiased
 	-moz-osx-font-smoothing grayscale
+	font-family font-family--roboto
+	font-size font-size--base
 
 	@media xlarge-up
 		font-size font-size--base + 2
@@ -38,6 +39,21 @@ html
 
 body
 	overflow-x hidden
+
+
+//-------------------------------------------
+// Form Fields
+//-------------------------------------------
+
+input[type=number]
+	-moz-appearance textfield
+
+	&::-webkit-inner-spin-button
+	&::-webkit-outer-spin-button
+		-webkit-appearance none
+		-moz-appearance none
+		appearance none
+		margin 0
 
 
 //-------------------------------------------
@@ -87,6 +103,9 @@ li
 p
 	& .no-text-underline
 		text-decoration none
+
+:focus
+	outline none
 
 
 //-------------------------------------------
