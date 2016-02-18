@@ -1,8 +1,4 @@
 module.exports = [
-	name: '404'
-	to: '404'
-	description: "404 - Page Not Found"
-,
 	name: 'Randomizer'
 	to: 'randomizer'
 	subitems: [

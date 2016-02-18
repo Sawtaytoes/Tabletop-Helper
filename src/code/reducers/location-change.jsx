@@ -30,13 +30,19 @@ function getMetaFromNavItems(items, path) {
 	})
 }
 
-function updatePageMeta() {
-	let { title, description } = pageMeta
+function updatePageMeta(path) {
+	if (!getMetaFromNavItems(navItems, path)) {
+		pageMeta = {
+			title: '404',
+			description: '404 - File Not Found'
+		}
+	}
 
 	if (typeof window === 'undefined') {
 		return
 	}
 
+	let { title, description } = pageMeta
 	title && (document.title = title + ' – Tabletop Helper')
 	description && (document.querySelector('meta[name=description]').content = description)
 }
@@ -52,8 +58,7 @@ export default (state = {}, action) => {
 
 	switch (type) {
 	case UPDATE_PAGE_META:
-		getMetaFromNavItems(navItems, path)
-		updatePageMeta()
+		updatePageMeta(path)
 
 		return {
 			...state,
@@ -66,8 +71,7 @@ export default (state = {}, action) => {
 			previousPath = state.currentPath,
 			pathChanged = currentPath !== previousPath
 
-		getMetaFromNavItems(navItems, currentPath)
-		updatePageMeta()
+		updatePageMeta(path)
 		pathChanged && updateScrollPosition()
 
 		return {
