@@ -21,7 +21,10 @@ const initialState = {
 	numberOfFactions: 4, // Should always be 2 times player count
 	selectedFactionIds: allFactionsList(),
 	playerFactionIds: []
-}
+},
+	minNumberOfPlayers = 2,
+	maxNumberOfPlayers = 9
+
 
 export default (state = initialState, action) => {
 	let { id, type, numberOfPlayers } = action,
@@ -30,10 +33,12 @@ export default (state = initialState, action) => {
 
 	switch (type) {
 		case UPDATE_PLAYERS_COUNT:
+			let playersCount = Math.min(Math.max(numberOfPlayers, minNumberOfPlayers), maxNumberOfPlayers)
+
 			return {
 				...state,
-				numberOfPlayers: numberOfPlayers,
-				numberOfFactions: numberOfPlayers*2
+				numberOfPlayers: playersCount,
+				numberOfFactions: playersCount*2
 			}
 
 		case SELECT_FACTION:
