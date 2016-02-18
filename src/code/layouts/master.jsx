@@ -63,7 +63,8 @@ class Master extends Component {
 	}
 
 	closeHeaderNav() {
-		return this.props.dispatch(closeMenu())
+		let { dispatch } = this.props
+		dispatch(closeMenu())
 	}
 
 	render() { return (
