@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import { Link } from 'react-router'
 import { connect } from 'react-redux'
 
 // Components
@@ -14,21 +13,6 @@ const styles = [
 
 class Header extends Component {
 	// static propTypes = {};
-
-	constructor() {
-		super()
-	}
-
-	handleLogoClick(e) {
-		e.stopPropagation()
-		e.nativeEvent.stopImmediatePropagation()
-
-		this.props.dispatch({
-			type: 'CLOSE_MENU',
-			menuIsOpen: false,
-			submenuIsOpen: false
-		})
-	}
 
 	render() { return (
 		<div className="header">
