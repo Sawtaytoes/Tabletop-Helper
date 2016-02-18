@@ -134,7 +134,7 @@ class DeckFilter extends Component {
 	}
 
 	render() { return (
-		<fieldset className={this.props.containerClass + ' deck-filter'}>
+		<fieldset className={'deck-filter ' + (this.props.containerClass || '')}>
 			{this.renderSelectAll()}
 			{this.props.sets.map((set, setId) => {
 				return this.renderSet(set, setId)
