@@ -1,3 +1,4 @@
+export const UPDATE_PAGE_META = 'UPDATE_PAGE_META'
 export const UPDATE_PLAYERS_COUNT = 'UPDATE_PLAYERS_COUNT'
 
 export const SELECT_FACTION = 'SELECT_FACTION'
@@ -8,6 +9,14 @@ export const DESELECT_SET_FACTIONS = 'DESELECT_SET_FACTIONS'
 
 export const SELECT_ALL_FACTIONS = 'SELECT_ALL_FACTIONS'
 export const DESELECT_ALL_FACTIONS = 'DESELECT_ALL_FACTIONS'
+
+// Page Meta
+export function updatePageMeta(path) {
+	return {
+		type: UPDATE_PAGE_META,
+		path
+	}
+}
 
 // Players
 export function updateNumberOfPlayers(numberOfPlayers) {

@@ -10,9 +10,6 @@ import 'utilities/polyfills'
 import { history, store } from 'utilities/store'
 import routes from './routes'
 
-// Nav Items
-import navItems from 'content/nav-items'
-
 // Router
 render(
 	<Provider store={store}>
