@@ -7,7 +7,6 @@ import navItems from 'content/nav-items'
 let pageMeta = {}
 
 const changePageMetaOnLinkMatch = (item, path) => {
-	console.log(item.to, path);
 	let re = new RegExp('(' + item.to + ')'),
 		linkMatch = re.test(path)
 
@@ -32,7 +31,6 @@ function getMetaFromNavItems(items, path) {
 }
 
 function updatePageMeta(path) {
-	console.log(getMetaFromNavItems(navItems, path));
 	if (!getMetaFromNavItems(navItems, path)) {
 		pageMeta = {
 			title: '404',
