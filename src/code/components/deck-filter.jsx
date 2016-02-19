@@ -56,7 +56,7 @@ class DeckFilter extends Component {
 		return 'fa ' + (isChecked ? checked : unchecked)
 	}
 
-	handleSelectAllClicked(isChecked, e) {
+	handleSelectAll(isChecked, e) {
 		let { dispatch } = this.props
 		isChecked ? dispatch(deselectAllFactions()) : dispatch(selectAllFactions())
 	}
@@ -71,15 +71,22 @@ class DeckFilter extends Component {
 		isChecked ? dispatch(deselectFaction(id)) : dispatch(selectFaction(id))
 	}
 
+	renderFilterItem(isChecked, title, titleClass) { return (
+		<span>
+		</span>
+	)}
+
 	renderSelectAll() {
 		let htmlId = 'select-all-' + (Math.random() * 1000000),
 			{ decks, selectedFactionIds } = this.props,
 			isChecked = decks.length === selectedFactionIds.length
 
 		return (
-			<div className="deck-filter__item deck-filter__item--select-all" onClick={this.handleSelectAllClicked.bind(this, isChecked)}>
-				<input className="deck-filter__checkbox" type="checkbox" title="Select all items in the list" value={htmlId} checked={isChecked} />
-				<span><i className={this.getCheckedIcon(isChecked)}></i> <em>Select All</em></span>
+			<div className="deck-filter__item deck-filter__item--select-all" onClick={this.handleSelectAll.bind(this, isChecked)}>
+				<span className="deck-filter__content deck-filter__icon">
+					<i className={this.getCheckedIcon(isChecked)}></i>
+				</span>
+				<span className="deck-filter__content">Select All</span>
 			</div>
 		)
 	}
@@ -91,8 +98,10 @@ class DeckFilter extends Component {
 		return (
 			<div key={setId + htmlId} className="deck-filter__items">
 				<div className="deck-filter__item deck-filter__item--group" onClick={this.handleSetSelection.bind(this, isChecked, setId)}>
-					<input className="deck-filter__checkbox" type="checkbox" title={set.description} checked={isChecked} />
-					<span><i className={this.getCheckedIcon(isChecked)}></i> <strong>{set.title}</strong></span>
+					<span className="deck-filter__content deck-filter__icon">
+						<i className={this.getCheckedIcon(isChecked)}></i>
+					</span>
+					<span className="deck-filter__content deck-filter__set-title">{set.title}</span>
 				</div>
 
 				<div className="deck-filter__subitems">
@@ -110,9 +119,11 @@ class DeckFilter extends Component {
 			isChecked = selectedFactionIds.includes(deckId)
 
 		return (
-			<div key={deckId + htmlId} className="deck-filter__subitem" onClick={this.handleDeckSelection.bind(this, isChecked, deckId)}>
-				<input className="deck-filter__checkbox" type="checkbox" title={deck.description} checked={isChecked} />
-				<span><i className={this.getCheckedIcon(isChecked)}></i> {deck.title}</span>
+			<div key={deckId + htmlId} className="deck-filter__item deck-filter__subitem" onClick={this.handleDeckSelection.bind(this, isChecked, deckId)}>
+				<span className="deck-filter__content deck-filter__icon">
+					<i className={this.getCheckedIcon(isChecked)}></i>
+				</span>
+				<span className="deck-filter__content">{deck.title}</span>
 			</div>
 		)
 	}

@@ -20,9 +20,12 @@
 	padding-bottom rem(10)
 
 .deck-filter__item
-	display block
-	padding rem(10)
+	display flex
+	align-items center
+	padding rem(5 10)
 	width 100%
+	cursor pointer
+	user-select none
 
 .deck-filter__item--select-all
 	margin rem(10) 0
@@ -30,6 +33,13 @@
 
 .deck-filter__item--group
 	background-color lightgreen
+
+.deck-filter__icon
+	margin-right rem(8)
+	font-size 1.5em
+
+.deck-filter__set-title
+	font-weight bold
 
 
 //-------------------------------------------
@@ -39,20 +49,7 @@
 // .deck-filter__subitems
 
 .deck-filter__subitem
-	display block
-	padding rem(10)
-	width 100%
-
 	&:nth-child(2n+1)
 		background-color grey
 	&:nth-child(2n)
 		background-color lightgrey
-
-
-//-------------------------------------------
-// Misc
-//-------------------------------------------
-
-.deck-filter__checkbox
-	display none
-
