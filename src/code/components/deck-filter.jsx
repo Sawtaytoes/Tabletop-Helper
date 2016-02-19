@@ -3,6 +3,12 @@ import { connect } from 'react-redux'
 
 // Actions
 import {
+	expandSet,
+	expandAllSets,
+
+	contractSet,
+	contractAllSets,
+
 	selectFaction,
 	selectSetFactions,
 	selectAllFactions,
@@ -32,7 +38,10 @@ class DeckFilter extends Component {
 
 		this.icons = {
 			checked: 'fa-check-circle',
-			unchecked: 'fa-check-circle-o'
+			unchecked: 'fa-check-circle-o',
+
+			expanded: 'fa-minus',
+			contracted: 'fa-plus'
 		}
 
 		this.deckSetList = []
@@ -45,10 +54,16 @@ class DeckFilter extends Component {
 			allFactionsSelected = true
 
 		for (let i = 0; i < decks.length; i++) {
-			allFactionsSelected = allFactionsSelected && selectedFactionIds.includes(decks[i].id)
+			let { id } = decks[i]
+			allFactionsSelected = allFactionsSelected && selectedFactionIds.includes(id)
 		}
 
 		return allFactionsSelected
+	}
+
+	isSetExpanded(set) {
+		let { expandedSetIds } = this.props
+		return expandedSetIds.includes(set.id)
 	}
 
 	getCheckedIcon(isChecked) {
@@ -56,9 +71,19 @@ class DeckFilter extends Component {
 		return 'fa ' + (isChecked ? checked : unchecked)
 	}
 
+	getExpandedIcon(isExpanded) {
+		let { expanded, contracted } = this.icons
+		return 'fa ' + (isExpanded ? expanded : contracted)
+	}
+
 	handleSelectAll(isChecked, e) {
 		let { dispatch } = this.props
 		isChecked ? dispatch(deselectAllFactions()) : dispatch(selectAllFactions())
+	}
+
+	handleExpandAll(isExpanded, e) {
+		let { dispatch } = this.props
+		isExpanded ? dispatch(contractAllSets()) : dispatch(expandAllSets())
 	}
 
 	handleSetSelection(isChecked, id, e) {
@@ -66,46 +91,66 @@ class DeckFilter extends Component {
 		isChecked ? dispatch(deselectSetFactions(id)) : dispatch(selectSetFactions(id))
 	}
 
+	handleSetExpansion(isExpanded, setId, e) {
+		let { dispatch } = this.props
+		isExpanded ? dispatch(contractSet(setId)) : dispatch(expandSet(setId))
+	}
+
 	handleDeckSelection(isChecked, id, e) {
 		let { dispatch } = this.props
 		isChecked ? dispatch(deselectFaction(id)) : dispatch(selectFaction(id))
 	}
 
-	renderFilterItem(isChecked, title, titleClass) { return (
-		<span>
-		</span>
-	)}
-
 	renderSelectAll() {
 		let htmlId = 'select-all-' + (Math.random() * 1000000),
-			{ decks, selectedFactionIds } = this.props,
-			isChecked = decks.length === selectedFactionIds.length
+			{ sets, decks, expandedSetIds, selectedFactionIds } = this.props,
+			isChecked = decks.length === selectedFactionIds.length,
+			isExpanded = sets.length === expandedSetIds.length
 
 		return (
-			<div className="deck-filter__item deck-filter__item--select-all" onClick={this.handleSelectAll.bind(this, isChecked)}>
-				<span className="deck-filter__content deck-filter__icon">
-					<i className={this.getCheckedIcon(isChecked)}></i>
-				</span>
-				<span className="deck-filter__content">Select All</span>
+			<div className="deck-filter__item deck-filter__item--select-all">
+				<div className="deck-filter__content deck-filter__selector" onClick={this.handleSelectAll.bind(this, isChecked)}>
+					<span className="deck-filter__checkmark">
+						<i className={this.getCheckedIcon(isChecked)}></i>
+					</span>
+
+					<span className="deck-filter__title">Select All</span>
+				</div>
+
+				<div className="deck-filter__content deck-filter__expander" onClick={this.handleExpandAll.bind(this, isExpanded)}>
+					<span className="deck-filter__plus-minus">
+						<i className={this.getExpandedIcon(isExpanded)}></i>
+					</span>
+				</div>
 			</div>
 		)
 	}
 
 	renderSet(set, setId) {
 		let htmlId = convertTextToId(set.title),
-			isChecked = this.isSetChecked(set)
+			isChecked = this.isSetChecked(set),
+			isExpanded = this.isSetExpanded(set)
 
 		return (
 			<div key={setId + htmlId} className="deck-filter__items">
-				<div className="deck-filter__item deck-filter__item--group" onClick={this.handleSetSelection.bind(this, isChecked, setId)}>
-					<span className="deck-filter__content deck-filter__icon">
-						<i className={this.getCheckedIcon(isChecked)}></i>
-					</span>
-					<span className="deck-filter__content deck-filter__set-title">{set.title}</span>
+				<div className="deck-filter__item deck-filter__item--group">
+					<div className="deck-filter__content deck-filter__selector" onClick={this.handleSetSelection.bind(this, isChecked, setId)}>
+						<span className="deck-filter__checkmark">
+							<i className={this.getCheckedIcon(isChecked)}></i>
+						</span>
+
+						<span className="deck-filter__title deck-filter__title--set">{set.title}</span>
+					</div>
+
+					<div className="deck-filter__content deck-filter__expander" onClick={this.handleSetExpansion.bind(this, isExpanded, setId)}>
+						<span className="deck-filter__plus-minus">
+							<i className={this.getExpandedIcon(isExpanded)}></i>
+						</span>
+					</div>
 				</div>
 
 				<div className="deck-filter__subitems">
-					{set.decks.map((deck) => {
+					{isExpanded && set.decks.map((deck) => {
 						return this.renderDeck(deck, deck.id)
 					})}
 				</div>
@@ -120,10 +165,13 @@ class DeckFilter extends Component {
 
 		return (
 			<div key={deckId + htmlId} className="deck-filter__item deck-filter__subitem" onClick={this.handleDeckSelection.bind(this, isChecked, deckId)}>
-				<span className="deck-filter__content deck-filter__icon">
-					<i className={this.getCheckedIcon(isChecked)}></i>
-				</span>
-				<span className="deck-filter__content">{deck.title}</span>
+				<div className="deck-filter__content deck-filter__selector">
+					<span className="deck-filter__checkmark">
+						<i className={this.getCheckedIcon(isChecked)}></i>
+					</span>
+
+					<span className="deck-filter__title">{deck.title}</span>
+				</div>
 			</div>
 		)
 	}
@@ -139,5 +187,8 @@ class DeckFilter extends Component {
 }
 
 export default connect(
-	state => ({ selectedFactionIds: state.factions.selectedFactionIds })
+	state => ({
+		expandedSetIds: state.factions.expandedSetIds,
+		selectedFactionIds: state.factions.selectedFactionIds
+	})
 )(styleHelper(DeckFilter, styles));

@@ -73,11 +73,6 @@ class Randomizer extends Component {
 		}
 	}
 
-	handlePlayersChanged(e) {
-		let { dispatch } = this.props
-		dispatch(updateNumberOfPlayers(e.target.value))
-	}
-
 	handlePlayersIncreased(e) {
 		let { dispatch, numberOfPlayers } = this.props
 		dispatch(updateNumberOfPlayers(numberOfPlayers + 1))
@@ -103,8 +98,7 @@ class Randomizer extends Component {
 						<i className="fa fa-arrow-down"></i>
 					</span>
 				</span>
-				<span className="players-selector__content players-selector__field">{this.props.numberOfPlayers}</span>
-				<span className="players-selector__content players-selector__label">Players</span>
+				<span className="players-selector__content players-selector__description">{this.props.numberOfPlayers} Players</span>
 				<button className="players-selector__content players-selector__button" onClick={this.handleRandomizeClicked.bind(this)}>Randomize</button>
 			</div>
 		</div>
