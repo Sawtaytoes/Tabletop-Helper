@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 
 // Utilities
-import { styleHelper } from 'utilities/style-helper'
+import { stylesHelper } from 'utilities/styles-helper'
 
 // Styles
 const styles = [
@@ -20,4 +20,4 @@ class Footer extends Component {
 	)}
 }
 
-export default styleHelper(Footer, styles)
+export default stylesHelper(Footer, styles)

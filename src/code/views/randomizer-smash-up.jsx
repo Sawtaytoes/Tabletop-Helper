@@ -13,7 +13,7 @@ import {
 } from 'actions'
 
 // Styles
-import { styleHelper } from 'utilities/style-helper'
+import { stylesHelper } from 'utilities/styles-helper'
 const styles = [
 	require('styl/message'),
 	require('styl/randomizer')
@@ -169,4 +169,4 @@ module.exports = connect(
 	}),
 	null, null,
 	{ pure: false }
-)(styleHelper(Randomizer, styles))
+)(stylesHelper(Randomizer, styles))

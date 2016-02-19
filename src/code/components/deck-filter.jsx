@@ -22,7 +22,7 @@ import {
 import convertTextToId from 'utilities/convert-text-to-id'
 
 // Styles
-import { styleHelper } from 'utilities/style-helper'
+import { stylesHelper } from 'utilities/styles-helper'
 const styles = [
 	require('styl/deck-filter')
 ]
@@ -191,4 +191,4 @@ export default connect(
 		expandedSetIds: state.factions.expandedSetIds,
 		selectedFactionIds: state.factions.selectedFactionIds
 	})
-)(styleHelper(DeckFilter, styles));
+)(stylesHelper(DeckFilter, styles));

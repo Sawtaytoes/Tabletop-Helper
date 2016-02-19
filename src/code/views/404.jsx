@@ -6,7 +6,7 @@ import { pushPath } from 'redux-simple-router'
 import PageDescription from 'components/page-description'
 
 // Utilities
-import { styleHelper } from 'utilities/style-helper'
+import { stylesHelper } from 'utilities/styles-helper'
 
 // Styles
 const styles = [
@@ -36,4 +36,4 @@ class NoMatch extends Component {
 module.exports = connect(
 	state => ({}),
 	dispatch => ({ dispatch, pushPath })
-)(styleHelper(NoMatch, styles))
+)(stylesHelper(NoMatch, styles))

@@ -14,7 +14,7 @@ import {
 } from 'actions'
 
 // Utilities
-import { styleHelper } from 'utilities/style-helper'
+import { stylesHelper } from 'utilities/styles-helper'
 
 // Styles
 const styles = [
@@ -137,4 +137,4 @@ export default connect(
 	}),
 	null, null,
 	{ pure: false }
-)(styleHelper(HeaderNav, styles));
+)(stylesHelper(HeaderNav, styles));

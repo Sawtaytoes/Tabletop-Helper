@@ -9,7 +9,7 @@ import PageDescription from 'components/page-description'
 import socialLinks from 'content/social-links'
 
 // Utilities
-import { styleHelper } from 'utilities/style-helper'
+import { stylesHelper } from 'utilities/styles-helper'
 
 // Styles
 const styles = [
@@ -266,4 +266,4 @@ class Contact extends Component {
 	)}
 }
 
-module.exports = styleHelper(Contact, styles)
+module.exports = stylesHelper(Contact, styles)

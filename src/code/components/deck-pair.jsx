@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
 // Styles
-import { styleHelper } from 'utilities/style-helper'
+import { stylesHelper } from 'utilities/styles-helper'
 const styles = [
 	require('styl/deck-pair')
 ]
@@ -39,4 +39,4 @@ export default class DeckPair extends Component {
 	)}
 }
 
-export default styleHelper(DeckPair, styles);
+export default stylesHelper(DeckPair, styles);
