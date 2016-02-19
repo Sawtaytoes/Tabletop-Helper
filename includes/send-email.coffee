@@ -51,7 +51,7 @@ module.exports = (reqBody, res) ->
 				success: false
 			return
 
-		not __production and console.log "Message sent: " + info.response
+		not __production and console.info "Message sent: " + info.response
 		res.send
 			message: "Message sent."
 			success: true
