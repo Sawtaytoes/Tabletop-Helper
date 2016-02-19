@@ -108,16 +108,16 @@ class Randomizer extends Component {
 			<fieldset className="players-selector-container">
 				<label htmlFor={htmlId} className="players-selector">
 					<span className="players-selector__arrows">
-						<span className="players-selector__arrow players-selector__arrow--up" onClick={this.handlePlayersIncreased.bind(this)} onTouchStart={this.handlePlayersIncreased.bind(this)}>
+						<span className="players-selector__arrow players-selector__arrow--up" onClick={this.handlePlayersIncreased.bind(this)}>
 							<i className="fa fa-arrow-up"></i>
 						</span>
-						<span className="players-selector__arrow players-selector__arrow--down" onClick={this.handlePlayersDecreased.bind(this)} onTouchStart={this.handlePlayersDecreased.bind(this)}>
+						<span className="players-selector__arrow players-selector__arrow--down" onClick={this.handlePlayersDecreased.bind(this)}>
 							<i className="fa fa-arrow-down"></i>
 						</span>
 					</span>
 					<input id={htmlId} className="players-selector__content players-selector__field" type="number" value={this.props.numberOfPlayers} onChange={this.handlePlayersChanged.bind(this)} />
 					<span className="players-selector__content players-selector__label">Players</span>
-					<button className="players-selector__content players-selector__button" onClick={this.handleRandomizeClicked.bind(this)} onTouchStart={this.handleRandomizeClicked.bind(this)}>Randomize</button>
+					<button className="players-selector__content players-selector__button" onClick={this.handleRandomizeClicked.bind(this)}>Randomize</button>
 				</label>
 			</fieldset>
 		)

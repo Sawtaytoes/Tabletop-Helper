@@ -4,6 +4,7 @@ import { Router, Route, Redirect, Link } from 'react-router'
 import { Provider } from 'react-redux'
 
 // Polyfills
+import 'react-fastclick'
 import 'utilities/polyfills'
 
 // Store and Routes

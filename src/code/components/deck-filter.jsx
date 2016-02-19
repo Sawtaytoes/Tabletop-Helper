@@ -56,34 +56,19 @@ class DeckFilter extends Component {
 		return 'fa ' + (isChecked ? checked : unchecked)
 	}
 
-	handleSelectAllClicked(e) {
+	handleSelectAllClicked(isChecked, e) {
 		let { dispatch } = this.props
-
-		if (e.target.checked) {
-			dispatch(selectAllFactions())
-		} else {
-			dispatch(deselectAllFactions())
-		}
+		isChecked ? dispatch(deselectAllFactions()) : dispatch(selectAllFactions())
 	}
 
-	handleSetSelection(id, e) {
+	handleSetSelection(isChecked, id, e) {
 		let { dispatch } = this.props
-
-		if (e.target.checked) {
-			dispatch(selectSetFactions(id))
-		} else {
-			dispatch(deselectSetFactions(id))
-		}
+		isChecked ? dispatch(deselectSetFactions(id)) : dispatch(selectSetFactions(id))
 	}
 
-	handleDeckSelection(id, e) {
+	handleDeckSelection(isChecked, id, e) {
 		let { dispatch } = this.props
-
-		if (e.target.checked) {
-			dispatch(selectFaction(id))
-		} else {
-			dispatch(deselectFaction(id))
-		}
+		isChecked ? dispatch(deselectFaction(id)) : dispatch(selectFaction(id))
 	}
 
 	renderSelectAll() {
@@ -92,11 +77,10 @@ class DeckFilter extends Component {
 			isChecked = decks.length === selectedFactionIds.length
 
 		return (
-			<label htmlFor={htmlId} className="deck-filter__item deck-filter__item--select-all">
-				<input id={htmlId} className="deck-filter__checkbox" type="checkbox" title="Select all items in the list" value={htmlId} checked={isChecked} onChange={this.handleSelectAllClicked.bind(this)}
-				/>
+			<div className="deck-filter__item deck-filter__item--select-all" onClick={this.handleSelectAllClicked.bind(this, isChecked)}>
+				<input className="deck-filter__checkbox" type="checkbox" title="Select all items in the list" value={htmlId} checked={isChecked} />
 				<span><i className={this.getCheckedIcon(isChecked)}></i> <em>Select All</em></span>
-			</label>
+			</div>
 		)
 	}
 
@@ -106,10 +90,10 @@ class DeckFilter extends Component {
 
 		return (
 			<div key={setId + htmlId} className="deck-filter__items">
-				<label htmlFor={htmlId} className="deck-filter__item deck-filter__item--group">
-					<input id={htmlId} className="deck-filter__checkbox" type="checkbox" title={set.description} value={htmlId} checked={isChecked} onChange={this.handleSetSelection.bind(this, setId)} />
+				<div className="deck-filter__item deck-filter__item--group" onClick={this.handleSetSelection.bind(this, isChecked, setId)}>
+					<input className="deck-filter__checkbox" type="checkbox" title={set.description} checked={isChecked} />
 					<span><i className={this.getCheckedIcon(isChecked)}></i> <strong>{set.title}</strong></span>
-				</label>
+				</div>
 
 				<div className="deck-filter__subitems">
 					{set.decks.map((deck) => {
@@ -126,10 +110,10 @@ class DeckFilter extends Component {
 			isChecked = selectedFactionIds.includes(deckId)
 
 		return (
-			<label key={deckId + htmlId} htmlFor={htmlId} className="deck-filter__subitem">
-				<input id={htmlId} className="deck-filter__checkbox" type="checkbox" title={deck.description} value={htmlId} checked={isChecked} onChange={this.handleDeckSelection.bind(this, deckId)} />
+			<div key={deckId + htmlId} className="deck-filter__subitem" onClick={this.handleDeckSelection.bind(this, isChecked, deckId)}>
+				<input className="deck-filter__checkbox" type="checkbox" title={deck.description} checked={isChecked} />
 				<span><i className={this.getCheckedIcon(isChecked)}></i> {deck.title}</span>
-			</label>
+			</div>
 		)
 	}
 
