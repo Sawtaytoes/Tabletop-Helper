@@ -2,7 +2,7 @@ import React from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 
 // Utilities
-import { renderStyles } from './style-helper'
+import { renderStyles } from './styles-helper'
 
 const cacheAge = 604800 // 1wk -> 60s x 60m x 24h x 7d
 
