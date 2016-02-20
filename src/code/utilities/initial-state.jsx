@@ -7,7 +7,6 @@ export function initializeState(reducerState = {}, initialState = {}) {
 	let newState = { ...reducerState }
 
 	for (let key of Object.keys(initialState)) {
-		console.log(key, !newState[key]);
 		!newState[key] && (newState[key] = initialState[key])
 	}
 
