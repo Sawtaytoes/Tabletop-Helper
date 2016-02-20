@@ -105,7 +105,7 @@ class DeckFilter extends Component {
 		let htmlId = 'select-all-' + (Math.random() * 1000000),
 			{ sets, decks, expandedSetIds, selectedFactionIds } = this.props,
 			isChecked = decks.length === selectedFactionIds.length,
-			isExpanded = sets.length === expandedSetIds.length
+			isExpanded = expandedSetIds.length > 0
 
 		return (
 			<div className="deck-filter__item deck-filter__item--select-all">
