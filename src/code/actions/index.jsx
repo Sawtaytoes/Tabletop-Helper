@@ -49,6 +49,12 @@ export function closeSubMenu() {
 // Factions
 export const UPDATE_PLAYERS_COUNT = 'UPDATE_PLAYERS_COUNT'
 
+export const EXPAND_SET = 'EXPAND_SET'
+export const CONTRACT_SET = 'CONTRACT_SET'
+
+export const EXPAND_ALL_SETS = 'EXPAND_ALL_SETS'
+export const CONTRACT_ALL_SETS = 'CONTRACT_ALL_SETS'
+
 export const SELECT_FACTION = 'SELECT_FACTION'
 export const DESELECT_FACTION = 'DESELECT_FACTION'
 
@@ -63,6 +69,34 @@ export function updateNumberOfPlayers(numberOfPlayers) {
 	return {
 		type: UPDATE_PLAYERS_COUNT,
 		numberOfPlayers
+	}
+}
+
+// Single Set
+export function expandSet(setId) {
+	return {
+		type: EXPAND_SET,
+		setId
+	}
+}
+
+export function contractSet(setId) {
+	return {
+		type: CONTRACT_SET,
+		setId
+	}
+}
+
+// All Sets
+export function expandAllSets() {
+	return {
+		type: EXPAND_ALL_SETS
+	}
+}
+
+export function contractAllSets() {
+	return {
+		type: CONTRACT_ALL_SETS
 	}
 }
 

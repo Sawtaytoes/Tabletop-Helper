@@ -4,37 +4,34 @@ redirectRoute = (route, nextState, replaceState) =>
 	replaceState null, route
 
 module.exports =
-	component: 'div'
+	component: Master
+	path: '/'
+	onEnter: (nextState, replaceState) =>
+		if nextState.location.pathname == '/'
+			replaceState null, '/randomizer'
 	childRoutes: [
-		path: '/'
-		onEnter: (nextState, replaceState) =>
-			if nextState.location.pathname == '/'
-				replaceState null, '/randomizer'
-		component: Master
+
+		# Redirects
+		path: 'randomizer'
+		onEnter: redirectRoute.bind null, '/randomizer/smash-up'
+	,
+
+		# Routes
+		path: 'randomizer'
 		childRoutes: [
-
-			# Redirects
-			path: 'randomizer'
-			onEnter: redirectRoute.bind null, '/randomizer/smash-up'
-		,
-
-			# Routes
-			path: 'randomizer'
-			childRoutes: [
-				path: 'smash-up'
-				getComponent: (location, cb) =>
-					# require.ensure [], (require) =>
-					cb null, require './views/randomizer-smash-up'
-			]
-		,
-		# 	path: 'contact'
-		# 	getComponent: (location, cb) =>
-		# 		# require.ensure [], (require) =>
-		# 		cb null, require './views/contact'
-		# ,
-			path: '*'
+			path: 'smash-up'
 			getComponent: (location, cb) =>
 				# require.ensure [], (require) =>
-				cb null, require './views/404'
+				cb null, require './views/randomizer-smash-up'
 		]
+	,
+	# 	path: 'contact'
+	# 	getComponent: (location, cb) =>
+	# 		# require.ensure [], (require) =>
+	# 		cb null, require './views/contact'
+	# ,
+		path: '*'
+		getComponent: (location, cb) =>
+			# require.ensure [], (require) =>
+			cb null, require './views/404'
 	]

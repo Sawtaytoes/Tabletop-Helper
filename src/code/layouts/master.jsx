@@ -10,7 +10,7 @@ import Footer from 'components/footer'
 import { closeMenu } from 'actions'
 
 // Utilities
-import { styleHelper } from 'utilities/style-helper'
+import { stylesHelper } from 'utilities/styles-helper'
 
 const styles = [
 	require('normalize.css'),
@@ -106,4 +106,4 @@ class Master extends Component {
 
 export default connect(
 	state => ({ menuIsOpen: state.collapsibleMenu.menuIsOpen })
-)(styleHelper(Master, styles))
+)(stylesHelper(Master, styles))

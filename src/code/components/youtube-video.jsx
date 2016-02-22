@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 
 // Utilities
-import { styleHelper } from 'utilities/style-helper'
+import { stylesHelper } from 'utilities/styles-helper'
 
 // Styles
 const styles = [
@@ -25,4 +25,4 @@ export default class YouTubeVideo extends Component {
 	)}
 }
 
-export default styleHelper(YouTubeVideo, styles)
+export default stylesHelper(YouTubeVideo, styles)

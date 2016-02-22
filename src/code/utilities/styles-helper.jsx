@@ -19,7 +19,7 @@ const collectOrRender = function(styles) {
 	return renderedCollection
 }
 
-export function styleHelper(ComposedComponent, styles) {
+export function stylesHelper(ComposedComponent, styles) {
 	return class Styles extends Component {
 		componentWillMount() {
 			this.styleRemovers = collectOrRender(styles)

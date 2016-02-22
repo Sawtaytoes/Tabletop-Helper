@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import HeaderNav from './header-nav'
 
 // Utilities
-import { styleHelper } from 'utilities/style-helper'
+import { stylesHelper } from 'utilities/styles-helper'
 
 const styles = [
 	require('styl/header')
@@ -25,4 +25,4 @@ export default connect(
 	state => ({}),
 	null, null,
 	{ pure: false }
-)(styleHelper(Header, styles));
+)(stylesHelper(Header, styles));
