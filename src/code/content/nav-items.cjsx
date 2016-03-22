@@ -1,4 +1,7 @@
 module.exports = [
+	name: 'Instructions'
+	to: 'instructions'
+,
 	name: 'Randomizer'
 	to: 'randomizer'
 	subitems: [

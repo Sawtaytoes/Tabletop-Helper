@@ -17,6 +17,16 @@ module.exports =
 	,
 
 		# Routes
+		path: 'instructions'
+		getComponent: (location, cb) =>
+			# require.ensure [], (require) =>
+			cb null, require './views/instructions'
+	,
+		path: 'instructions/:link'
+		getComponent: (location, cb) =>
+			# require.ensure [], (require) =>
+			cb null, require './views/instruction'
+	,
 		path: 'randomizer'
 		childRoutes: [
 			path: 'smash-up'
