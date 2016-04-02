@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import { Router, Route, Redirect, Link } from 'react-router'
+import { match, browserHistory, Router, Route, Redirect, Link } from 'react-router'
 import { Provider } from 'react-redux'
 
 // Polyfills
@@ -12,8 +12,14 @@ import { history, store } from 'utilities/store'
 import routes from './routes'
 
 // Router
-render(
-	<Provider store={store}>
-		<Router history={history} routes={routes} />
-	</Provider>
-, document.getElementById('root'))
+match({ history, routes }, (error, redirectLocation, renderProps) => {
+	if (redirectLocation) {
+		window.location = redirectLocation.pathname
+	}
+
+	render(
+		<Provider store={store}>
+			<Router history={browserHistory} {...renderProps} />
+		</Provider>
+	, document.getElementById('root'))
+})

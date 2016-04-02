@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import GoogleAnalytics from 'react-g-analytics'
+// import GoogleAnalytics from 'react-g-analytics'
 import { connect } from 'react-redux'
 
 // Components
