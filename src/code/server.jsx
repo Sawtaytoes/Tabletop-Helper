@@ -1,7 +1,6 @@
 import React from 'react'
 import { renderToString } from 'react-dom/server'
-import { RoutingContext, match } from 'react-router'
-import { setRawCookie } from 'react-cookie'
+import { RouterContext, match, memoryHistory } from 'react-router'
 import { Provider } from 'react-redux'
 import { compose, createStore } from 'redux'
 import createMemoryHistory from 'history/lib/createMemoryHistory'
@@ -24,7 +23,6 @@ import routes from './routes'
  * and pass it into the Router.run function.
  */
 module.exports = function render(req, res) {
-	setRawCookie(req.headers.cookie) // Initialize cookies
 	const initialState = getInitialState()
 
 	const history = createMemoryHistory()
@@ -38,7 +36,7 @@ module.exports = function render(req, res) {
 		} else if (renderProps) {
 			const renderedContent = renderToString(
 				<Provider store={store}>
-					<RoutingContext {...renderProps} />
+					<RouterContext history={memoryHistory} {...renderProps} />
 				</Provider>
 			)
 

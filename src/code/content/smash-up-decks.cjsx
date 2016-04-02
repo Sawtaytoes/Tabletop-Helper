@@ -306,6 +306,18 @@ factions = [
 	set: setNames.munchkin
 ,
 
+	title: "Dragons"
+	name:
+		noun: "Dragons"
+		adjective: "Dragon"
+	set: setNames.iyf
+,
+	title: "Greek Myths"
+	name:
+		noun: "Greek Myths"
+		adjective: "Greek Myth"
+	set: setNames.iyf
+,
 	title: "Sharks"
 	name:
 		noun: "Sharks"
@@ -318,16 +330,10 @@ factions = [
 		adjective: "Superhero"
 	set: setNames.iyf
 ,
-	title: "Greek Myths"
+	title: "Tornados"
 	name:
-		noun: "Greek Myths"
-		adjective: "Greek Myth"
-	set: setNames.iyf
-,
-	title: "Dragons"
-	name:
-		noun: "Dragons"
-		adjective: "Dragon"
+		noun: "Tornados"
+		adjective: "Tornado"
 	set: setNames.iyf
 ]
 

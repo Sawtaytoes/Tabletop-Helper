@@ -1,14 +1,15 @@
 `import { Master } from './layouts'`
 
-redirectRoute = (route, nextState, replaceState) =>
-	replaceState null, route
+redirectRoute = (route, nextState, replace) =>
+	replace route
 
 module.exports =
-	component: Master
 	path: '/'
+	component: Master
 	onEnter: (nextState, replaceState) =>
-		if nextState.location.pathname == '/'
-			replaceState null, '/randomizer'
+	onEnter: ({ location }, replace) =>
+		if location.pathname == '/'
+			replace '/randomizer'
 	childRoutes: [
 
 		# Redirects
@@ -19,29 +20,29 @@ module.exports =
 		# Routes
 		path: 'instructions'
 		getComponent: (location, cb) =>
-			# require.ensure [], (require) =>
-			cb null, require './views/instructions'
+			require.ensure [], (require) =>
+				cb null, require './views/instructions'
 	,
 		path: 'instructions/:link'
 		getComponent: (location, cb) =>
-			# require.ensure [], (require) =>
-			cb null, require './views/instruction'
+			require.ensure [], (require) =>
+				cb null, require './views/instruction'
 	,
 		path: 'randomizer'
 		childRoutes: [
 			path: 'smash-up'
 			getComponent: (location, cb) =>
-				# require.ensure [], (require) =>
-				cb null, require './views/randomizer-smash-up'
+				require.ensure [], (require) =>
+					cb null, require './views/randomizer-smash-up'
 		]
 	,
 	# 	path: 'contact'
 	# 	getComponent: (location, cb) =>
-	# 		# require.ensure [], (require) =>
-	# 		cb null, require './views/contact'
+	#		require.ensure [], (require) =>
+	# 			cb null, require './views/contact'
 	# ,
 		path: '*'
 		getComponent: (location, cb) =>
-			# require.ensure [], (require) =>
-			cb null, require './views/404'
+			require.ensure [], (require) =>
+				cb null, require './views/404'
 	]
