@@ -1,7 +1,6 @@
 bodyParser = require 'body-parser'
 compression = require 'compression'
 express = require 'express'
-slashes = require 'connect-slashes'
 fs = require 'fs'
 paths = require __includes + 'paths'
 
@@ -29,7 +28,6 @@ module.exports = do ->
 
 	app
 	.use express.static __base + paths.root.dest, redirect: false
-	.use slashes false
 	.use helmet()
 	#.use helmet.csp
 	#	directives:
