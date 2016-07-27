@@ -93,6 +93,7 @@ module.exports =
 		pathinfo: false
 		publicPath: '/'
 	plugins: [
+		new webpack.DefinePlugin 'process.env.NODE_ENV': JSON.stringify __env
 		new webpack.IgnorePlugin /^\.\/locale$/, [/moment$/]
 		new webpack.NoErrorsPlugin()
 		new webpack.optimize.AggressiveMergingPlugin()

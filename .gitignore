@@ -10,7 +10,9 @@ network-*
 ## Node ##
 .env
 includes/node-env.coffee
+newrelic.js
 node_modules
+npm-debug.log
 
 ## Public ##
 web/*

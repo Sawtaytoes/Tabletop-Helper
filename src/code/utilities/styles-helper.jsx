@@ -1,36 +1,36 @@
 import React, { Component } from 'react'
 import { canUseDOM } from 'fbjs/lib/ExecutionEnvironment'
 
-const css = []
+var styles = [],
+	cssDictionary = {}
 
-const collectOrRender = function(styles) {
+const collectOrRender = function(stylesFiles) {
 	let renderedCollection = []
 
-	for (let i = 0, l = styles.length; i < l; i++) {
-		const stylesFile = styles[i]
+	stylesFiles && stylesFiles.forEach((stylesFile) => {
+		let css = stylesFile._getCss()
 
 		if (canUseDOM) {
-			renderedCollection[stylesFile._insertCss()]
+			renderedCollection.push(stylesFile._insertCss())
+			styles.push(css)
+		} else if (!cssDictionary[css]) {
+			cssDictionary[css] = true
+			styles.push(css)
 		}
-
-		css.push(stylesFile._getCss())
-	}
+	})
 
 	return renderedCollection
 }
 
-export function stylesHelper(ComposedComponent, styles) {
+export function stylesHelper(ComposedComponent, stylesFiles) {
 	return class Styles extends Component {
 		componentWillMount() {
-			this.styleRemovers = collectOrRender(styles)
+			this.styleRemovers = collectOrRender(stylesFiles)
 		}
 
 		componentWillUnmount() {
 			setTimeout(() => {
-				for (let i = 0, l = this.styleRemovers.length; i < l; i++) {
-					let styleRemover = this.styleRemovers[i]
-					typeof styleRemover === 'function' && styleRemover()
-				}
+				this.styleRemovers && this.styleRemovers.forEach(styleRemover => typeof styleRemover === 'function' && styleRemover())
 			}, 0)
 		}
 
@@ -41,5 +41,5 @@ export function stylesHelper(ComposedComponent, styles) {
 }
 
 export function renderStyles() {
-	return css.join('')
+	return styles.join('')
 }

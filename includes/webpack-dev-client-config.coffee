@@ -90,6 +90,7 @@ module.exports =
 		pathinfo: true
 		publicPath: '/'
 	plugins: [
+		new webpack.DefinePlugin 'process.env.NODE_ENV': JSON.stringify __env
 		new webpack.HotModuleReplacementPlugin()
 		new webpack.IgnorePlugin /^\.\/locale$/, [/moment$/]
 		new webpack.optimize.OccurenceOrderPlugin true
