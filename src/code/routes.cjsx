@@ -8,36 +8,12 @@ module.exports =
 	component: Master
 	onEnter: ({ location }, replace) =>
 		if location.pathname == '/'
-			replace '/game'
+			replace '/randomizer'
 	childRoutes: [
 
 		# Redirects
-		path: 'about'
-		onEnter: redirectRoute.bind null, '/game'
-	,
-		path: 'credits'
-		onEnter: redirectRoute.bind null, '/dev-team'
-	,
-		path: 'dancemats'
-		onEnter: redirectRoute.bind null, '/dance-pads'
-	,
-		path: 'dlc'
-		onEnter: redirectRoute.bind null, '/dlc/pulsen-souleye'
-	,
-		path: 'faqs'
-		onEnter: redirectRoute.bind null, '/faq'
-	,
-		path: 'manual'
-		onEnter: redirectRoute.bind null, '/faq'
-	,
-		path: 'media'
-		onEnter: redirectRoute.bind null, '/game'
-	,
-		path: 'news'
-		onEnter: redirectRoute.bind null, '/game'
-	,
-		path: 'press'
-		onEnter: redirectRoute.bind null, '/press-kit'
+		path: 'randomizer'
+		onEnter: redirectRoute.bind null, '/randomizer/smash-up'
 	,
 		path: '**/'
 		onEnter: ({ location }, replace) =>
@@ -45,54 +21,34 @@ module.exports =
 	,
 
 		# Routes
-		path: 'game'
+		path: 'instructions'
 		getComponent: (location, cb) =>
 			require.ensure [], (require) =>
-				cb null, require './views/game'
+				cb null, require './views/instructions'
 	,
-		path: 'dlc'
+		path: 'instructions/:link'
+		getComponent: (location, cb) =>
+			require.ensure [], (require) =>
+				cb null, require './views/instruction'
+	,
+		path: 'score-keeper'
+		getComponent: (location, cb) =>
+			require.ensure [], (require) =>
+				cb null, require './views/score-keeper'
+	,
+		path: 'randomizer'
 		childRoutes: [
-			path: 'pulsen-souleye'
+			path: 'smash-up'
 			getComponent: (location, cb) =>
 				require.ensure [], (require) =>
-					cb null, require './views/pulsen-souleye'
-		,
-			path: 'pulsen-community-hopscotch-mix'
-			getComponent: (location, cb) =>
-				require.ensure [], (require) =>
-					cb null, require './views/pulsen-community-hopscotch-mix'
+					cb null, require './views/randomizer-smash-up'
 		]
 	,
-		path: 'dance-pads'
-		getComponent: (location, cb) =>
-			require.ensure [], (require) =>
-				cb null, require './views/dance-pads'
-	,
-		path: 'faq'
-		getComponent: (location, cb) =>
-			require.ensure [], (require) =>
-				cb null, require './views/faq'
-	,
-		path: 'dev-team'
-		getComponent: (location, cb) =>
-			require.ensure [], (require) =>
-				cb null, require './views/dev-team'
-	,
-		path: 'contact'
-		getComponent: (location, cb) =>
-			require.ensure [], (require) =>
-				cb null, require './views/contact'
-	,
-		path: 'press-kit'
-		getComponent: (location, cb) =>
-			require.ensure [], (require) =>
-				cb null, require './views/press-kit'
-	,
-		path: 'video-policy'
-		getComponent: (location, cb) =>
-			require.ensure [], (require) =>
-				cb null, require './views/video-policy'
-	,
+	# 	path: 'contact'
+	# 	getComponent: (location, cb) =>
+	#		require.ensure [], (require) =>
+	# 			cb null, require './views/contact'
+	# ,
 		path: '*'
 		getComponent: (location, cb) =>
 			require.ensure [], (require) =>
