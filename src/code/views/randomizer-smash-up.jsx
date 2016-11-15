@@ -10,14 +10,15 @@ import PageDescription from 'components/page-description'
 // Actions
 import {
 	updateNumberOfPlayers
-} from 'actions'
+} from 'actions/factions'
+
+// Utilities
+import StylesLoader from 'utilities/styles-loader'
 
 // Styles
-import { stylesHelper } from 'utilities/styles-helper'
-const styles = [
-	require('styl/message'),
-	require('styl/randomizer')
-]
+const stylesLoader = StylesLoader.create()
+	.add(require('styl/message'))
+	.add(require('styl/randomizer'))
 
 // Content
 import { sets, factions } from 'content/smash-up-decks'
@@ -169,4 +170,4 @@ module.exports = connect(
 	}),
 	null, null,
 	{ pure: false }
-)(stylesHelper(Randomizer, styles))
+)(stylesLoader.render(Randomizer))

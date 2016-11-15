@@ -1,22 +1,19 @@
-export const INCREASE_COUNTER = 'INCREASE_COUNTER'
-export const DECREASE_COUNTER = 'DECREASE_COUNTER'
+export const CHANGE_COUNTER = 'CHANGE_COUNTER'
 
-export function increaseCounter(id, value = 0, interval = 1) {
-
-
+export function incrementCounter(id, value = 0, interval = 1) {
 	return {
-		type: INCREASE_COUNTER,
+		type: CHANGE_COUNTER,
 		id,
+		style: 'incremented',
 		value: value + interval
 	}
 }
 
-export function decreaseCounter(id, value = 0, interval = 1) {
-
-
+export function decrementCounter(id, value = 0, interval = 1) {
 	return {
-		type: DECREASE_COUNTER,
+		type: CHANGE_COUNTER,
 		id,
+		style: 'decremented',
 		value: value - interval
 	}
 }

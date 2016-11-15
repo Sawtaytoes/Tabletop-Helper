@@ -1,6 +1,7 @@
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { RouterContext, match, memoryHistory } from 'react-router'
+import cookie, { setRawCookie } from 'react-cookie'
 import { Provider } from 'react-redux'
 import { compose, createStore } from 'redux'
 import createMemoryHistory from 'history/lib/createMemoryHistory'
@@ -11,18 +12,14 @@ import { getInitialState } from 'utilities/initial-state'
 import renderFullPage from 'utilities/render-full-page'
 
 // Actions
-import { updatePageMeta } from 'actions'
+import { updatePageMeta } from 'actions/page-meta'
 
 // Reducers & Routes
 import rootReducer from 'reducers'
 import routes from './routes'
 
-/*
- * Export render function to be used in server/config/routes.js
- * We grab the state passed in from the server and the req object from Express/Koa
- * and pass it into the Router.run function.
- */
 module.exports = function render(req, res) {
+	setRawCookie(req.headers.cookie) // Initialize cookies
 	const initialState = getInitialState()
 
 	const history = createMemoryHistory()

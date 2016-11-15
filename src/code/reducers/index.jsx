@@ -1,13 +1,16 @@
 import { combineReducers } from 'redux'
-import { routeReducer } from 'redux-simple-router'
+import { routerReducer } from 'react-router-redux'
 
-import collapsibleMenu from './collapsible-menu'
-import factions from './factions'
-import locationChange from './location-change'
+// Reducers
+import factions from 'reducers/factions'
+import locationChange from 'reducers/location-change'
+import numberCounter from 'reducers/number-counter'
+import tap from 'reducers/tap'
 
 export default combineReducers({
-	collapsibleMenu,
 	factions,
 	locationChange,
-	routing: routeReducer
+	numberCounter,
+	tap,
+	routing: routerReducer,
 })

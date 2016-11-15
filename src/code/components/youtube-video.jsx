@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PureComponent, PropTypes } from 'react'
 
 // Utilities
 import { stylesHelper } from 'utilities/styles-helper'
@@ -8,7 +8,7 @@ const styles = [
 	require('styl/flex-video')
 ]
 
-export default class YouTubeVideo extends Component {
+export default class YouTubeVideo extends PureComponent {
 	static propTypes = {
 		id: PropTypes.string.isRequired,
 		className: PropTypes.string

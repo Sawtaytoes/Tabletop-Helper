@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { render } from 'react-dom'
 import { match, browserHistory, Router, Route, Redirect, Link } from 'react-router'
 import { Provider } from 'react-redux'

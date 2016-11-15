@@ -1,24 +1,17 @@
 import {
-	INCREASE_COUNTER,
-	DECREASE_COUNTER,
+	CHANGE_COUNTER,
 } from 'actions/number-counter'
 
 export default (state = {}, action) => {
-	let { type, id, amount } = action
+	let { type, id, value } = action
 
 	switch (type) {
-	case INCREASE_COUNTER:
+	case CHANGE_COUNTER:
 		return {
 			...state,
 			id,
-			amount
-		}
-
-	case DECREASE_COUNTER:
-		return {
-			...state,
-			id,
-			amount * -1,
+			style,
+			value,
 		}
 
 	default:

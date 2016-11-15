@@ -12,7 +12,9 @@ import {
 	DESELECT_FACTION,
 	DESELECT_SET_FACTIONS,
 	DESELECT_ALL_FACTIONS
-} from 'actions'
+} from 'actions/factions'
+
+// Utilities
 import { createArrayFromRange } from 'utilities/array'
 
 // Content
@@ -30,10 +32,10 @@ const initialState = {
 	numberOfPlayers: 2,
 	numberOfFactions: 4, // Should always be 2 times player count
 	expandedSetIds: [],
-	selectedFactionIds: allFactionsList()
-},
-	minNumberOfPlayers = 2,
-	maxNumberOfPlayers = 9
+	selectedFactionIds: allFactionsList(),
+}
+const minNumberOfPlayers = 2
+const maxNumberOfPlayers = 9
 
 export function getFactionsInitialState() {
 	return initialState

@@ -1,13 +1,14 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PureComponent, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-// Styles
-import { stylesHelper } from 'utilities/styles-helper'
-const styles = [
-	require('styl/deck-pair')
-]
+// Utilities
+import StylesLoader from 'utilities/styles-loader'
 
-export default class DeckPair extends Component {
+// Styles
+const stylesLoader = StylesLoader.create()
+	.add(require('styl/deck-pair'))
+
+class DeckPair extends PureComponent {
 	// static propTypes = {
 	// 	containerClass: PropTypes.string,
 	// 	items: PropTypes.arrayOf(PropTypes.Object),
@@ -39,4 +40,4 @@ export default class DeckPair extends Component {
 	)}
 }
 
-export default stylesHelper(DeckPair, styles);
+export default stylesLoader.render(DeckPair)

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import cookie from 'react-cookie'
@@ -6,44 +6,24 @@ import cookie from 'react-cookie'
 // Components
 import PageDescription from 'components/page-description'
 
+// Utilities
+import StylesLoader from 'utilities/styles-loader'
+
 // Styles
-import { stylesHelper } from 'utilities/styles-helper'
-const styles = []
+const stylesLoader = StylesLoader.create()
 
-class Instructions extends Component {
-	constructor(props) {
-		super()
-
-		this.info = {
-
-		}
-	}
-
-	renderSection(section) { return (
-		<div key={section.name}>
-			<h2>{section.name}</h2>
-			<ul>
-				{section.items.map((item, i) => {
-					return <li key={i}>{item}</li>
-				})}
-			</ul>
-		</div>
-	)}
-
+class ScoreKeeper extends PureComponent {
 	render() {
-		let { info, goal } = this.instructions,
-			goBack = <Link to="/instructions">&lt; Back</Link>
+		const { counters } = this.props
 
 		return (
 			<article>
 				<PageDescription title="Number Keepers" />
 
-				{this.counters.map(counter => <Counter
+				{counters && counters.map(counter => (<Counter
 					id={counter.id}
 					count={counter.value}
-				/>)}
-
-				{goBack}
+				/>))}
 			</article>
 		)
 	}
@@ -51,4 +31,4 @@ class Instructions extends Component {
 
 module.exports = connect(
 	state => ({ counters: state.numberCounter.counters })
-)(stylesHelper(Instructions, styles))
+)(stylesLoader.render(ScoreKeeper))
