@@ -1,4 +1,4 @@
-# Ghadyani Framework for Webpack, React, and Redux
+# Tabletop Helper
 
 ## Prerequisites
 
