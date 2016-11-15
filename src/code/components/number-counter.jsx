@@ -56,21 +56,33 @@ class NumberCounter extends PureComponent {
 
 	render() {
 		this.initValues()
-		const { id } = this.props
+		const { number } = this.props
 		const { value, rotation } = this
 
 		return (
-			<div>
+			<div style={{ margin: '40px 10px' }}>
 				<div>
 					<button onClick={this.handleDecrement.bind(this, 5)}>-5</button>
 					<button onClick={this.handleDecrement.bind(this, 1)}>-1</button>
-					<span> {value} </span>
+					<span style={{
+						display: 'inline-block',
+						margin: '10px 10px 20px',
+					}}>
+						<span style={{
+							display: 'inline-block',
+							transform: `rotate(${rotation}deg)`,
+						}}> {value} </span>
+					</span>
 					<button onClick={this.handleIncrement.bind(this, 1)}>+1</button>
 					<button onClick={this.handleIncrement.bind(this, 5)}>+5</button>
+				</div>
+				<div>
 					<button onClick={this.handleRotation.bind(this, -90)}>Rotate Counterclockwise</button>
 					<span> {rotation} </span>
 					<button onClick={this.handleRotation.bind(this, 90)}>Rotate Clockwise</button>
-					<button onClick={this.handleRemoveSelf}>Remove Counter {id}</button>
+				</div>
+				<div>
+					<button onClick={this.handleRemoveSelf}>Remove Counter {number}</button>
 				</div>
 			</div>
 		)
