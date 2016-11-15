@@ -1,6 +1,15 @@
 module.exports = [{
+	name: 'Home',
+	to: 'home',
+}, {
+	name: 'About',
+	to: 'about',
+}, {
 	name: 'Instructions',
 	to: 'instructions',
+}, {
+	name: 'Score Keeper',
+	to: 'score-keeper',
 }, {
 	name: 'Randomizer',
 	to: 'randomizer',
