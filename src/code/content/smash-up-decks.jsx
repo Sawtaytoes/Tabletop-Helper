@@ -8,6 +8,7 @@ const setNames = {
 	pretty: "Pretty Pretty Smash Up",
 	munchkin: "Munchkin",
 	iyf: "It's Your Fault",
+	cad: "Cease & Desist",
 }
 
 const sets = [{
@@ -36,6 +37,9 @@ const sets = [{
 	description: '',
 }, {
 	title: setNames.iyf,
+	description: '',
+}, {
+	title: setNames.cad,
 	description: '',
 }]
 
@@ -104,6 +108,7 @@ const factions = [{
 	description: "Play minions from the discard pile.",
 	setName: setNames.core,
 }, {
+
 	title: "Bear Cavalry",
 	name: {
 		noun: "Bear Cavalry",
@@ -136,6 +141,7 @@ const factions = [{
 	description: "Powerful base actions that can be salvaged from the discard pile, moving between bases.",
 	setName: setNames.al9k,
 }, {
+
 	title: "Elder Things",
 	name: {
 		noun: "Elder Things",
@@ -168,6 +174,7 @@ const factions = [{
 	description: "Gain, use, and lose Madness to accomplish a little of everything.",
 	setName: setNames.cthulhu,
 }, {
+
 	title: "Cyborg Apes",
 	name: {
 		noun: "Cyborg Apes",
@@ -200,6 +207,7 @@ const factions = [{
 	description: "Replay actions and minions, avoiding the discard pile by going to the hand or the bottom of the deck.",
 	setName: setNames.sfdf,
 }, {
+
 	title: "Giant Ants",
 	name: {
 		noun: "Giant Ants",
@@ -232,6 +240,7 @@ const factions = [{
 	description: "Gain power on your turn and destroy minions.",
 	setName: setNames.monster,
 }, {
+
 	title: "Geeks",
 	name: {
 		noun: "Geeks",
@@ -240,6 +249,7 @@ const factions = [{
 	description: "Interrupt other players' turns to disrupt their plans.",
 	setName: setNames.geek,
 }, {
+
 	title: "Fairies",
 	name: {
 		noun: "Fairies",
@@ -272,6 +282,7 @@ const factions = [{
 	description: "A few strong minions with powerful talents and abilities.",
 	setName: setNames.pretty,
 }, {
+
 	title: "Clerics",
 	name: {
 		noun: "Clerics",
@@ -336,6 +347,7 @@ const factions = [{
 	description: "Playing more monsters on bases to slow game and destroying monsters on bases",
 	setName: setNames.munchkin,
 }, {
+
 	title: "Dragons",
 	name: {
 		noun: "Dragons",
@@ -370,6 +382,35 @@ const factions = [{
 		adjective: "Tornado",
 	},
 	setName: setNames.iyf,
+}, {
+
+	title: "Star Roamers",
+	name: {
+		noun: "Star Roamers",
+		adjective: "Star Roamer",
+	},
+	setName: setNames.cad,
+}, {
+	title: "Astro Knights",
+	name: {
+		noun: "Astro Knights",
+		adjective: "Astro Knight",
+	},
+	setName: setNames.cad,
+}, {
+	title: "Changerbots",
+	name: {
+		noun: "Changerbots",
+		adjective: "Changerbot",
+	},
+	setName: setNames.cad,
+}, {
+	title: "Ignobles",
+	name: {
+		noun: "Ignobles",
+		adjective: "Ignoble",
+	},
+	setName: setNames.cad,
 }]
 
 const deckSetList = []
