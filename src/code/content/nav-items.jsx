@@ -1,6 +1,6 @@
 module.exports = [{
 	name: 'Home',
-	to: 'home',
+	to: '',
 }, {
 	name: 'About',
 	to: 'about',
