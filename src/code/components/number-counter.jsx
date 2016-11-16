@@ -16,6 +16,7 @@ import StylesLoader from 'utilities/styles-loader'
 
 // Styles
 const stylesLoader = StylesLoader.create()
+.add(require('styl/number-counter'))
 
 class NumberCounter extends PureComponent {
 	handleRemoveSelf = () => {
@@ -54,41 +55,68 @@ class NumberCounter extends PureComponent {
 		this.value = value
 	}
 
+	renderCountControls() {
+		const { value, rotation } = this
+		const { number } = this.props
+
+		return [
+			<div key="identifier" className="number-counter__identifier">Player {number}</div>,
+			<div key="controls" className="number-counter__controls">
+				<span className="number-counter__control number-counter__control--clickable" onClick={this.handleDecrement.bind(this, 5)}>-5</span>
+				<span className="number-counter__control number-counter__control--clickable" onClick={this.handleDecrement.bind(this, 1)}>-1</span>
+				<span className="number-counter__control number-counter__control--count">
+					<span className="number-counter__count" style={{
+						transform: `rotate(${rotation}deg)`,
+					}}>{value}</span>
+				</span>
+				<span className="number-counter__control number-counter__control--clickable" onClick={this.handleIncrement.bind(this, 1)}>+1</span>
+				<span className="number-counter__control number-counter__control--clickable" onClick={this.handleIncrement.bind(this, 5)}>+5</span>
+			</div>,
+		]
+	}
+
+	renderSettingsControls() {
+		const { value, rotation } = this
+		const { number } = this.props
+
+		return [
+			<div key="identifier" className="number-counter__identifier">Player {number}</div>,
+			<div key="controls" className="number-counter__controls">
+				<span className="number-counter__control" onClick={this.handleRemoveSelf}>
+					<span>
+						<i className="fa fa-close"></i>
+					</span>
+					<span> Remove</span>
+				</span>
+				<span className="number-counter__control number-counter__control--count">
+					<span className="number-counter__count" style={{
+						transform: `rotate(${rotation}deg)`,
+					}}>{value}</span>
+				</span>
+				<span className="number-counter__control" onClick={this.handleRotation.bind(this, -90)}>
+					<i className="fa fa-rotate-left"></i>
+				</span>
+				<span className="number-counter__control" onClick={this.handleRotation.bind(this, 90)}>
+					<i className="fa fa-rotate-right"></i>
+				</span>
+			</div>,
+		]
+	}
+
 	render() {
 		this.initValues()
-		const { number } = this.props
-		const { value, rotation } = this
+		const { settingsVisible } = this.props
 
 		return (
-			<div style={{ margin: '40px 10px' }}>
-				<div>
-					<button onClick={this.handleDecrement.bind(this, 5)}>-5</button>
-					<button onClick={this.handleDecrement.bind(this, 1)}>-1</button>
-					<span style={{
-						display: 'inline-block',
-						margin: '10px 10px 20px',
-					}}>
-						<span style={{
-							display: 'inline-block',
-							transform: `rotate(${rotation}deg)`,
-						}}> {value} </span>
-					</span>
-					<button onClick={this.handleIncrement.bind(this, 1)}>+1</button>
-					<button onClick={this.handleIncrement.bind(this, 5)}>+5</button>
-				</div>
-				<div>
-					<button onClick={this.handleRotation.bind(this, -90)}>Rotate Counterclockwise</button>
-					<span> {rotation} </span>
-					<button onClick={this.handleRotation.bind(this, 90)}>Rotate Clockwise</button>
-				</div>
-				<div>
-					<button onClick={this.handleRemoveSelf}>Remove Counter {number}</button>
-				</div>
+			<div className="number-counter">
+				{settingsVisible && this.renderCountControls()}
+				{!settingsVisible && this.renderSettingsControls()}
 			</div>
 		)
 	}
 }
 
-export default connect(
-	state => ({ state, counters: state.numberCounters })
-)(stylesLoader.render(NumberCounter))
+export default connect(state => ({
+	counters: state.numberCounters,
+	settingsVisible: state.contextMenu.visible,
+}))(stylesLoader.render(NumberCounter))

@@ -136,6 +136,13 @@ test('Rotate by 0', t => {
 		...options,
 		interval: 0,
 		initialRotation: 360,
+		expectedRotation: 360,
+	})
+
+	testRun.rotateCounter({
+		...options,
+		interval: 0,
+		initialRotation: 1080,
 		expectedRotation: 0,
 	})
 
@@ -145,6 +152,13 @@ test('Rotate by 0', t => {
 test('Rotate by 1', t => {
 	const options = TestRun.getVars(),
 		testRun = new TestRun(t)
+
+	testRun.rotateCounter({
+		...options,
+		interval: 1,
+		initialRotation: 0,
+		expectedRotation: 1,
+	})
 
 	testRun.rotateCounter({
 		...options,
@@ -163,6 +177,13 @@ test('Rotate by 5', t => {
 	testRun.rotateCounter({
 		...options,
 		interval: 5,
+		initialRotation: 0,
+		expectedRotation: 5,
+	})
+
+	testRun.rotateCounter({
+		...options,
+		interval: 5,
 		initialRotation: 12,
 		expectedRotation: 17,
 	})
@@ -177,8 +198,15 @@ test('Rotate by 90', t => {
 	testRun.rotateCounter({
 		...options,
 		interval: 90,
+		initialRotation: 0,
+		expectedRotation: 90,
+	})
+
+	testRun.rotateCounter({
+		...options,
+		interval: 90,
 		initialRotation: 340,
-		expectedRotation: 70,
+		expectedRotation: 430,
 	})
 
 	t.end()
@@ -206,12 +234,18 @@ test('Rotate by 180', t => {
 		...options,
 		interval: 180,
 		initialRotation: 180,
-		expectedRotation: 0,
+		expectedRotation: 360,
+	})
+
+	testRun.rotateCounter({
+		...options,
+		interval: 180,
+		initialRotation: 1080,
+		expectedRotation: 180,
 	})
 
 	t.end()
 })
-
 
 test('Rotate by -360', t => {
 	const options = TestRun.getVars(),
@@ -220,6 +254,20 @@ test('Rotate by -360', t => {
 	testRun.rotateCounter({
 		...options,
 		interval: -360,
+		initialRotation: -135,
+		expectedRotation: -495,
+	})
+
+	t.end()
+})
+
+test('Rotate by -1080', t => {
+	const options = TestRun.getVars(),
+		testRun = new TestRun(t)
+
+	testRun.rotateCounter({
+		...options,
+		interval: -1080,
 		initialRotation: -135,
 		expectedRotation: -135,
 	})

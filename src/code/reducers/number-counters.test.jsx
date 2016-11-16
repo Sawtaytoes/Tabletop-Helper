@@ -20,7 +20,7 @@ class TestRun extends TestHelper {
 		}
 	}
 
-	incrementCounter({store, id, interval, initialValue, expectedValue}) {
+	incrementCounter({ store, id, interval, initialValue, expectedValue }) {
 		store.dispatch(incrementCounter(id, initialValue, interval))
 
 		let { value } = store.getState().numberCounters[id]
@@ -30,7 +30,7 @@ class TestRun extends TestHelper {
 		)
 	}
 
-	decrementCounter({store, id, interval, initialValue, expectedValue}) {
+	decrementCounter({ store, id, interval, initialValue, expectedValue }) {
 		store.dispatch(decrementCounter(id, initialValue, interval))
 
 		let { value } = store.getState().numberCounters[id]
@@ -40,7 +40,7 @@ class TestRun extends TestHelper {
 		)
 	}
 
-	rotateCounter({store, id, interval, initialRotation, expectedRotation}) {
+	rotateCounter({ store, id, interval, initialRotation, expectedRotation }) {
 		store.dispatch(rotateCounter(id, initialRotation, interval))
 
 		let { rotation } = store.getState().numberCounters[id]

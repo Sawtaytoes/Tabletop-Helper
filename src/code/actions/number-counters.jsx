@@ -24,6 +24,6 @@ export function rotateCounter(id, currentRotation, interval = 0) {
 		type: CHANGE_COUNTER_ROTATION,
 		style: 'rotated',
 		id,
-		rotation: (currentRotation + interval) % 360,
+		rotation: (currentRotation + interval) % 1080,
 	}
 }

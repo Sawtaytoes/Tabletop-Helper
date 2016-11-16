@@ -41,9 +41,10 @@ export default function renderStyles(ComposedComponent, stylesFiles) {
 		}
 
 		setPreRenderedStyles(css) {
-			let cssHash = hash(css)
+			const cssHash = hash(css)
 
 			if (!cssDictionary[cssHash]) {
+				// cssDictionary[cssHash] += 1
 				cssDictionary[cssHash] = true
 				styles.push(css)
 			}
