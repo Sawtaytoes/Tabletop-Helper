@@ -58,19 +58,42 @@ class NumberCounter extends PureComponent {
 	renderCountControls() {
 		const { value, rotation } = this
 		const { number } = this.props
+		const styles = {
+			transform: `rotate(${rotation}deg)`,
+		}
 
 		return [
 			<div key="identifier" className="number-counter__identifier">Player {number}</div>,
 			<div key="controls" className="number-counter__controls">
-				<span className="number-counter__control number-counter__control--clickable" onClick={this.handleDecrement.bind(this, 5)}>-5</span>
-				<span className="number-counter__control number-counter__control--clickable" onClick={this.handleDecrement.bind(this, 1)}>-1</span>
-				<span className="number-counter__control number-counter__control--count">
-					<span className="number-counter__count" style={{
-						transform: `rotate(${rotation}deg)`,
-					}}>{value}</span>
+				<span
+					className="number-counter__control number-counter__control--clickable"
+					onClick={this.handleDecrement.bind(this, 5)}
+				>
+					<span className="number-counter__description" style={styles}>-5</span>
 				</span>
-				<span className="number-counter__control number-counter__control--clickable" onClick={this.handleIncrement.bind(this, 1)}>+1</span>
-				<span className="number-counter__control number-counter__control--clickable" onClick={this.handleIncrement.bind(this, 5)}>+5</span>
+				<span
+					className="number-counter__control number-counter__control--clickable"
+					onClick={this.handleDecrement.bind(this, 1)}
+				>
+					<span className="number-counter__description" style={styles}>-1</span>
+				</span>
+
+				<span className="number-counter__control number-counter__control--count">
+					<span className="number-counter__description" style={styles}>{value}</span>
+				</span>
+
+				<span
+					className="number-counter__control number-counter__control--clickable"
+					onClick={this.handleIncrement.bind(this, 1)}
+				>
+					<span className="number-counter__description" style={styles}>+1</span>
+				</span>
+				<span
+					className="number-counter__control number-counter__control--clickable"
+					onClick={this.handleIncrement.bind(this, 5)}
+				>
+					<span className="number-counter__description" style={styles}>+5</span>
+				</span>
 			</div>,
 		]
 	}
@@ -78,6 +101,9 @@ class NumberCounter extends PureComponent {
 	renderSettingsControls() {
 		const { value, rotation } = this
 		const { number } = this.props
+		const styles = {
+			transform: `rotate(${rotation}deg)`,
+		}
 
 		return [
 			<div key="identifier" className="number-counter__identifier">Player {number}</div>,
@@ -89,9 +115,7 @@ class NumberCounter extends PureComponent {
 					<span> Remove</span>
 				</span>
 				<span className="number-counter__control number-counter__control--count">
-					<span className="number-counter__count" style={{
-						transform: `rotate(${rotation}deg)`,
-					}}>{value}</span>
+					<span className="number-counter__description" style={styles}>{value}</span>
 				</span>
 				<span className="number-counter__control" onClick={this.handleRotation.bind(this, -90)}>
 					<i className="fa fa-rotate-left"></i>
