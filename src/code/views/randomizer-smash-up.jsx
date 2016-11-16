@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import cookie from 'react-cookie'
 
 // Components
 import DeckFilter from 'components/deck-filter'
@@ -17,20 +16,11 @@ import StylesLoader from 'utilities/styles-loader'
 
 // Styles
 const stylesLoader = StylesLoader.create()
-	.add(require('styl/message'))
-	.add(require('styl/randomizer'))
+.add(require('styl/message'))
+.add(require('styl/randomizer'))
 
 // Content
 import { sets, factions } from 'content/smash-up-decks'
-
-const saveFactionsState = (factionsState) => {
-	typeof window !== 'undefined' && cookie.save('factions', factionsState, {
-		path: '/',
-		secure: location.protocol === 'https:'
-	})
-
-	return factionsState
-}
 
 class Randomizer extends Component {
 	constructor() {
@@ -163,7 +153,6 @@ class Randomizer extends Component {
 
 module.exports = connect(
 	state => ({
-		factionsState: saveFactionsState(state.factions),
 		numberOfPlayers: state.factions.numberOfPlayers,
 		numberOfFactions: state.factions.numberOfFactions,
 		selectedFactionIds: state.factions.selectedFactionIds

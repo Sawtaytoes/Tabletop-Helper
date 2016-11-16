@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import { Link } from 'react-router'
 import { connect } from 'react-redux'
 
 // Components
@@ -118,9 +117,7 @@ class ScoreKeeper extends PureComponent {
 	)}
 }
 
-module.exports = connect(
-	state => ({
-		counters: state.itemHolder[name],
-		settingsVisible: state.contextMenu.visible,
-	})
-)(stylesLoader.render(ScoreKeeper))
+module.exports = connect(state => ({
+	counters: state.itemHolder[name],
+	settingsVisible: state.contextMenu.visible,
+}))(stylesLoader.render(ScoreKeeper))

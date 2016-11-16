@@ -4,9 +4,12 @@ import {
 	REMOVE_ALL,
 } from 'actions/item-holder'
 
+const initialState = {}
+export const getItemHolderInitialState = () => initialState
+
 let idCounter = 0
 
-export default (state = {}, action) => {
+export default (state = initialState, action) => {
 	const { type, name, id } = action
 	const items = { ...state[name] }
 

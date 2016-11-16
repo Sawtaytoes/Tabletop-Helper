@@ -7,6 +7,7 @@ const initialState = {
 	value: contextMenuClosed,
 	visible: false
 }
+export const getContextMenuInitialState = () => initialState
 
 export default (state = initialState, action) => {
 	const { type, value, visible } = action

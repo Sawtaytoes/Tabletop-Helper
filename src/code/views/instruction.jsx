@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
-import cookie from 'react-cookie'
 
 // Components
 import PageDescription from 'components/page-description'

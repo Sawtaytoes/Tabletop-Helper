@@ -3,7 +3,10 @@ import {
 	CHANGE_COUNTER_ROTATION,
 } from 'actions/number-counters'
 
-export default (state = {}, action) => {
+const initialState = {}
+export const getNumberCountersInitialState = () => initialState
+
+export default (state = initialState, action) => {
 	const { type, id, rotation, style, value } = action
 	let counter
 
