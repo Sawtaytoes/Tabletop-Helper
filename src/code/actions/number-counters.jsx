@@ -1,5 +1,28 @@
+export const INIT_COUNTER = 'INIT_COUNTER'
+export const REMOVE_COUNTER = 'REMOVE_COUNTER'
 export const CHANGE_COUNTER_VALUE = 'CHANGE_COUNTER_VALUE'
 export const CHANGE_COUNTER_ROTATION = 'CHANGE_COUNTER_ROTATION'
+
+export function initCounter(id) {
+	return {
+		type: INIT_COUNTER,
+		id
+	}
+}
+
+export function resetCounter(id) {
+	return {
+		type: INIT_COUNTER,
+		id
+	}
+}
+
+export function removeCounter(id) {
+	return {
+		type: REMOVE_COUNTER,
+		id
+	}
+}
 
 export function incrementCounter(id, value = 0, interval = 1) {
 	return {

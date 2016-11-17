@@ -20,25 +20,22 @@ const stylesLoader = StylesLoader.create()
 
 class NumberCounter extends PureComponent {
 	handleRemoveSelf = () => {
-		const { dispatch, name, id } = this.props
-		dispatch(removeItem(name, id))
+		const { dispatch, containerName, id } = this.props
+		dispatch(removeItem(containerName, id))
 	};
 
 	handleIncrement = interval => {
-		const { dispatch, id } = this.props
-		const { value } = this
+		const { dispatch, id, value } = this.props
 		dispatch(incrementCounter(id, value, interval))
 	};
 
 	handleDecrement = interval => {
-		const { dispatch, id } = this.props
-		const { value } = this
+		const { dispatch, id, value } = this.props
 		dispatch(decrementCounter(id, value, interval))
 	};
 
 	handleRotation = interval => {
-		const { dispatch, id } = this.props
-		const { rotation } = this
+		const { dispatch, id, rotation } = this.props
 		dispatch(rotateCounter(id, rotation, interval))
 	};
 
@@ -56,8 +53,7 @@ class NumberCounter extends PureComponent {
 	}
 
 	renderCountControls() {
-		const { value, rotation } = this
-		const { number } = this.props
+		const { number, rotation, value } = this.props
 		const styles = {
 			transform: `rotate(${rotation}deg)`,
 		}
@@ -79,7 +75,7 @@ class NumberCounter extends PureComponent {
 				</span>
 
 				<span className="number-counter__control number-counter__control--count">
-					<span className="number-counter__description" style={styles}>{value}</span>
+					<span className="number-counter__description" style={styles}>{value || 0}</span>
 				</span>
 
 				<span
@@ -99,8 +95,7 @@ class NumberCounter extends PureComponent {
 	}
 
 	renderSettingsControls() {
-		const { value, rotation } = this
-		const { number } = this.props
+		const { number, rotation, value } = this.props
 		const styles = {
 			transform: `rotate(${rotation}deg)`,
 		}
@@ -115,7 +110,7 @@ class NumberCounter extends PureComponent {
 					<span> Remove</span>
 				</span>
 				<span className="number-counter__control number-counter__control--count">
-					<span className="number-counter__description" style={styles}>{value}</span>
+					<span className="number-counter__description" style={styles}>{value || 0}</span>
 				</span>
 				<span className="number-counter__control" onClick={this.handleRotation.bind(this, -90)}>
 					<i className="fa fa-rotate-left"></i>
@@ -128,7 +123,6 @@ class NumberCounter extends PureComponent {
 	}
 
 	render() {
-		this.initValues()
 		const { settingsVisible } = this.props
 
 		return (
@@ -141,6 +135,5 @@ class NumberCounter extends PureComponent {
 }
 
 export default connect(state => ({
-	counters: state.numberCounters,
 	settingsVisible: state.contextMenu.visible,
 }))(stylesLoader.render(NumberCounter))

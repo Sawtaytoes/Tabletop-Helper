@@ -7,6 +7,8 @@ import {
 	incrementCounter,
 	decrementCounter,
 	rotateCounter,
+	resetCounter,
+	removeCounter,
 } from 'actions/number-counters'
 
 class TestRun extends TestHelper {
@@ -47,6 +49,37 @@ class TestRun extends TestHelper {
 
 		this.t.equal(rotation, expectedRotation,
 			`New rotation '${rotation}' should equal '${expectedRotation}'.`
+		)
+	}
+
+	resetCounter({ store, id }) {
+		store.dispatch(resetCounter(id))
+
+		let { rotation, style, value } = store.getState().numberCounters[id]
+
+		const expectedRotation = 0
+		this.t.equal(rotation, expectedRotation,
+			`New value '${rotation}' should equal '${expectedRotation}'.`
+		)
+
+		const expectedStyle = ''
+		this.t.equal(style, expectedStyle,
+			`New value '${style}' should equal '${expectedStyle}'.`
+		)
+
+		const expectedValue = 0
+		this.t.equal(value, expectedValue,
+			`New value '${value}' should equal '${expectedValue}'.`
+		)
+	}
+
+	removeCounter({ store, id }) {
+		store.dispatch(removeCounter(id))
+
+		let numberCounter = store.getState().numberCounters[id]
+
+		this.t.equal(numberCounter, undefined,
+			`Number counter should no longer exist.`
 		)
 	}
 }

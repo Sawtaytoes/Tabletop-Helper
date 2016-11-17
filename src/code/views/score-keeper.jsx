@@ -14,6 +14,10 @@ import {
 	addItem,
 	removeItems,
 } from 'actions/item-holder'
+import {
+	initCounter,
+	removeCounter,
+} from 'actions/number-counters'
 
 // Utilities
 import StylesLoader from 'utilities/styles-loader'
@@ -53,12 +57,16 @@ class ScoreKeeper extends PureComponent {
 	}
 
 	handleAddCounter = () => {
-		const { dispatch, counters } = this.props
+		const { dispatch } = this.props
 		dispatch(addItem(name))
 	};
 
 	handleRemoveAllCounters = () => {
-		const { dispatch } = this.props
+		const { dispatch, counterHolder } = this.props
+		counterHolder && Object.keys(counterHolder).forEach(key => {
+			const id = counterHolder[key]
+			dispatch(removeCounter(id))
+		})
 		dispatch(removeItems(name))
 	};
 
@@ -66,7 +74,6 @@ class ScoreKeeper extends PureComponent {
 		const { dispatch, settingsVisible } = this.props
 
 		if (settingsVisible) {
-			console.log(settingsVisible);
 			dispatch(closeContext())
 		} else {
 			dispatch(openContext())
@@ -89,15 +96,25 @@ class ScoreKeeper extends PureComponent {
 	)}
 
 	renderCounters() {
-		const { counters } = this.props
+		const { counterHolder, counters } = this.props
 		let counterNumber = 1
 
 		return (
 			<div className="score-keeper__counters">
-				{counters && Object.keys(counters).map(key => {
+				{counterHolder && Object.keys(counterHolder).map(key => {
+					const id = counterHolder[key]
 					const counter = (
-						<div className="score-keeper__counter" style={{ backgroundColor: this.colors[counterNumber - 1] }}>
-							<NumberCounter key={key} id={counters[key]} number={counterNumber} name={name} />
+						<div
+							key={key}
+							className="score-keeper__counter"
+							style={{ backgroundColor: this.colors[counterNumber - 1] }}
+						>
+							<NumberCounter
+								{...counters[id]}
+								id={id}
+								number={counterNumber}
+								containerName={name}
+							/>
 						</div>
 					)
 
@@ -118,6 +135,7 @@ class ScoreKeeper extends PureComponent {
 }
 
 module.exports = connect(state => ({
-	counters: state.itemHolder[name],
+	counterHolder: state.itemHolder[name],
+	counters: state.numberCounters,
 	settingsVisible: state.contextMenu.visible,
 }))(stylesLoader.render(ScoreKeeper))

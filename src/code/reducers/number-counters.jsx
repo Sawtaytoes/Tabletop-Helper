@@ -1,4 +1,6 @@
 import {
+	INIT_COUNTER,
+	REMOVE_COUNTER,
 	CHANGE_COUNTER_VALUE,
 	CHANGE_COUNTER_ROTATION,
 } from 'actions/number-counters'
@@ -11,6 +13,21 @@ export default (state = initialState, action) => {
 	let counter
 
 	switch (type) {
+	case INIT_COUNTER:
+		return {
+			...state,
+			[id]: {
+				rotation: 0,
+				style: '',
+				value: 0,
+			}
+		}
+
+	case REMOVE_COUNTER:
+		const newState = { ...state }
+		delete newState[id]
+		return newState
+
 	case CHANGE_COUNTER_VALUE:
 		counter = {
 			...state[id],

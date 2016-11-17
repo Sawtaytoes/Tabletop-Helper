@@ -274,3 +274,32 @@ test('Rotate by -1080', t => {
 
 	t.end()
 })
+
+
+// ---------------------------------
+// Reset
+// ---------------------------------
+
+test('Reset Counter', t => {
+	const options = TestRun.getVars(),
+		testRun = new TestRun(t)
+
+	testRun.resetCounter({ ...options })
+
+	t.end()
+})
+
+
+// ---------------------------------
+// Remove
+// ---------------------------------
+
+test('Remove Counter', t => {
+	const options = TestRun.getVars(),
+		testRun = new TestRun(t)
+
+	testRun.removeCounter({ ...options })
+
+	t.end()
+})
+
