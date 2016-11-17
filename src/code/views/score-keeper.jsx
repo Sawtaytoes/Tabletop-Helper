@@ -94,7 +94,7 @@ class ScoreKeeper extends PureComponent {
 	)}
 
 	renderCounters() {
-		const { counterHolder, counters } = this.props
+		const { counterHolder } = this.props
 		let counterNumber = 1
 
 		return (
@@ -112,7 +112,6 @@ class ScoreKeeper extends PureComponent {
 							style={{ backgroundColor: this.colors[counterNumber - 1] }}
 						>
 							<NumberCounter
-								{...counters[id]}
 								id={id}
 								number={counterNumber}
 								containerName={name}
@@ -138,6 +137,5 @@ class ScoreKeeper extends PureComponent {
 
 module.exports = connect(state => ({
 	counterHolder: state.itemHolder[name],
-	counters: state.numberCounters,
 	settingsVisible: state.contextMenu.visible,
 }))(stylesLoader.render(ScoreKeeper))

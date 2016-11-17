@@ -136,6 +136,11 @@ class NumberCounter extends PureComponent {
 	}
 }
 
-export default connect(state => ({
-	settingsVisible: state.contextMenu.visible,
-}))(stylesLoader.render(NumberCounter))
+const mapStateToProps = (_, initialProps) => {
+	return state => ({
+		...(state.numberCounters[initialProps.id] || {}),
+		settingsVisible: state.contextMenu.visible,
+	})
+}
+
+export default connect(mapStateToProps)(stylesLoader.render(NumberCounter))
