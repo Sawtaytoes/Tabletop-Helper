@@ -19,6 +19,21 @@ const stylesLoader = StylesLoader.create()
 .add(require('styl/number-counter'))
 
 class NumberCounter extends PureComponent {
+	static propTypes = {
+		containerName: PropTypes.string.isRequired,
+		id: PropTypes.number.isRequired,
+		number: PropTypes.number.isRequired,
+		rotation: PropTypes.number,
+		style: PropTypes.string,
+		value: PropTypes.number,
+	};
+
+	static defaultProps = {
+		rotation: 0,
+		style: '',
+		value: 0,
+	};
+
 	handleRemoveSelf = () => {
 		const { dispatch, containerName, id } = this.props
 		dispatch(removeItem(containerName, id))
@@ -38,19 +53,6 @@ class NumberCounter extends PureComponent {
 		const { dispatch, id, rotation } = this.props
 		dispatch(rotateCounter(id, rotation, interval))
 	};
-
-	initValues() {
-		const { counters, id } = this.props
-		const {
-			rotation = 0,
-			style = '',
-			value = 0,
-		} = counters[id] || {}
-
-		this.rotation = rotation
-		this.style = style
-		this.value = value
-	}
 
 	renderCountControls() {
 		const { number, rotation, value } = this.props
@@ -75,7 +77,7 @@ class NumberCounter extends PureComponent {
 				</span>
 
 				<span className="number-counter__control number-counter__control--count">
-					<span className="number-counter__description" style={styles}>{value || 0}</span>
+					<span className="number-counter__description" style={styles}>{value}</span>
 				</span>
 
 				<span
@@ -110,7 +112,7 @@ class NumberCounter extends PureComponent {
 					<span> Remove</span>
 				</span>
 				<span className="number-counter__control number-counter__control--count">
-					<span className="number-counter__description" style={styles}>{value || 0}</span>
+					<span className="number-counter__description" style={styles}>{value}</span>
 				</span>
 				<span className="number-counter__control" onClick={this.handleRotation.bind(this, -90)}>
 					<i className="fa fa-rotate-left"></i>
