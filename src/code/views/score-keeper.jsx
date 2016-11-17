@@ -16,7 +16,7 @@ import {
 } from 'actions/item-holder'
 import {
 	initCounter,
-	removeCounter,
+	removeCounters,
 } from 'actions/number-counters'
 
 // Utilities
@@ -63,10 +63,8 @@ class ScoreKeeper extends PureComponent {
 
 	handleRemoveAllCounters = () => {
 		const { dispatch, counterHolder } = this.props
-		counterHolder && Object.keys(counterHolder).forEach(key => {
-			const id = counterHolder[key]
-			dispatch(removeCounter(id))
-		})
+		const ids = counterHolder && Object.keys(counterHolder).map(key => counterHolder[key])
+		dispatch(removeCounters(ids))
 		dispatch(removeItems(name))
 	};
 
