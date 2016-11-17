@@ -4,17 +4,18 @@ import TestHelper from 'utilities/test-helper'
 
 // Actions
 import {
+	initCounter,
+	resetCounter,
+	removeCounter,
+	removeCounters,
 	incrementCounter,
 	decrementCounter,
 	rotateCounter,
-	resetCounter,
-	removeCounter,
 } from 'actions/number-counters'
 
 class TestRun extends TestHelper {
 	static getVars() {
 		return {
-			store: MockStore.getStore(),
 			style: '',
 			id: 0,
 			rotation: 0,
@@ -22,40 +23,24 @@ class TestRun extends TestHelper {
 		}
 	}
 
-	incrementCounter({ store, id, interval, initialValue, expectedValue }) {
-		store.dispatch(incrementCounter(id, initialValue, interval))
-
-		let { value } = store.getState().numberCounters[id]
-
-		this.t.equal(value, expectedValue,
-			`New value '${value}' should equal '${expectedValue}'.`
-		)
+	constructor(t) {
+		super(t)
+		this.store = MockStore.getStore()
 	}
 
-	decrementCounter({ store, id, interval, initialValue, expectedValue }) {
-		store.dispatch(decrementCounter(id, initialValue, interval))
-
-		let { value } = store.getState().numberCounters[id]
-
-		this.t.equal(value, expectedValue,
-			`New value '${value}' should equal '${expectedValue}'.`
-		)
+	hasCounter(id) {
+		return Boolean(this.store.getState().numberCounters[id])
 	}
 
-	rotateCounter({ store, id, interval, initialRotation, expectedRotation }) {
-		store.dispatch(rotateCounter(id, initialRotation, interval))
-
-		let { rotation } = store.getState().numberCounters[id]
-
-		this.t.equal(rotation, expectedRotation,
-			`New rotation '${rotation}' should equal '${expectedRotation}'.`
-		)
+	getCounter(id) {
+		return this.store.getState().numberCounters[id]
 	}
 
-	resetCounter({ store, id }) {
-		store.dispatch(resetCounter(id))
+	initCounter(id) {
+		console.log('this', this);
+		this.store.dispatch(initCounter(id))
 
-		let { rotation, style, value } = store.getState().numberCounters[id]
+		let { rotation, style, value } = this.store.getState().numberCounters[id]
 
 		const expectedRotation = 0
 		this.t.equal(rotation, expectedRotation,
@@ -73,13 +58,78 @@ class TestRun extends TestHelper {
 		)
 	}
 
-	removeCounter({ store, id }) {
-		store.dispatch(removeCounter(id))
+	resetCounter(id) {
+		this.store.dispatch(resetCounter(id))
 
-		let numberCounter = store.getState().numberCounters[id]
+		let { rotation, style, value } = this.store.getState().numberCounters[id]
+
+		const expectedRotation = 0
+		this.t.equal(rotation, expectedRotation,
+			`New value '${rotation}' should equal '${expectedRotation}'.`
+		)
+
+		const expectedStyle = ''
+		this.t.equal(style, expectedStyle,
+			`New value '${style}' should equal '${expectedStyle}'.`
+		)
+
+		const expectedValue = 0
+		this.t.equal(value, expectedValue,
+			`New value '${value}' should equal '${expectedValue}'.`
+		)
+	}
+
+	removeCounter(id) {
+		this.store.dispatch(removeCounter(id))
+
+		let numberCounter = this.store.getState().numberCounters[id]
 
 		this.t.equal(numberCounter, undefined,
 			`Number counter should no longer exist.`
+		)
+	}
+
+	removeCounters(ids) {
+		this.store.dispatch(removeCounters(ids))
+
+		const numberCounters = this.store.getState().numberCounters
+		Object.keys(numberCounters).forEach(numberCounter => {
+			console.log('numberCounter', numberCounter);
+			if (!ids.includes(numberCounter.id)) { return }
+
+			this.t.equal(numberCounter, undefined,
+				`Number counter should no longer exist.`
+			)
+		})
+	}
+
+	incrementCounter({ id, interval, initialValue, expectedValue }) {
+		this.store.dispatch(incrementCounter(id, initialValue, interval))
+
+		const { value } = this.store.getState().numberCounters[id]
+
+		this.t.equal(value, expectedValue,
+			`New value '${value}' should equal '${expectedValue}'.`
+		)
+	}
+
+	decrementCounter({ id, interval, initialValue, expectedValue }) {
+		this.store.dispatch(decrementCounter(id, initialValue, interval))
+
+		const { value } = this.store.getState().numberCounters[id]
+
+		this.t.equal(value, expectedValue,
+			`New value '${value}' should equal '${expectedValue}'.`
+		)
+	}
+
+	rotateCounter({ id, interval, initialRotation, expectedRotation }) {
+		this.store.dispatch(rotateCounter(id, initialRotation, interval))
+
+		const { rotation } = this.store.getState().numberCounters[id]
+
+		this.t.equal(rotation, expectedRotation,
+			`New rotation '${rotation}' should equal '${expectedRotation}'.`
 		)
 	}
 }

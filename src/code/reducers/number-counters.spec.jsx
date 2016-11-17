@@ -3,12 +3,69 @@ import TestRun from './number-counters.test'
 
 
 // ---------------------------------
+// Init
+// ---------------------------------
+
+test('Init Counter', t => {
+	const testRun = new TestRun(t)
+
+	testRun.initCounter(0)
+
+	t.end()
+})
+
+
+// ---------------------------------
+// Reset
+// ---------------------------------
+
+test('Reset Counter', t => {
+	const testRun = new TestRun(t)
+
+	testRun.initCounter(0)
+	testRun.resetCounter(0)
+
+	t.end()
+})
+
+
+// ---------------------------------
+// Remove
+// ---------------------------------
+
+test('Remove Counter', t => {
+	const options = TestRun.getVars()
+	const testRun = new TestRun(t)
+
+	testRun.initCounter(0)
+	testRun.removeCounter(0)
+
+	t.end()
+})
+
+test('Remove Counters', t => {
+	const options = TestRun.getVars()
+	const testRun = new TestRun(t)
+
+	testRun.initCounter(0)
+	testRun.initCounter(1)
+	testRun.initCounter(2)
+	testRun.initCounter(3)
+
+	testRun.removeCounters([0, 1, 3])
+	t.ok(testRun.hasCounter(2), "CounterId 2 should exist.")
+
+	t.end()
+})
+
+
+// ---------------------------------
 // Increment
 // ---------------------------------
 
 test('Increment by 0', t => {
-	const options = TestRun.getVars(),
-		testRun = new TestRun(t)
+	const options = TestRun.getVars()
+	const testRun = new TestRun(t)
 
 	testRun.incrementCounter({
 		...options,
@@ -21,8 +78,8 @@ test('Increment by 0', t => {
 })
 
 test('Increment by 1', t => {
-	const options = TestRun.getVars(),
-		testRun = new TestRun(t)
+	const options = TestRun.getVars()
+	const testRun = new TestRun(t)
 
 	testRun.incrementCounter({
 		...options,
@@ -35,8 +92,8 @@ test('Increment by 1', t => {
 })
 
 test('Increment by 5', t => {
-	const options = TestRun.getVars(),
-		testRun = new TestRun(t)
+	const options = TestRun.getVars()
+	const testRun = new TestRun(t)
 
 	testRun.incrementCounter({
 		...options,
@@ -49,8 +106,8 @@ test('Increment by 5', t => {
 })
 
 test('Increment by 100', t => {
-	const options = TestRun.getVars(),
-		testRun = new TestRun(t)
+	const options = TestRun.getVars()
+	const testRun = new TestRun(t)
 
 	testRun.incrementCounter({
 		...options,
@@ -68,8 +125,8 @@ test('Increment by 100', t => {
 // ---------------------------------
 
 test('Decrement by 0', t => {
-	const options = TestRun.getVars(),
-		testRun = new TestRun(t)
+	const options = TestRun.getVars()
+	const testRun = new TestRun(t)
 
 	testRun.decrementCounter({
 		...options,
@@ -82,8 +139,8 @@ test('Decrement by 0', t => {
 })
 
 test('Decrement by 1', t => {
-	const options = TestRun.getVars(),
-		testRun = new TestRun(t)
+	const options = TestRun.getVars()
+	const testRun = new TestRun(t)
 
 	testRun.decrementCounter({
 		...options,
@@ -96,8 +153,8 @@ test('Decrement by 1', t => {
 })
 
 test('Decrement by 5', t => {
-	const options = TestRun.getVars(),
-		testRun = new TestRun(t)
+	const options = TestRun.getVars()
+	const testRun = new TestRun(t)
 
 	testRun.decrementCounter({
 		...options,
@@ -110,8 +167,8 @@ test('Decrement by 5', t => {
 })
 
 test('Decrement by 100', t => {
-	const options = TestRun.getVars(),
-		testRun = new TestRun(t)
+	const options = TestRun.getVars()
+	const testRun = new TestRun(t)
 
 	testRun.decrementCounter({
 		...options,
@@ -129,8 +186,8 @@ test('Decrement by 100', t => {
 // ---------------------------------
 
 test('Rotate by 0', t => {
-	const options = TestRun.getVars(),
-		testRun = new TestRun(t)
+	const options = TestRun.getVars()
+	const testRun = new TestRun(t)
 
 	testRun.rotateCounter({
 		...options,
@@ -150,8 +207,8 @@ test('Rotate by 0', t => {
 })
 
 test('Rotate by 1', t => {
-	const options = TestRun.getVars(),
-		testRun = new TestRun(t)
+	const options = TestRun.getVars()
+	const testRun = new TestRun(t)
 
 	testRun.rotateCounter({
 		...options,
@@ -171,8 +228,8 @@ test('Rotate by 1', t => {
 })
 
 test('Rotate by 5', t => {
-	const options = TestRun.getVars(),
-		testRun = new TestRun(t)
+	const options = TestRun.getVars()
+	const testRun = new TestRun(t)
 
 	testRun.rotateCounter({
 		...options,
@@ -192,8 +249,8 @@ test('Rotate by 5', t => {
 })
 
 test('Rotate by 90', t => {
-	const options = TestRun.getVars(),
-		testRun = new TestRun(t)
+	const options = TestRun.getVars()
+	const testRun = new TestRun(t)
 
 	testRun.rotateCounter({
 		...options,
@@ -213,8 +270,8 @@ test('Rotate by 90', t => {
 })
 
 test('Rotate by -90', t => {
-	const options = TestRun.getVars(),
-		testRun = new TestRun(t)
+	const options = TestRun.getVars()
+	const testRun = new TestRun(t)
 
 	testRun.rotateCounter({
 		...options,
@@ -227,8 +284,8 @@ test('Rotate by -90', t => {
 })
 
 test('Rotate by 180', t => {
-	const options = TestRun.getVars(),
-		testRun = new TestRun(t)
+	const options = TestRun.getVars()
+	const testRun = new TestRun(t)
 
 	testRun.rotateCounter({
 		...options,
@@ -248,8 +305,8 @@ test('Rotate by 180', t => {
 })
 
 test('Rotate by -360', t => {
-	const options = TestRun.getVars(),
-		testRun = new TestRun(t)
+	const options = TestRun.getVars()
+	const testRun = new TestRun(t)
 
 	testRun.rotateCounter({
 		...options,
@@ -262,8 +319,8 @@ test('Rotate by -360', t => {
 })
 
 test('Rotate by -1080', t => {
-	const options = TestRun.getVars(),
-		testRun = new TestRun(t)
+	const options = TestRun.getVars()
+	const testRun = new TestRun(t)
 
 	testRun.rotateCounter({
 		...options,
@@ -274,32 +331,3 @@ test('Rotate by -1080', t => {
 
 	t.end()
 })
-
-
-// ---------------------------------
-// Reset
-// ---------------------------------
-
-test('Reset Counter', t => {
-	const options = TestRun.getVars(),
-		testRun = new TestRun(t)
-
-	testRun.resetCounter({ ...options })
-
-	t.end()
-})
-
-
-// ---------------------------------
-// Remove
-// ---------------------------------
-
-test('Remove Counter', t => {
-	const options = TestRun.getVars(),
-		testRun = new TestRun(t)
-
-	testRun.removeCounter({ ...options })
-
-	t.end()
-})
-
