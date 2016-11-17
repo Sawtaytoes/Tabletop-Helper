@@ -127,8 +127,8 @@ class NumberCounter extends PureComponent {
 
 		return (
 			<div className="number-counter">
-				{settingsVisible && this.renderCountControls()}
-				{!settingsVisible && this.renderSettingsControls()}
+				{!settingsVisible && this.renderCountControls()}
+				{settingsVisible && this.renderSettingsControls()}
 			</div>
 		)
 	}
