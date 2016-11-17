@@ -101,7 +101,7 @@ class ScoreKeeper extends PureComponent {
 
 		return (
 			<div className="score-keeper__counters">
-				{counterHolder && !Object.keys(counterHolder).length &&
+				{(!counterHolder || counterHolder && !Object.keys(counterHolder).length) &&
 					<div className="score-keeper__message">No Counters</div>
 				}
 
