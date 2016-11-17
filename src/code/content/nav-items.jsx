@@ -22,4 +22,7 @@ module.exports = [{
 	name: 'Contact',
 	to: 'contact',
 	description: "Send us a message, support question, press inquiries, or a content submission.",
+}, {
+	name: 'Unit Tests',
+	to: 'tests',
 }]
