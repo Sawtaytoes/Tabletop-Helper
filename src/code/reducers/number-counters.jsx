@@ -9,7 +9,7 @@ const initialState = {}
 export const getNumberCountersInitialState = () => initialState
 
 export default (state = initialState, action) => {
-	const { type, id, rotation, style, value } = action
+	const { type, id, ids, rotation, style, value } = action
 	let counter
 
 	switch (type) {
@@ -24,9 +24,14 @@ export default (state = initialState, action) => {
 		}
 
 	case REMOVE_COUNTER:
-		const newState = { ...state }
-		delete newState[id]
-		return newState
+		const nextState = { ...state }
+		delete nextState[id]
+		return nextState
+
+	case REMOVE_COUNTERS:
+		const nextState = { ...state }
+		ids.forEach(delete nextState[id])
+		return nextState
 
 	case CHANGE_COUNTER_VALUE:
 		counter = {

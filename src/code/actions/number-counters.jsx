@@ -1,5 +1,6 @@
 export const INIT_COUNTER = 'INIT_COUNTER'
 export const REMOVE_COUNTER = 'REMOVE_COUNTER'
+export const REMOVE_COUNTERS = 'REMOVE_COUNTERS'
 export const CHANGE_COUNTER_VALUE = 'CHANGE_COUNTER_VALUE'
 export const CHANGE_COUNTER_ROTATION = 'CHANGE_COUNTER_ROTATION'
 
@@ -21,6 +22,13 @@ export function removeCounter(id) {
 	return {
 		type: REMOVE_COUNTER,
 		id
+	}
+}
+
+export function removeCounters(ids = []) {
+	return {
+		type: REMOVE_COUNTERS,
+		ids
 	}
 }
 
