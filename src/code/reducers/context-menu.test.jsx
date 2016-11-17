@@ -9,16 +9,15 @@ import {
 } from 'actions/context-menu'
 
 class TestRun extends TestHelper {
-	static getVars() {
-		return {
-			store: MockStore.getStore(),
-		}
+	constructor(t) {
+		super(t)
+		this.store = MockStore.getStore()
 	}
 
-	openContext({ store, expectedValue, expectedVisibility }) {
-		store.dispatch(openContext())
+	openContext({ expectedValue, expectedVisibility }) {
+		this.store.dispatch(openContext())
 
-		let { value, visible } = store.getState().contextMenu
+		let { value, visible } = this.store.getState().contextMenu
 
 		this.t.equal(value, expectedValue,
 			`New value '${value}' should equal '${expectedValue}'.`
@@ -29,10 +28,10 @@ class TestRun extends TestHelper {
 		)
 	}
 
-	closeContext({ store, expectedValue, expectedVisibility }) {
-		store.dispatch(closeContext())
+	closeContext({ expectedValue, expectedVisibility }) {
+		this.store.dispatch(closeContext())
 
-		let { value, visible } = store.getState().contextMenu
+		let { value, visible } = this.store.getState().contextMenu
 
 		this.t.equal(value, expectedValue,
 			`New value '${value}' should equal '${expectedValue}'.`

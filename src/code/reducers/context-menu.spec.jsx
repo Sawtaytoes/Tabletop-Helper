@@ -8,11 +8,9 @@ import {
 } from 'actions/context-menu'
 
 test('Open Context Menu', t => {
-	const options = TestRun.getVars(),
-		testRun = new TestRun(t)
+	const testRun = new TestRun(t)
 
 	testRun.openContext({
-		...options,
 		expectedValue: contextMenuOpened,
 		expectedVisibility: true,
 	})
@@ -21,11 +19,9 @@ test('Open Context Menu', t => {
 })
 
 test('Close Context Menu', t => {
-	const options = TestRun.getVars(),
-		testRun = new TestRun(t)
+	const testRun = new TestRun(t)
 
 	testRun.closeContext({
-		...options,
 		expectedValue: contextMenuClosed,
 		expectedVisibility: false,
 	})
