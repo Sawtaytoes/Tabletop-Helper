@@ -1,25 +1,23 @@
 bodyParser = require 'body-parser'
 compression = require 'compression'
-express = require 'express'
+config = require __includes + 'config-settings'
 cookieParser = require 'cookie-parser'
+express = require 'express'
+fs = require 'fs'
 paths = require __includes + 'paths'
 
+helmet = require 'helmet'
 secureServer = (app) ->
-	express_enforces_ssl = require 'express-enforces-ssl'
-	helmet = require 'helmet'
+	https = require 'https'
+	enforce = require 'express-sslify'
 
 	app
-		.enable 'trust proxy'
-		.use express_enforces_ssl()
-		.use helmet()
-		.use helmet.hidePoweredBy()
-		# .use helmet.csp
-		# 	directives:
-		# 		defaultSrc: ['self']
-		# 		scriptSrc: ['self', 'www.google-analytics.com', 'ajax.googleapis.com']
-		# 		sandbox: ['allow-forms', 'allow-scripts']
-		# 	reportOnly: false
-		# 	setAllHeaders: false
+	.use enforce.HTTPS trustProtoHeader: true
+
+	return https.createServer
+		cert: fs.readFileSync('./conf/domain-crt.txt')
+		key: fs.readFileSync('./conf/key.pem')
+	, app
 
 sendEmail = (req, res) ->
 	require(__includes + 'send-email')(req.body, res)
@@ -29,16 +27,28 @@ loadSite = (req, res) ->
 
 module.exports = do ->
 	app = express()
-	__secure and secureServer app
 
 	app
-		.use compression()
-		.use cookieParser()
-		.use express.static __base + paths.root.dest
-		.use bodyParser.json()
-		.use bodyParser.urlencoded extended: false
-		.post __sendEmailUri, sendEmail
-		.all '*', loadSite
-		.listen Number(__port), (err) ->
-			console.error err if err
-			console.info 'Web Server running on port', __port
+	.use compression()
+	.use cookieParser()
+	.use helmet()
+	.use express.static __base + paths.root.dest, redirect: false
+	#.use helmet.csp
+	#	directives:
+	#		defaultSrc: ['self']
+	#		scriptSrc: ['self', 'www.google-analytics.com', 'ajax.googleapis.com']
+	#		sandbox: ['allow-forms', 'allow-scripts']
+	#	reportOnly: false
+	#	setAllHeaders: false
+	.use bodyParser.json()
+	.use bodyParser.urlencoded extended: false
+	.disable 'x-powered-by'
+	.post config.getMailSendPath(), sendEmail
+	.all '*', loadSite
+
+	server = if config.isSecure() then secureServer app else app
+
+	server
+	.listen config.getPort(), (err) ->
+		console.error err if err
+		console.info 'Web Server running as', config.getServerUrl()

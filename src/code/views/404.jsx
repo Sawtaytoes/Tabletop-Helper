@@ -1,33 +1,25 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
+import { Link } from 'react-router'
 import { connect } from 'react-redux'
-import { pushPath } from 'redux-simple-router'
 
 // Components
 import PageDescription from 'components/page-description'
 
 // Utilities
-import { stylesHelper } from 'utilities/styles-helper'
+import StylesLoader from 'utilities/styles-loader'
 
 // Styles
-const styles = [
-	require('styl/contact')
-]
+const stylesLoader = StylesLoader.create()
+	.add(require('styl/contact'))
 
-class NoMatch extends Component {
-	handleGoBack(e) {
-		e.preventDefault()
-		this.props.pushPath(this.props.dispatch(pushPath('/game')))
-	}
-
+class NoMatch extends PureComponent {
 	render() { return (
 		<article>
 			<section className="bubble">
 				<PageDescription
 					title="404"
 					subtitle="You're Trying to Get Somewhere That Doesn't Exist"
-				>
-					<button className="contact__field__input contact__send-button" title="Go back to the previous page" onClick={this.handleGoBack.bind(this)}>Go Back</button>
-				</PageDescription>
+				><Link to="/" title="Go back to Home">Go Back</Link></PageDescription>
 			</section>
 		</article>
 	)}
@@ -35,5 +27,6 @@ class NoMatch extends Component {
 
 module.exports = connect(
 	state => ({}),
-	dispatch => ({ dispatch, pushPath })
-)(stylesHelper(NoMatch, styles))
+	null, null,
+	{ pure: false }
+)(stylesLoader.render(NoMatch))

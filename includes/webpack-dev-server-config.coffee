@@ -1,18 +1,21 @@
 require 'babel-core/register'
+config = require __includes + 'config-settings'
+fs = require 'fs'
 paths = require __includes + 'paths'
 webpackClientConfig = require __includes + 'webpack-dev-client-config'
 
 webpackServerConfig =
+	https: config.isSecure()
+	cert: config.isSecure() and fs.readFileSync('./conf/domain-crt.txt')
+	key: config.isSecure() and fs.readFileSync('./conf/key.pem')
+
 	contentBase: './' + paths.root.dest
 	historyApiFallback: true
 	hot: true
-	https: __secure
+	progress: true
+	proxy: '*': target: config.getProxyServerUrl()
 	publicPath: webpackClientConfig.output.publicPath
+	quiet: true
 	stats: colors: true
-	proxy: {}
-
-webpackServerConfig.proxy['*'] =
-	target: __protocol + '://' + __proxyServerHostname + ':' + __proxyServerPort
-	secure: __secure
 
 module.exports = webpackServerConfig

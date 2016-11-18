@@ -3,7 +3,7 @@ import {
 	CLOSE_MENU,
 	OPEN_SUBMENU,
 	CLOSE_SUBMENU
-} from 'actions'
+} from 'actions/collapsible-menu'
 
 export default (state = {}, action) => {
 	let { type, menuIsOpen, submenuId, submenuIsOpen } = action

@@ -1,0 +1,52 @@
+@charset 'UTF-8'
+@require './includes/**/*'
+
+.score-keeper
+	display flex
+	flex-direction column
+	width 100%
+	height 100%
+	position absolute
+	font-family font-family--pt-mono
+	user-select none
+
+.score-keeper__actions
+	display flex
+	align-items center
+	overflow hidden
+	background-color darkgrey
+
+.score-keeper__action
+	flex 1 1 auto
+	padding rem(10 0)
+	text-align center
+	cursor pointer
+
+	&:hover
+		background-color lightgrey
+
+// .score-keeper__action__icon
+
+.score-keeper__action__text
+	display none
+
+	@media small-up
+		display inline-block
+		margin-left 1ch
+
+.score-keeper__counters
+	display flex
+	flex-direction column
+	justify-content space-around
+	height 100%
+	overflow hidden
+	flex 0 1 auto
+
+.score-keeper__counter
+	display flex
+	flex-direction column
+	justify-content center
+	height 100%
+
+.score-keeper__message
+	text-align center

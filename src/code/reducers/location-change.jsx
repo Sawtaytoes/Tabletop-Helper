@@ -1,13 +1,15 @@
+import { htmlMeta } from 'utilities/render-full-page-extras'
+
 // Actions
-import { UPDATE_PAGE_META } from 'actions'
+import { UPDATE_PAGE_META } from 'actions/page-meta'
 
 // Content
 import navItems from 'content/nav-items'
 
 let pageMeta = {}
 
-const changePageMetaOnLinkMatch = (item, path) => {
-	let re = new RegExp('(' + item.to + ')'),
+const changePageMetaOnLinkMatch = (item, path, itemPathTo) => {
+	let re = new RegExp(`^/${itemPathTo}${item.to}$`),
 		linkMatch = re.test(path)
 
 	if (linkMatch) {
@@ -20,13 +22,13 @@ const changePageMetaOnLinkMatch = (item, path) => {
 	return linkMatch
 }
 
-function getMetaFromNavItems(items, path) {
+function getMetaFromNavItems(items, path, itemPathTo = '') {
 	return items.some((item) => {
 		if (item.subitems) {
-			return getMetaFromNavItems(item.subitems, path)
+			return getMetaFromNavItems(item.subitems, path, `${item.to}/`)
 		}
 
-		return changePageMetaOnLinkMatch(item, path)
+		return changePageMetaOnLinkMatch(item, path, itemPathTo)
 	})
 }
 
@@ -43,13 +45,16 @@ function updatePageMeta(path) {
 	}
 
 	let { title, description } = pageMeta
-	title && (document.title = title + ' – Tabletop Helper')
-	description && (document.querySelector('meta[name=description]').content = description)
+	title && (document.title = `${title}${htmlMeta.titlePostfix}`)
+	if (description) {
+		const descriptionMetaTag = document.querySelector('meta[name=description]')
+		descriptionMetaTag && (descriptionMetaTag.content = description)
+	}
 }
 
 function updateScrollPosition() {
 	if (typeof window !== 'undefined') {
-		window && window.scroll(0, 0)
+		window.scroll(0, 0)
 	}
 }
 
@@ -66,8 +71,8 @@ export default (state = {}, action) => {
 			description: pageMeta.description
 		}
 
-	case '@@router/UPDATE_PATH':
-		let currentPath = payload.path,
+	case '@@router/LOCATION_CHANGE':
+		let currentPath = payload.pathname,
 			previousPath = state.currentPath,
 			pathChanged = currentPath !== previousPath
 

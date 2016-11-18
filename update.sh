@@ -8,7 +8,8 @@ export NODE_ENV=production
 rm -r web/*
 git reset --hard HEAD
 git pull
+npm prune
 npm install
-chown -R www-data:www-data .
 coffee index.coffee compile
+chown -R www-data:www-data .
 pm2 gracefulReload ${PWD##*/}

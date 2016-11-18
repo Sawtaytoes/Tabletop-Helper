@@ -1,6 +1,12 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PureComponent, PropTypes } from 'react'
 
-export default class ItemDescription extends Component {
+// Utilities
+import StylesLoader from 'utilities/styles-loader'
+
+// Styles
+const stylesLoader = StylesLoader.create()
+
+class PageDescription extends PureComponent {
 	static propTypes = {
 		containerClass: PropTypes.string,
 		title: PropTypes.string.isRequired,
@@ -21,14 +27,16 @@ export default class ItemDescription extends Component {
 		<div className={this.props.containerClass}>
 			<h1 className="main__heading">
 				{this.renderHeadingText()}
-				<span>&nbsp;</span>
+				<span className="main__heading__space">&nbsp;</span>
 				{this.props.subtitle && this.renderHeadingSubtext()}
 			</h1>
 
-			{(this.props.description || this.props.children) && <h2 className="main__subheading">{this.props.description || this.props.children}</h2>}
+			{this.props.description || this.props.children}
 			{this.props.descriptions && this.props.descriptions.map((description) =>
 				<p className="main__description" key={description}>{description}</p>
 			)}
 		</div>
 	)}
 }
+
+export default stylesLoader.render(PageDescription)

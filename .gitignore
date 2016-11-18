@@ -1,20 +1,27 @@
 ## Project Files ##
 ~res
 
-## Bower ##
-bower_components
-
-## Network Info ##
-network-*
-
-## Node ##
+## Configs ##
 .env
-includes/node-env.coffee
+.happypack
+config.coffee
+
+## Logs ##
+logs
+*.log
+npm-debug.log*
+
+## npm ##
 node_modules
+
+## New Relic ##
+newrelic.js
 
 ## Public ##
 web/*
 !web/favicons
+!web/images
+!web/static
 
 ## Misc ##
 .DS_Store

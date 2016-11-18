@@ -1,16 +1,17 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
-import cookie from 'react-cookie'
 
 // Components
 import PageDescription from 'components/page-description'
 
-// Styles
-import { stylesHelper } from 'utilities/styles-helper'
-const styles = []
+// Utilities
+import StylesLoader from 'utilities/styles-loader'
 
-class Instructions extends Component {
+// Styles
+const stylesLoader = StylesLoader.create()
+
+class Instruction extends PureComponent {
 	constructor(props) {
 		super()
 
@@ -78,4 +79,4 @@ module.exports = connect(
 	state => ({}),
 	null, null,
 	{ pure: false }
-)(stylesHelper(Instructions, styles))
+)(stylesLoader.render(Instruction))

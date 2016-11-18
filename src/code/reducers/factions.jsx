@@ -12,32 +12,27 @@ import {
 	DESELECT_FACTION,
 	DESELECT_SET_FACTIONS,
 	DESELECT_ALL_FACTIONS
-} from 'actions'
+} from 'actions/factions'
+
+// Utilities
 import { createArrayFromRange } from 'utilities/array'
 
 // Content
 import { sets, factions } from 'content/smash-up-decks'
 
-let allSetsList = () => {
-	return createArrayFromRange(sets.length)
-}
-
-let allFactionsList = () => {
-	return createArrayFromRange(factions.length)
-}
+let allSetsList = () => createArrayFromRange(sets.length)
+let allFactionsList = () => createArrayFromRange(factions.length)
 
 const initialState = {
 	numberOfPlayers: 2,
 	numberOfFactions: 4, // Should always be 2 times player count
 	expandedSetIds: [],
-	selectedFactionIds: allFactionsList()
-},
-	minNumberOfPlayers = 2,
-	maxNumberOfPlayers = 9
-
-export function getFactionsInitialState() {
-	return initialState
+	selectedFactionIds: allFactionsList(),
 }
+export const getFactionsInitialState = () => initialState
+
+const minNumberOfPlayers = 2
+const maxNumberOfPlayers = 9
 
 export default (state = initialState, action) => {
 	let { type, id, setId, numberOfPlayers } = action,

@@ -1,17 +1,19 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { Link } from 'react-router'
 
 // Components
 import PageDescription from 'components/page-description'
 
+// Utilities
+import StylesLoader from 'utilities/styles-loader'
+
 // Styles
-import { stylesHelper } from 'utilities/styles-helper'
-const styles = []
+const stylesLoader = StylesLoader.create()
 
 // Content
 import { instructions } from 'content/instructions'
 
-class Instructions extends Component {
+class Instructions extends PureComponent {
 	render() { return (
 		<article>
 			<PageDescription
@@ -30,4 +32,4 @@ class Instructions extends Component {
 	)}
 }
 
-module.exports = stylesHelper(Instructions, styles)
+module.exports = stylesLoader.render(Instructions)

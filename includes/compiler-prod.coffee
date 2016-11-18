@@ -12,7 +12,7 @@ module.exports = (runServer) ->
 		webpack webpackServerConfig
 			.watch 100, onBuild.bind null, '[webpack-server]'
 		webpack webpackClientConfig
-			.watch 100, onBuild.bind null, '[webpack-client]'
+			.watch 100, onBuild.bind null, '[webpack-server]'
 	else
 		webpack webpackServerConfig, onBuild.bind null, '[webpack-server]'
 		webpack webpackClientConfig, onBuild.bind null, '[webpack-client]'

@@ -1,22 +1,26 @@
-`import React, { Component } from 'react'`
+import React, { Component } from 'react'
 
-info =
-	name:
-		standard: "Bang! The Dice Game"
+const info = {
+	name: {
+		standard: "Bang! The Dice Game",
 		variations: [
-			"Bang! The Walking Dead Dice Game"
+			"Bang! The Walking Dead Dice Game",
 		]
-	players: standard: "3-8"
+	},
+	players: {
+		standard: "3-8",
+	},
+}
 
-goal = <ul>
+const goal = <ul>
 	<li>Renegade: Be the last one alive</li>
 	<li>Outlaw: Kill the Sheriff</li>
 	<li>Sheriff &amp; Deputies: Kill everyone else.</li>
 </ul>
 
-rules = [
-	"Sheriff goes first."
-	"Bullets are lives and the Sheriff has 2 extra."
+const rules = [
+	"Sheriff goes first.",
+	"Bullets are lives and the Sheriff has 2 extra.",
 	<div>
 		Dice are resolved at the end of up to 3 rolls.
 		<ul>
@@ -27,12 +31,12 @@ rules = [
 			<li>Beer: Choose a player or yourself to heal 1 life. You cannot gain lives more than your starting total.</li>
 			<li>Gatling Gun: 3 of these and you discard all your arrows. Each player other than you loses 1 life.</li>
 		</ul>
-	</div>
-	"On your third roll, you can only choose to re-roll dice that were rolled on your second roll."
+	</div>,
+	"On your third roll, you can only choose to re-roll dice that were rolled on your second roll.",
 ]
 
-setup = [
-	<span><strong>(OPTIONAL)</strong> Give each player an instruction card.</span>
+const setup = [
+	<span><strong>(OPTIONAL)</strong> Give each player an instruction card.</span>,
 	<div>
 		Stack the role deck
 		<ul>
@@ -43,15 +47,16 @@ setup = [
 			<li>7 players: 1 Sheriff, 1 Renegade, 3 Outlaw, 2 Deputy</li>
 			<li>8 players: 1 Sheriff, 2 Renegade, 3 Outlaw, 2 Deputy</li>
 		</ul>
-	</div>
-	"Shuffle both character and role decks separately."
-	"Divvy out one character face-up and role face-down to each player."
-	"Players look at their role and get lives equal to the bullets on their character."
-	"Reveal and give the Sheriff the dice."
+	</div>,
+	"Shuffle both character and role decks separately.",
+	"Divvy out one character face-up and role face-down to each player.",
+	"Players look at their role and get lives equal to the bullets on their character.",
+	"Reveal and give the Sheriff the dice.",
 ]
 
-module.exports =
-	info: info
-	goal: goal
-	rules: rules
-	setup: setup
+module.exports = {
+	info: info,
+	goal: goal,
+	rules: rules,
+	setup: setup,
+}

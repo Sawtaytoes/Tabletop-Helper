@@ -16,16 +16,15 @@ import {
 	deselectFaction,
 	deselectSetFactions,
 	deselectAllFactions
-} from 'actions'
+} from 'actions/factions'
 
 // Utilities
 import convertTextToId from 'utilities/convert-text-to-id'
+import StylesLoader from 'utilities/styles-loader'
 
 // Styles
-import { stylesHelper } from 'utilities/styles-helper'
-const styles = [
-	require('styl/deck-filter')
-]
+const stylesLoader = StylesLoader.create()
+	.add(require('styl/deck-filter'))
 
 class DeckFilter extends Component {
 	// static propTypes = {
@@ -191,4 +190,4 @@ export default connect(
 		expandedSetIds: state.factions.expandedSetIds,
 		selectedFactionIds: state.factions.selectedFactionIds
 	})
-)(stylesHelper(DeckFilter, styles));
+)(stylesLoader.render(DeckFilter));
