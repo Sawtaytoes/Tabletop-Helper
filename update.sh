@@ -8,7 +8,6 @@ export NODE_ENV=production
 rm -r web/*
 git reset --hard HEAD
 git pull
-yarn clean
 yarn
 coffee index.coffee compile
 chown -R www-data:www-data .
