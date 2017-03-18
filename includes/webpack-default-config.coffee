@@ -64,15 +64,15 @@ prod =
 	colors: false
 	debug: false
 	devtool: false
-	imagemin:
-		gifsicle: interlaced: false
-		jpegtran:
-			progressive: true
-			arithmetic: false
-		pngquant:
-			floyd: 0.5
-			speed: 2
-		svgo: plugins: [removeTitle: true, convertPathData: false]
+	#imagemin:
+	#	gifsicle: interlaced: false
+	#	jpegtran:
+	#		progressive: true
+	#		arithmetic: false
+	#	pngquant:
+	#		floyd: 0.5
+	#		speed: 2
+	#	svgo: plugins: [removeTitle: true, convertPathData: false]
 	minimize: true
 	noInfo: true
 	prerender: true
