@@ -6,8 +6,8 @@
     ]
   },
   "scripts": {
-    "postinstall": "npm prune",
-    "prestart": "npm install",
+    "postinstall": "yarn clean",
+    "prestart": "yarn",
     "start": "coffee index.coffee"
   },
   "engines": {
