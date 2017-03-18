@@ -1,3 +1,42 @@
+const tiers = {
+	untouchables: {
+		name: "Untouchables",
+		rank: 1
+	},
+	overpowered: {
+		name: "Overpowered",
+		rank: 2
+	},
+	excellent: {
+		name: "Excellent",
+		rank: 3
+	},
+	great: {
+		name: "Great",
+		rank: 4
+	},
+	good: {
+		name: "Good",
+		rank: 5
+	},
+	poor: {
+		name: "Poor",
+		rank: 6
+	},
+	terrible: {
+		name: "Terrible",
+		rank: 7
+	},
+	worst: {
+		name: "Worst",
+		rank: 8
+	},
+	untested: {
+		name: "Untested",
+		rank: 0
+	},
+}
+
 const setNames = {
 	core: "Core",
 	al9k: "Awesome Level 9000",
@@ -9,6 +48,7 @@ const setNames = {
 	munchkin: "Munchkin",
 	iyf: "It's Your Fault",
 	cad: "Cease & Desist",
+	wwet: "What Were We Thinking?",
 }
 
 const sets = [{
@@ -51,6 +91,7 @@ const factions = [{
 	},
 	description: "Return minions back to their owners' hands, gain victory points through play, and base manipulation",
 	setName: setNames.core,
+	tier: tiers.great,
 }, {
 	title: "Dinosaurs",
 	name: {
@@ -59,6 +100,7 @@ const factions = [{
 	},
 	description: "High-powered minions break bases quickly with ways to augment power further.",
 	setName: setNames.core,
+	tier: tiers.poor,
 }, {
 	title: "Ninjas",
 	name: {
@@ -67,6 +109,7 @@ const factions = [{
 	},
 	description: "Destroy minions and sneak onto bases at the last second using specials.",
 	setName: setNames.core,
+	tier: tiers.terrible,
 }, {
 	title: "Pirates",
 	name: {
@@ -75,6 +118,7 @@ const factions = [{
 	},
 	description: "Move around from base to base and destroy weak minions.",
 	setName: setNames.core,
+	tier: tiers.terrible,
 }, {
 	title: "Robots",
 	name: {
@@ -83,6 +127,7 @@ const factions = [{
 	},
 	description: "Play lots of weak minions at once that compound eachother.",
 	setName: setNames.core,
+	tier: tiers.untouchables,
 }, {
 	title: "Tricksters",
 	name: {
@@ -91,6 +136,7 @@ const factions = [{
 	},
 	description: "Force other players to discard and make bases undesirable to play on.",
 	setName: setNames.core,
+	tier: tiers.worst,
 }, {
 	title: "Wizards",
 	name: {
@@ -99,6 +145,7 @@ const factions = [{
 	},
 	description: "Draw quickly, and play several cards per turn.",
 	setName: setNames.core,
+	tier: tiers.great,
 }, {
 	title: "Zombies",
 	name: {
@@ -107,6 +154,7 @@ const factions = [{
 	},
 	description: "Play minions from the discard pile.",
 	setName: setNames.core,
+	tier: tiers.untouchables,
 }, {
 
 	title: "Bear Cavalry",
@@ -116,6 +164,7 @@ const factions = [{
 	},
 	description: "Move other players' minions and destroy them.",
 	setName: setNames.al9k,
+	tier: tiers.good,
 }, {
 	title: "Ghosts",
 	name: {
@@ -124,6 +173,7 @@ const factions = [{
 	},
 	description: "Benefit from discarding and having 2 or fewer cards in their hand.",
 	setName: setNames.al9k,
+	tier: tiers.terrible,
 }, {
 	title: "Killer Plants",
 	name: {
@@ -132,6 +182,7 @@ const factions = [{
 	},
 	description: "Search your deck for weak minions and multi-turn abilities, base manipulation.",
 	setName: setNames.al9k,
+	tier: tiers.great,
 }, {
 	title: "Steampunks",
 	name: {
@@ -140,6 +191,7 @@ const factions = [{
 	},
 	description: "Powerful base actions that can be salvaged from the discard pile, moving between bases.",
 	setName: setNames.al9k,
+	tier: tiers.great,
 }, {
 
 	title: "Elder Things",
@@ -149,6 +201,7 @@ const factions = [{
 	},
 	description: "Give Madness to other players, and have strong minions that are difficult to play.",
 	setName: setNames.cthulhu,
+	tier: tiers.excellent,
 }, {
 	title: "Innsmouth",
 	name: {
@@ -157,6 +210,7 @@ const factions = [{
 	},
 	description: "Lots of power 2 minions that work together well and played in droves.",
 	setName: setNames.cthulhu,
+	tier: tiers.worst,
 }, {
 	title: "Minions of Cthulhu",
 	name: {
@@ -165,6 +219,7 @@ const factions = [{
 	},
 	description: "Play lots of actions, recover cards from the discard pile, and slow the game down all the while gaining Madness.",
 	setName: setNames.cthulhu,
+	tier: tiers.terrible,
 }, {
 	title: "Miskatonic University",
 	name: {
@@ -173,6 +228,7 @@ const factions = [{
 	},
 	description: "Gain, use, and lose Madness to accomplish a little of everything.",
 	setName: setNames.cthulhu,
+	tier: tiers.poor,
 }, {
 
 	title: "Cyborg Apes",
@@ -182,6 +238,7 @@ const factions = [{
 	},
 	description: "Play lots of actions on minions to power them up.",
 	setName: setNames.sfdf,
+	tier: tiers.great,
 }, {
 	title: "Shapeshifters",
 	name: {
@@ -190,6 +247,7 @@ const factions = [{
 	},
 	description: "Copy other players' power and abilities.",
 	setName: setNames.sfdf,
+	tier: tiers.great,
 }, {
 	title: "Super Spies",
 	name: {
@@ -198,6 +256,7 @@ const factions = [{
 	},
 	description: "Sabotage other players' hands and deck while improving yours, play specials while bases are scoring.",
 	setName: setNames.sfdf,
+	tier: tiers.terrible,
 }, {
 	title: "Time Travelers",
 	name: {
@@ -206,6 +265,7 @@ const factions = [{
 	},
 	description: "Replay actions and minions, avoiding the discard pile by going to the hand or the bottom of the deck.",
 	setName: setNames.sfdf,
+	tier: tiers.terrible,
 }, {
 
 	title: "Giant Ants",
@@ -215,6 +275,7 @@ const factions = [{
 	},
 	description: "Play and move +1 power counters on your minions flexibly.",
 	setName: setNames.monster,
+	tier: tiers.terrible,
 }, {
 	title: "Mad Scientists",
 	name: {
@@ -223,6 +284,7 @@ const factions = [{
 	},
 	description: "Play and manipulate +1 power counters on your minions.",
 	setName: setNames.monster,
+	tier: tiers.great,
 }, {
 	title: "Vampires",
 	name: {
@@ -231,6 +293,7 @@ const factions = [{
 	},
 	description: "Destroy minions to gain power.",
 	setName: setNames.monster,
+	tier: tiers.worst,
 }, {
 	title: "Werewolves",
 	name: {
@@ -239,6 +302,7 @@ const factions = [{
 	},
 	description: "Gain power on your turn and destroy minions.",
 	setName: setNames.monster,
+	tier: tiers.poor,
 }, {
 
 	title: "Geeks",
@@ -248,6 +312,7 @@ const factions = [{
 	},
 	description: "Interrupt other players' turns to disrupt their plans.",
 	setName: setNames.geek,
+	tier: tiers.overpowered,
 }, {
 
 	title: "Fairies",
@@ -257,6 +322,7 @@ const factions = [{
 	},
 	description: "Choose between effects and manipulate actions played on minions.",
 	setName: setNames.pretty,
+	tier: tiers.good,
 }, {
 	title: "Kitty Cats",
 	name: {
@@ -265,6 +331,7 @@ const factions = [{
 	},
 	description: "Temporarily take control of other player's minions, and destroy minions you control.",
 	setName: setNames.pretty,
+	tier: tiers.good,
 }, {
 	title: "Mythic Horses",
 	name: {
@@ -273,6 +340,7 @@ const factions = [{
 	},
 	description: "Benefit from having minions together on bases and lots of ways to move.",
 	setName: setNames.pretty,
+	tier: tiers.overpowered,
 }, {
 	title: "Princesses",
 	name: {
@@ -281,6 +349,7 @@ const factions = [{
 	},
 	description: "A few strong minions with powerful talents and abilities.",
 	setName: setNames.pretty,
+	tier: tiers.good,
 }, {
 
 	title: "Clerics",
@@ -290,6 +359,7 @@ const factions = [{
 	},
 	description: "Return cards from the discard pile and prevent them from going to the discard pile",
 	setName: setNames.munchkin,
+	tier: tiers.terrible,
 }, {
 	title: "Dwarves",
 	name: {
@@ -298,6 +368,7 @@ const factions = [{
 	},
 	description: "Benefit from treasures played on their minions",
 	setName: setNames.munchkin,
+	tier: tiers.poor,
 }, {
 	title: "Elves",
 	name: {
@@ -306,6 +377,7 @@ const factions = [{
 	},
 	description: "Help other players to indirectly help self",
 	setName: setNames.munchkin,
+	tier: tiers.terrible,
 }, {
 	title: "Halflings",
 	name: {
@@ -314,6 +386,7 @@ const factions = [{
 	},
 	description: "Playing lots of extra minions, often negating their effects to play them",
 	setName: setNames.munchkin,
+	tier: tiers.excellent,
 }, {
 	title: "Mages",
 	name: {
@@ -322,6 +395,7 @@ const factions = [{
 	},
 	description: "Discarding cards for destroying and other effects",
 	setName: setNames.munchkin,
+	tier: tiers.poor,
 }, {
 	title: "Orcs",
 	name: {
@@ -330,6 +404,7 @@ const factions = [{
 	},
 	description: "Huge brute horse against your opponents while being hard to knock down",
 	setName: setNames.munchkin,
+	tier: tiers.poor,
 }, {
 	title: "Thieves",
 	name: {
@@ -338,6 +413,7 @@ const factions = [{
 	},
 	description: "Steal things and get treasure, sell treasures for VP",
 	setName: setNames.munchkin,
+	tier: tiers.terrible,
 }, {
 	title: "Warriors",
 	name: {
@@ -346,6 +422,7 @@ const factions = [{
 	},
 	description: "Playing more monsters on bases to slow game and destroying monsters on bases",
 	setName: setNames.munchkin,
+	tier: tiers.good,
 }, {
 
 	title: "Dragons",
@@ -354,13 +431,15 @@ const factions = [{
 		adjective: "Dragon",
 	},
 	setName: setNames.iyf,
+	tier: tiers.excellent,
 }, {
-	title: "Greek Myths",
+	title: "Mythic Greeks",
 	name: {
-		noun: "Greek Myths",
-		adjective: "Greek Myth",
+		noun: "Mythic Greeks",
+		adjective: "Mythic Greek",
 	},
 	setName: setNames.iyf,
+	tier: tiers.overpowered,
 }, {
 	title: "Sharks",
 	name: {
@@ -368,6 +447,7 @@ const factions = [{
 		adjective: "Shark",
 	},
 	setName: setNames.iyf,
+	tier: tiers.great,
 }, {
 	title: "Superheroes",
 	name: {
@@ -375,6 +455,7 @@ const factions = [{
 		adjective: "Superhero",
 	},
 	setName: setNames.iyf,
+	tier: tiers.good,
 }, {
 	title: "Tornados",
 	name: {
@@ -382,6 +463,7 @@ const factions = [{
 		adjective: "Tornado",
 	},
 	setName: setNames.iyf,
+	tier: tiers.terrible,
 }, {
 
 	title: "Star Roamers",
@@ -390,6 +472,7 @@ const factions = [{
 		adjective: "Star Roamer",
 	},
 	setName: setNames.cad,
+	tier: tiers.great,
 }, {
 	title: "Astro Knights",
 	name: {
@@ -397,6 +480,7 @@ const factions = [{
 		adjective: "Astro Knight",
 	},
 	setName: setNames.cad,
+	tier: tiers.excellent,
 }, {
 	title: "Changerbots",
 	name: {
@@ -404,6 +488,7 @@ const factions = [{
 		adjective: "Changerbot",
 	},
 	setName: setNames.cad,
+	tier: tiers.good,
 }, {
 	title: "Ignobles",
 	name: {
@@ -411,6 +496,7 @@ const factions = [{
 		adjective: "Ignoble",
 	},
 	setName: setNames.cad,
+	tier: tiers.terrible,
 }]
 
 const deckSetList = []
