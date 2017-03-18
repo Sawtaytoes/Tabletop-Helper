@@ -29,7 +29,12 @@ class DeckPair extends PureComponent {
 
 	renderDeckPair() {
 		let { adjectiveDeck, nounDeck } = this.props
-		return <span className="deck-pair__deck-name">{adjectiveDeck.name.adjective} {nounDeck.name.noun}</span>
+		return (
+			<div>
+				<div className="deck-pair__name">{adjectiveDeck.name.adjective} {nounDeck.name.noun}</div>
+				<div className="deck-pair__tier">Rank: {adjectiveDeck.tier.rank + nounDeck.tier.rank}</div>
+			</div>
+		)
 	}
 
 	render() { return (

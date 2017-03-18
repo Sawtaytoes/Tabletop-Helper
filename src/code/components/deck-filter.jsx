@@ -169,7 +169,10 @@ class DeckFilter extends Component {
 						<i className={this.getCheckedIcon(isChecked)}></i>
 					</span>
 
-					<span className="deck-filter__title">{deck.title}</span>
+					<span className="deck-filter__name">
+						<span className="deck-filter__name__text">{deck.title}</span>
+						<span className="deck-filter__name__tier">Tier {deck.tier.rank}: {deck.tier.name}</span>
+					</span>
 				</div>
 			</div>
 		)
