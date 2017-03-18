@@ -81,6 +81,9 @@ const sets = [{
 }, {
 	title: setNames.cad,
 	description: '',
+}, {
+	title: setNames.wwet,
+	description: '',
 }]
 
 const factions = [{
@@ -497,6 +500,39 @@ const factions = [{
 	},
 	setName: setNames.cad,
 	tier: tiers.terrible,
+}, {
+
+	title: "Teddy Bears",
+	name: {
+		noun: "Teddy Bears",
+		adjective: "Teddy Bear",
+	},
+	setName: setNames.wwet,
+	tier: tiers.untested,
+}, {
+	title: "Grandmas",
+	name: {
+		noun: "Grandmas",
+		adjective: "Grandma",
+	},
+	setName: setNames.wwet,
+	tier: tiers.untested,
+}, {
+	title: "Rock Stars",
+	name: {
+		noun: "Rock Stars",
+		adjective: "Rock Star",
+	},
+	setName: setNames.wwet,
+	tier: tiers.untested,
+}, {
+	title: "Explorers",
+	name: {
+		noun: "Explorers",
+		adjective: "Explorer",
+	},
+	setName: setNames.wwet,
+	tier: tiers.untested,
 }]
 
 const deckSetList = []
