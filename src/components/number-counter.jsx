@@ -21,9 +21,11 @@ const stylesLoader = StylesLoader.create()
 class NumberCounter extends PureComponent {
 	static propTypes = {
 		containerName: PropTypes.string.isRequired,
+		dispatch: PropTypes.func.isRequired,
 		id: PropTypes.number.isRequired,
 		number: PropTypes.number.isRequired,
 		rotation: PropTypes.number,
+		settingsVisible: PropTypes.bool,
 		style: PropTypes.string,
 		value: PropTypes.number,
 	};
