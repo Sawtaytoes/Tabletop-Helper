@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import { toggleFaction } from 'ducks/smash-up-decks-selector'
 
-import Selector from 'components/smash-up/Selector'
+import Selector from 'components/smash-up/selector'
 
 export const FactionsSelector = ({
 	isSelected,

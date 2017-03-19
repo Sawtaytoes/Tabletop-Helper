@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import { toggleSet } from 'ducks/smash-up-decks-selector'
 
-import Selector from 'components/smash-up/Selector'
+import Selector from 'components/smash-up/selector'
 
 export const SetsSelector = ({
 	isSelected,
