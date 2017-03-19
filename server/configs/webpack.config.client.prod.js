@@ -25,7 +25,7 @@ const webpackConfig = {
 			// 'react-g-analytics',
 			'react-hot-loader',
 			'react-redux',
-			'react-router-dom,
+			'react-router-dom',
 			'react-router-redux',
 		]
 	},
