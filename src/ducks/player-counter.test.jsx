@@ -17,74 +17,91 @@ test('Player Counter: Initial', t => {
 	t.end()
 })
 
-testHelper.addPlayer = (t, initialValue, finalValue) => {
+testHelper.addPlayer = (t, { initial, final }) => {
 	const store = mockStore(playerCounter, {
 		...initialState,
-		numberOfPlayers: initialValue,
+		numberOfPlayers: initial,
 	})
 
 	store.dispatch(addPlayer())
 
-	t.equal(store.getState().numberOfPlayers, finalValue)
-	t.end()
+	t.equal(store.getState().numberOfPlayers, final, `${initial} becomes ${final} players`)
 }
 
-test('Player Counter: Add Player (2 becomes 3 players)', t => {
-	testHelper.addPlayer(t, 2, 3)
+test('Player Counter: Add Player', t => {
+	testHelper.addPlayer(t, {
+		initial: 2,
+		final: 3,
+	})
+
+	testHelper.addPlayer(t, {
+		initial: 8,
+		final: 9,
+	})
+
+	testHelper.addPlayer(t, {
+		initial: 0,
+		final: 2,
+	})
+
+	testHelper.addPlayer(t, {
+		initial: 9,
+		final: 9,
+	})
+
+	testHelper.addPlayer(t, {
+		initial: 11,
+		final: 9,
+	})
+
+	testHelper.addPlayer(t, {
+		initial: -1,
+		final: 2,
+	})
+
+	t.end()
 })
 
-test('Player Counter: Add Player (8 becomes 9 players)', t => {
-	testHelper.addPlayer(t, 8, 9)
-})
-
-test('Player Counter: Add Player (0 becomes 2 players)', t => {
-	testHelper.addPlayer(t, 0, 2)
-})
-
-test('Player Counter: Add Player (9 becomes 9 players)', t => {
-	testHelper.addPlayer(t, 9, 9)
-})
-
-test('Player Counter: Add Player (11 becomes 9 players)', t => {
-	testHelper.addPlayer(t, 11, 9)
-})
-
-test('Player Counter: Add Player (-1 becomes 2 players)', t => {
-	testHelper.addPlayer(t, -1, 2)
-})
-
-testHelper.removePlayer = (t, initialValue, finalValue) => {
+testHelper.removePlayer = (t, { initial, final }) => {
 	const store = mockStore(playerCounter, {
 		...initialState,
-		numberOfPlayers: initialValue,
+		numberOfPlayers: initial,
 	})
 
 	store.dispatch(removePlayer())
 
-	t.equal(store.getState().numberOfPlayers, finalValue)
-	t.end()
+	t.equal(store.getState().numberOfPlayers, final, `${initial} becomes ${final} players`)
 }
 
-test('Player Counter: Remove Player (3 becomes 2 players)', t => {
-	testHelper.removePlayer(t, 3, 2)
-})
+test('Player Counter: Remove Player', t => {
+	testHelper.removePlayer(t, {
+		initial: 3,
+		final: 2,
+	})
 
-test('Player Counter: Remove Player (9 becomes 8 players)', t => {
-	testHelper.removePlayer(t, 9, 8)
-})
+	testHelper.removePlayer(t, {
+		initial: 9,
+		final: 8,
+	})
 
-test('Player Counter: Remove Player (0 becomes 2 players)', t => {
-	testHelper.removePlayer(t, 0, 2)
-})
+	testHelper.removePlayer(t, {
+		initial: 0,
+		final: 2,
+	})
 
-test('Player Counter: Remove Player (2 becomes 2 players)', t => {
-	testHelper.removePlayer(t, 2, 2)
-})
+	testHelper.removePlayer(t, {
+		initial: 2,
+		final: 2,
+	})
 
-test('Player Counter: Remove Player (11 becomes 9 players)', t => {
-	testHelper.removePlayer(t, 11, 9)
-})
+	testHelper.removePlayer(t, {
+		initial: 11,
+		final: 9,
+	})
 
-test('Player Counter: Remove Player (-1 becomes 2 players)', t => {
-	testHelper.removePlayer(t, -1, 2)
+	testHelper.removePlayer(t, {
+		initial: -1,
+		final: 2,
+	})
+
 })
