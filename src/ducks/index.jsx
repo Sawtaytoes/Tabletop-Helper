@@ -8,6 +8,7 @@ import itemHolder from 'ducks/item-holder'
 import location from 'ducks/location'
 import numberCounters from 'ducks/number-counters'
 import playerCounter from 'ducks/player-counter'
+import smashUpDecksSelector from 'ducks/smash-up-decks-selector'
 import tap from 'ducks/tap'
 
 export default combineReducers({
@@ -18,5 +19,6 @@ export default combineReducers({
 	numberCounters,
 	playerCounter,
 	routing,
+	smashUpDecksSelector,
 	tap,
 })

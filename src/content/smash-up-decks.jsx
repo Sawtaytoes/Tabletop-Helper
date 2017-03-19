@@ -11,7 +11,7 @@ const setNames = {
 	cad: "Cease & Desist",
 }
 
-const sets = [{
+const setsList = [{
 	title: setNames.core,
 	description: '',
 }, {
@@ -416,7 +416,7 @@ export const factions = [{
 const deckSetList = []
 const deckSetListReverse = {}
 
-sets.forEach((set, setId) => {
+setsList.forEach((set, setId) => {
 	deckSetList.push({
 		id: setId,
 		decks: [],
@@ -435,4 +435,4 @@ factions.forEach((faction, factionId) => {
 	})
 })
 
-export const setsList = deckSetList
+export const sets = deckSetList

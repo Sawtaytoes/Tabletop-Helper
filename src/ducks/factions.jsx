@@ -2,7 +2,7 @@
 import { createArrayFromRange } from 'utils/array'
 
 // Content
-import { setsList as sets, factions } from 'content/smash-up-decks'
+import { sets, factions } from 'content/smash-up-decks'
 
 // Factions
 export const UPDATE_PLAYERS_COUNT = 'UPDATE_PLAYERS_COUNT'

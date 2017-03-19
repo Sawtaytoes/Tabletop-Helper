@@ -18,7 +18,7 @@ const stylesLoader = StylesLoader.create()
 .add(require('./randomizer-smash-up.styl'))
 
 // Content
-import { setsList as sets, factions } from 'content/smash-up-decks'
+import { sets, factions } from 'content/smash-up-decks'
 
 class Randomizer extends PureComponent {
 	static propTypes = {
