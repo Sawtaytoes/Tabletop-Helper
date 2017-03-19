@@ -8,17 +8,10 @@ export const TOGGLE_SET = 'TOGGLE_SET'
 export const selectAll = () => ({ type: SELECT_ALL_DECKS })
 export const deselectAll = () => ({ type: DESELECT_ALL_DECKS })
 
-// export const toggleFaction = title => ({
-// 	type: TOGGLE_FACTION,
-// 	title,
-// })
-export const toggleFaction = title => {
-	console.debug('title', title)
-	return {
-		type: TOGGLE_FACTION,
-		title,
-	}
-}
+export const toggleFaction = title => ({
+	type: TOGGLE_FACTION,
+	title,
+})
 
 export const toggleSet = title => ({
 	type: TOGGLE_SET,
@@ -31,10 +24,8 @@ export const initialState = {
 }
 
 export default (state = initialState, { type, title }) => {
-	console.debug('here 4', type)
 	switch (type) {
 		case TOGGLE_FACTION:
-			console.debug('here 3')
 			return {
 				...state,
 				[title]: !state[title],
@@ -42,7 +33,6 @@ export default (state = initialState, { type, title }) => {
 
 		case TOGGLE_SET: {
 			const setState = !state[title]
-			console.debug('here 2')
 
 			return {
 				...state,
