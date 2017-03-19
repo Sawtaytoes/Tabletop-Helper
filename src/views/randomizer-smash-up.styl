@@ -1,0 +1,80 @@
+@charset 'UTF-8'
+@require '~utilities/style-vars'
+
+
+//-------------------------------------------
+// Containers
+//-------------------------------------------
+
+.players-selector-container
+	margin 0
+	padding 0
+	border 0
+	color white
+
+.players-selector
+	display flex
+	justify-content center
+	align-items center
+	border-bottom rem(3) solid skyblue
+
+
+//-------------------------------------------
+// Content
+//-------------------------------------------
+
+.players-selector__content
+	line-height 3
+
+.players-selector__description
+	padding-left rem(4)
+	padding-right rem(10)
+	background-color darkblue
+	white-space nowrap
+
+.players-selector__button
+	flex 1 1 auto
+	border 0
+	padding rem(0 10)
+	color navy
+	background-color lightblue
+
+	&:hover
+		color white
+		background-color blue
+
+
+//-------------------------------------------
+// Selectors
+//-------------------------------------------
+
+.players-selector__arrows
+	display flex
+	flex-direction column
+	align-items center
+	height 100%
+	line-height 1.5
+	text-align center
+	background-color darkblue
+
+.players-selector__arrow
+	flex 1 1 auto
+	padding 0 rem(5)
+
+	&:hover
+		background-color royalblue
+
+
+//-------------------------------------------
+// Message
+//-------------------------------------------
+
+.players-selector__message
+	padding rem(20)
+
+.players-selector__message--warning
+	background-color yellow
+
+.players-selector__message--error
+	color white
+	background-color red
