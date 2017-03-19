@@ -3,17 +3,28 @@ import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 
 // Polyfills
-import 'utilities/polyfills'
+import 'utils/polyfills'
 
 // Components
 import TestsOutput from 'components/tap/tests-output'
 
-// Utilities
-import { store } from 'utilities/tests-store'
+// Utils
+import store from 'utils/tests-store'
+
 
 // Setup testing files to watch
-var context = require.context('./', true, /^\.\/.*\.test\.jsx$/)
-context.keys().forEach(context)
+const context = require.context('./', true, /^.*\.test\.jsx$/)
+const testName = window.__TESTNAME__
+
+if (testName === 'undefined') {
+	context.keys()
+	.forEach(context)
+
+} else {
+	context.keys()
+	.filter(fileName => fileName.includes(`/${testName}.test.js`))
+	.forEach(context)
+}
 
 render(
 	<Provider store={store}>

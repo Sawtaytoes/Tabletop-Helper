@@ -18,9 +18,9 @@ import {
 	deselectAllFactions
 } from 'ducks/factions'
 
-// Utilities
-import convertTextToId from 'utilities/convert-text-to-id'
-import StylesLoader from 'utilities/styles-loader'
+// Utils
+import convertTextToId from 'utils/convert-text-to-id'
+import StylesLoader from 'utils/styles-loader'
 
 // Styles
 const stylesLoader = StylesLoader.create()

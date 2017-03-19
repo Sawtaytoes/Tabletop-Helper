@@ -1,7 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react'
 
-// Utilities
-import StylesLoader from 'utilities/styles-loader'
+// Utils
+import StylesLoader from 'utils/styles-loader'
 
 // Styles
 const stylesLoader = StylesLoader.create()

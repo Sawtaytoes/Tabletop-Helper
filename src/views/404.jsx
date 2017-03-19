@@ -5,8 +5,8 @@ import { connect } from 'react-redux'
 // Components
 import PageDescription from 'components/page-description'
 
-// Utilities
-import StylesLoader from 'utilities/styles-loader'
+// Utils
+import StylesLoader from 'utils/styles-loader'
 
 // Styles
 const stylesLoader = StylesLoader.create()

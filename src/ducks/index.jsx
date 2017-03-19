@@ -7,6 +7,7 @@ import factions from 'ducks/factions'
 import itemHolder from 'ducks/item-holder'
 import location from 'ducks/location'
 import numberCounters from 'ducks/number-counters'
+import playerCounter from 'ducks/player-counter'
 import tap from 'ducks/tap'
 
 export default combineReducers({
@@ -15,6 +16,7 @@ export default combineReducers({
 	itemHolder,
 	location,
 	numberCounters,
+	playerCounter,
 	routing,
 	tap,
 })

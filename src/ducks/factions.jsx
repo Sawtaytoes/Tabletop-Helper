@@ -1,5 +1,5 @@
-// Utilities
-import { createArrayFromRange } from 'utilities/array'
+// Utils
+import { createArrayFromRange } from 'utils/array'
 
 // Content
 import { setsList as sets, factions } from 'content/smash-up-decks'

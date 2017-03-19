@@ -11,8 +11,8 @@ import {
 	rotateCounter,
 } from 'ducks/number-counters'
 
-// Utilities
-import StylesLoader from 'utilities/styles-loader'
+// Utils
+import StylesLoader from 'utils/styles-loader'
 
 // Styles
 const stylesLoader = StylesLoader.create()

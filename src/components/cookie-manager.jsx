@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 
-// Utilities
-import { saveState } from 'utilities/cookie-manager'
+// Utils
+import { saveState } from 'utils/cookie-manager'
 
 class CookieManager extends PureComponent {
 	render() { return (<div />) }

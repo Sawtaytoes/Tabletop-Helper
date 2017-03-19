@@ -1,16 +1,18 @@
 import { compose, applyMiddleware, createStore } from 'redux'
 import { syncHistoryWithStore } from 'react-router-redux'
+import persistState from 'redux-localstorage'
 import createBrowserHistory from 'history/createBrowserHistory'
 
 import rootReducer from 'ducks'
-import { getInitialState } from 'utilities/initial-state'
+import { getInitialState } from 'utils/initial-state'
 
 const initialState = getInitialState()
 const history = createBrowserHistory()
+const middlewares = []
 
-let middlewares = []
+const enhancer = compose(applyMiddleware(...middlewares), persistState())
 
-const store = compose(applyMiddleware(...middlewares))(
+const store = enhancer(
 	window.devToolsExtension ? window.devToolsExtension()(createStore) : createStore
 )(rootReducer, initialState)
 
