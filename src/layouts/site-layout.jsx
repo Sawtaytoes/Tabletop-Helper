@@ -1,9 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react'
 // import GoogleAnalytics from 'react-g-analytics'
 
-// Components
-import CookieManager from 'components/cookie-manager'
-
 // Utils
 import StylesLoader from 'utils/styles-loader'
 
@@ -21,7 +18,6 @@ class SiteLayout extends PureComponent {
 	render() { return (
 		<div>
 			{this.props.children}
-			<CookieManager />
 			{/*<GoogleAnalytics id="UA-????????-?" />*/}
 		</div>
 	)}
