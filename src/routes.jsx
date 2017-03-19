@@ -6,8 +6,6 @@ import { connect } from 'react-redux'
 import SiteLayout from 'layouts/site-layout'
 import About from 'views/about'
 import Home from 'views/home'
-import Instruction from 'views/instruction'
-import Instructions from 'views/instructions'
 import RandomizerSmashUp from 'views/randomizer-smash-up'
 import ScoreKeeper from 'views/score-keeper'
 
@@ -43,13 +41,10 @@ const Routes = () => (
 		<Route path="/randomizer/smash-up" component={RandomizerSmashUp} />
 		<Route path="/randomizer/smash-up" component={ConnectedReduxLocation} />
 
-		<Route path="/instructions" component={Instructions} />
-
-		<Route path="/instructions/:link" component={Instruction} />
-		<Route path="/instructions/:link" component={ConnectedReduxLocation} />
-
 		<Route path="/score-keeper" component={ScoreKeeper} />
 		<Route path="/score-keeper" component={ConnectedReduxLocation} />
+
+		<Route path="*" render={() => <Redirect to="/" />} />
 	</SiteLayout>
 )
 
