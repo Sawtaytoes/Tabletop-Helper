@@ -39,7 +39,6 @@ export const TAP_TEST_INFO_REGEX = /^(\d+)[ ](.+)$/
 export const TAP_FAILURE_REGEX = /^((\s{4}(operator|expected|actual|stack):)|\s{6})[ ]*(.+)$/
 
 export const getInitialState = () => ({
-	duration: 0,
 	failures: [],
 	numFailed: 0,
 	numPassed: 0,
@@ -122,7 +121,6 @@ export default (state = getInitialState(), action) => {
 		} else if (tapMessageIs('# ')) {
 			test.type = TAP_MESSAGE_TYPE.HEADER
 			test.text = value
-			test.testNumber = 0
 
 			newState.tests = state.tests.slice()
 			newState.tests.push(test)

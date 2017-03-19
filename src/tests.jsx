@@ -11,13 +11,13 @@ import TestsOutput from 'components/tap/tests-output'
 // Utils
 import store from 'utils/tests-store'
 
-
 // Setup testing files to watch
 const context = require.context('./', true, /^.*\.test\.jsx$/)
 const testName = window.__TESTNAME__
 
 if (testName === 'undefined') {
 	context.keys()
+	.filter(fileName => !fileName.includes('tests-output.test.js'))
 	.forEach(context)
 
 } else {

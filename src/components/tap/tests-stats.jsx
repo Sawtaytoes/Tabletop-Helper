@@ -6,7 +6,7 @@ import { TAP_COLOR } from 'ducks/tap'
 
 class TestsStats extends PureComponent {
 	static propTypes = {
-		duration: PropTypes.number.isRequired,
+		duration: PropTypes.number,
 		numFailed: PropTypes.number.isRequired,
 		numPassed: PropTypes.number.isRequired,
 		numTotal: PropTypes.number.isRequired,
