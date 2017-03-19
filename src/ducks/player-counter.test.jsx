@@ -104,4 +104,5 @@ test('Player Counter: Remove Player', t => {
 		final: 2,
 	})
 
+	t.end()
 })
