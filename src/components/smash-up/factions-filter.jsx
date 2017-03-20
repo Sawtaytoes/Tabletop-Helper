@@ -2,11 +2,12 @@ import React from 'react'
 
 import FactionsSelector from 'components/smash-up/factions-selector'
 import SetsSelector from 'components/smash-up/sets-selector'
+import { stylesLoader } from 'utils/styles-loader'
 
 import { sets } from 'content/smash-up-decks'
 
-export const smashUpDecksFilter = () => (
-	<div>
+export const FactionsFilter = () => (
+	<article className="factions-filter">
 		{sets
 			.map(({ title, decks }) => (
 				<div key={title}>
@@ -19,7 +20,7 @@ export const smashUpDecksFilter = () => (
 				</div>
 			)
 		)}
-	</div>
+	</article>
 )
 
-export default smashUpDecksFilter
+export default stylesLoader(require('./factions-filter.styl'))(FactionsFilter)

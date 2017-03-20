@@ -1,32 +1,17 @@
 @charset 'UTF-8'
 @require '~utils/style-vars'
 
-smash-up--light = #f5f7d2
-smash-up--medium = #eaed8f
-smash-up--dark = #dfe240
-smash-up--bold = #181415
-smash-up--wild = #d6e000
-smash-up--contrast-light = #3769b3
-smash-up--contrast-dark = #243267
-
 shadow-distance = -0.06em
 
 .players-selector
 	display flex
-	flex-direction column
 	justify-content center
 	align-items center
-	height 100%
+	width 100%
 	font-size rem(16)
-	background-color smash-up--contrast-light
 
 	@media small-up
 		font-size rem(24)
-
-.player-selector__wrapper
-	display flex
-	justify-content center
-	align-items center
 
 .players-selector__players
 	position relative
@@ -48,9 +33,14 @@ shadow-distance = -0.06em
 		2px 2px 0 smash-up--bold,
 		shadow-distance shadow-distance 0 smash-up--bold
 
+	&:hover
+		color smash-up--dark
+
+	&:active
+		color smash-up--wild
+
 .player-selector__arrow-up
 	color smash-up--light
 
 .player-selector__arrow-down
 	color smash-up--medium
-

@@ -12,21 +12,19 @@ export const PlayersSelector = ({
 	removePlayer,
 	numberOfPlayers,
 }) => (
-	<div className="players-selector">
-		<div className="player-selector__wrapper">
-			<div className="players-selector__players">
-				{numberOfPlayers}
+	<article className="players-selector">
+		<div className="players-selector__players">
+			{numberOfPlayers}
+		</div>
+		<div className="players-selector__controls">
+			<div className="players-selector__control player-selector__arrow-up" onClick={addPlayer}>
+				<i className="fa fa-arrow-up" />
 			</div>
-			<div className="players-selector__controls">
-				<div className="players-selector__control player-selector__arrow-up" onClick={addPlayer}>
-					<i className="fa fa-arrow-up" />
-				</div>
-				<div className="players-selector__control player-selector__arrow-down" onClick={removePlayer}>
-					<i className="fa fa-arrow-down" />
-				</div>
+			<div className="players-selector__control player-selector__arrow-down" onClick={removePlayer}>
+				<i className="fa fa-arrow-down" />
 			</div>
 		</div>
-	</div>
+	</article>
 )
 
 PlayersSelector.propTypes = {

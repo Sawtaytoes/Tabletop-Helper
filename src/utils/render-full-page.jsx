@@ -62,7 +62,7 @@ module.exports = (renderedContent = undefined, state = {}) => {
 		</head>
 		<body>
 			{/* HTML */}
-			<div id="root" dangerouslySetInnerHTML={{__html: renderedContent}}></div>
+			<article id="root" dangerouslySetInnerHTML={{__html: renderedContent}}></article>
 
 			{/* App */}
 			<script dangerouslySetInnerHTML={{__html: `window.__INITIAL_STATE__ = ${JSON.stringify(state)}`}} />

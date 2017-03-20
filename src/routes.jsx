@@ -7,7 +7,6 @@ import SiteLayout from 'layouts/site-layout'
 import About from 'views/about'
 import Home from 'views/home'
 import RandomizerSmashUp from 'views/randomizer-smash-up'
-import RandomizerSmashUp2 from 'views/randomizer-smash-up2'
 import ScoreKeeper from 'views/score-keeper'
 
 // Actions
@@ -24,7 +23,7 @@ class ReduxLocation extends PureComponent {
 		dispatch(changeLocation(location))
 	}
 
-	render() { return <div /> }
+	render() { return null }
 }
 
 const ConnectedReduxLocation = connect(() => ({}))(ReduxLocation)
@@ -39,10 +38,7 @@ const Routes = () => (
 
 		<Route exact path="/randomizer" render={() => <Redirect to="/randomizer/smash-up" />} />
 
-		<Route path="/randomizer/smash-up-old" component={RandomizerSmashUp} />
-		<Route path="/randomizer/smash-up-old" component={ConnectedReduxLocation} />
-
-		<Route path="/randomizer/smash-up" component={RandomizerSmashUp2} />
+		<Route path="/randomizer/smash-up" component={RandomizerSmashUp} />
 		<Route path="/randomizer/smash-up" component={ConnectedReduxLocation} />
 
 		<Route path="/score-keeper" component={ScoreKeeper} />

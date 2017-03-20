@@ -1,7 +1,5 @@
 import { sets } from 'content/smash-up-decks'
 
-console.debug('sets', sets)
-
 export const PAIR_FACTIONS = 'SMASH_UP_PAIR_FACTIONS'
 
 export const generateDecks = (availableFactions, numberOfPlayers) => ({

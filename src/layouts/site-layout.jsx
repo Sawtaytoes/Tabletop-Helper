@@ -16,10 +16,10 @@ class SiteLayout extends PureComponent {
 	};
 
 	render() { return (
-		<div>
+		<article>
 			{this.props.children}
 			{/*<GoogleAnalytics id="UA-????????-?" />*/}
-		</div>
+		</article>
 	)}
 }
 
