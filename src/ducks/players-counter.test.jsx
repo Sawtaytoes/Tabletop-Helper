@@ -3,22 +3,22 @@ import test from 'tape-catch'
 // Utils
 import mockStore from 'utils/mocks/store.mock'
 
-import playerCounter, {
+import playersCounter, {
 	addPlayer,
 	initialState,
 	removePlayer,
-} from 'ducks/player-counter'
+} from 'ducks/players-counter'
 
 const testHelper = {}
 
 test('Player Counter: Initial', t => {
-	const store = mockStore(playerCounter, initialState)
+	const store = mockStore(playersCounter, initialState)
 	t.equal(store.getState(), initialState)
 	t.end()
 })
 
 testHelper.addPlayer = (t, { initial, final }) => {
-	const store = mockStore(playerCounter, {
+	const store = mockStore(playersCounter, {
 		...initialState,
 		numberOfPlayers: initial,
 	})
@@ -63,7 +63,7 @@ test('Player Counter: Add Player', t => {
 })
 
 testHelper.removePlayer = (t, { initial, final }) => {
-	const store = mockStore(playerCounter, {
+	const store = mockStore(playersCounter, {
 		...initialState,
 		numberOfPlayers: initial,
 	})

@@ -22,7 +22,9 @@ test('Smash Up Randomizer: Initial', t => {
 testHelper.getNormalizedFactions = (t, { availableFactions, expectedFactions }) => {
 	const normalizedFactions = getNormalizedFactions(availableFactions)
 	t.ok(normalizedFactions instanceof Array, 'normalizing factions turns the container into an array')
-	t.deepEqual(normalizedFactions, expectedFactions, 'normalized factions remove unselected factions')
+	t.deepEqual(normalizedFactions, expectedFactions,
+		'normalized factions remove unselected factions and sets'
+	)
 }
 
 
@@ -73,6 +75,34 @@ test('Smash Up Randomizer: Normalize Factions', t => {
 		expectedFactions: [],
 	})
 
+	testHelper.getNormalizedFactions(t, {
+		availableFactions: {
+			"Smash Up": true,
+			"Cease & Desist": true,
+
+			"Bear Cavalry": false,
+			"Ghosts": false,
+			"Killer Plants": false,
+			"Steampunks": false,
+		},
+		expectedFactions: [],
+	})
+
+	testHelper.getNormalizedFactions(t, {
+		availableFactions: {
+			"Smash Up": true,
+
+			"Aliens": true,
+			"Dinosaurs": true,
+			"Ninjas": true,
+		},
+		expectedFactions: [
+			"Aliens",
+			"Dinosaurs",
+			"Ninjas",
+		],
+	})
+
 	t.end()
 })
 
@@ -91,14 +121,6 @@ testHelper.randomizeFactions = (t, { availableFactions, iterations }) => {
 }
 
 test('Smash Up Randomizer: Randomize Factions', t => {
-	testHelper.randomizeFactions(t, {
-		availableFactions: [
-			"Aliens",
-			"Dinosaurs",
-		],
-		iterations: 4,
-	})
-
 	testHelper.randomizeFactions(t, {
 		availableFactions: [
 			"Aliens",
@@ -162,11 +184,6 @@ test('Smash Up Randomizer: Randomize Factions', t => {
 		iterations: 0,
 	})
 
-	testHelper.randomizeFactions(t, {
-		availableFactions: [],
-		iterations: 2,
-	})
-
 	t.end()
 })
 
@@ -176,9 +193,6 @@ testHelper.pairFactions = (t, { randomizedFactions, expectedDecks }) => {
 
 	const numberOfFactions = randomizedFactions.length
 	const numberOfDecks = decks.length
-
-	console.debug('randomizedFactions', randomizedFactions)
-	console.debug('decks', decks)
 
 	t.equal(numberOfDecks, numberOfFactions / 2,
 		`Half of ${numberOfFactions} factions make up the ${numberOfDecks} decks`
@@ -253,7 +267,6 @@ testHelper.generateDecks = (t, { numberOfPlayers, filteredFactions, previousDeck
 	t.equal(numberOfDecks, numberOfPlayers,
 		`${numberOfDecks} decks are for ${numberOfPlayers} players`
 	)
-
 	t.equal(
 		decks.reduce((dictionary, { adjectiveFaction, nounFaction }) => {
 			dictionary.add(adjectiveFaction)

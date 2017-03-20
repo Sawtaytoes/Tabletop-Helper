@@ -1,3 +1,7 @@
+import { sets } from 'content/smash-up-decks'
+
+console.debug('sets', sets)
+
 export const PAIR_FACTIONS = 'SMASH_UP_PAIR_FACTIONS'
 
 export const generateDecks = (availableFactions, numberOfPlayers) => ({
@@ -7,13 +11,20 @@ export const generateDecks = (availableFactions, numberOfPlayers) => ({
 })
 
 export const getNormalizedFactions = availableFactions => (
-	Object.keys(availableFactions).filter(key => availableFactions[key])
+	Object.keys(availableFactions)
+	.filter(key => availableFactions[key])
+	.filter(key => !sets.find(({ title }) => key === title))
 )
 
 export const randomizeFactions = (availableFactions, randomizedFactions, iterations) => {
 	if (iterations <= 0) return randomizedFactions
 
-	randomizedFactions.push(availableFactions.splice(Math.floor(Math.random() * availableFactions.length)))
+	randomizedFactions.push(
+		availableFactions.splice(
+			Math.floor(Math.random() * availableFactions.length
+		), 1)[0]
+	)
+
 	randomizeFactions([ ...availableFactions ], randomizedFactions, iterations - 1)
 
 	return randomizedFactions

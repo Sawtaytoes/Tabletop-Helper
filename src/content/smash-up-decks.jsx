@@ -38,7 +38,7 @@ const tiers = {
 }
 
 const setNames = {
-	core: "Core",
+	core: "Smash Up",
 	al9k: "Awesome Level 9000",
 	cthulhu: "The Obligatory Cthulhu Set",
 	sfdf: "Science Fiction Double Feature",

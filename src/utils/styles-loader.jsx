@@ -1,4 +1,4 @@
-// Utils
+// Utilities
 import renderStyles from 'utils/styles'
 
 class StylesLoader {
@@ -21,3 +21,7 @@ class StylesLoader {
 }
 
 export default StylesLoader
+export const stylesLoader = file => {
+	const stylesLoader = StylesLoader.create().add(file)
+	return stylesLoader.render.bind(stylesLoader)
+}

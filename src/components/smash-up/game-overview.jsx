@@ -1,15 +1,11 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 
+import RandomizeButton from 'components/smash-up/randomize-button'
 import { factions } from 'content/smash-up-decks'
-
-import { generateDecks } from 'ducks/smash-up-randomizer'
 
 export const GameOverview = ({
 	decks,
-	generateDecks,
-	numberOfPlayers,
-	filteredFactions,
 }) => (
 	<div>
 		{decks
@@ -18,47 +14,27 @@ export const GameOverview = ({
 				adjectiveFaction: factions.find(({ title }) => title === deck.adjectiveFaction),
 				nounFaction: factions.find(({ title }) => title === deck.nounFaction)
 			}))
-			.map(({ playerNumber, nounFaction, adjectiveFaction }) => <div><div>{playerNumber}</div><div>{nounFaction.title}</div><div>{nounFaction.tier.name}</div><div>{adjectiveFaction.title}</div><div>{adjectiveFaction.tier.name}</div></div>)
+			.map(({ playerNumber, adjectiveFaction, nounFaction }) => <div key={playerNumber}><div>{playerNumber}</div><div>{adjectiveFaction.name.adjective}</div><div>{adjectiveFaction.tier.name}</div><div>{nounFaction.name.noun}</div><div>{nounFaction.tier.name}</div></div>)
 		}
 
-		<button onClick={() => generateDecks(filteredFactions, numberOfPlayers)}>Randomize</button>
+		<RandomizeButton />
 	</div>
 )
-
-const factionShape = {
-	title: PropTypes.string,
-	tier: PropTypes.shape({
-		name: PropTypes.string,
-	}),
-}
 
 GameOverview.propTypes = {
 	decks: PropTypes.arrayOf(PropTypes.shape({
 		playerNumber: PropTypes.number,
-		adjectiveFaction: PropTypes.shape(factionShape),
-		nounFaction: PropTypes.shape(factionShape),
+		adjectiveFaction: PropTypes.string,
+		nounFaction: PropTypes.string,
 	})),
-	numberOfPlayers: PropTypes.number.isRequired,
-	generateDecks: PropTypes.func,
-	filteredFactions: PropTypes.shape({
-		[PropTypes.string]: PropTypes.bool
-	}),
 }
 
 GameOverview.defaultProps = {
 	decks: [],
-	generateDecks: () => {},
-	filteredFactions: {},
 }
 
-const mapStateToProps = ({ playersCounter, smashUpDecksFilter, smashUpRandomizer }) => ({
+const mapStateToProps = ({ smashUpRandomizer }) => ({
 	decks: smashUpRandomizer,
-	filteredFactions: smashUpDecksFilter,
-	numberOfPlayers: playersCounter.numberOfPlayers,
 })
 
-const mapDispatchToProps = dispatch => ({
-	generateDecks: (filteredFactions, numberOfPlayers) => dispatch(generateDecks(filteredFactions, numberOfPlayers)),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(GameOverview)
+export default connect(mapStateToProps)(GameOverview)

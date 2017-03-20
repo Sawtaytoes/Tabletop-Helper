@@ -4,19 +4,13 @@ import { connect } from 'react-redux'
 import {
 	addPlayer,
 	removePlayer,
-} from 'ducks/player-counter'
+} from 'ducks/players-counter'
 
 export const PlayersSelector = ({
 	addPlayer,
 	removePlayer,
 	numberOfPlayers,
 }) => (
-	<div>
-		<span onClick={removePlayer}>Remove</span>
-		<span> </span>
-		{numberOfPlayers}
-		<span> </span>
-		<span onClick={addPlayer}>Add</span>
 	</div>
 )
 

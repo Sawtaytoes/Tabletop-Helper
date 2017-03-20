@@ -11,8 +11,8 @@ const RandomizerSmashUp = () => (
 
 		<Route path="/randomizer/smash-up/players-selector" render={() => (
 			<div>
-				<div><Link to="/randomizer/smash-up/deck-selector">Next</Link></div>
 				<PlayersSelector />
+				<div><Link to="/randomizer/smash-up/deck-selector">Next</Link></div>
 				<div><Link to="/randomizer/smash-up/deck-selector">Next</Link></div>
 			</div>
 		)} />
