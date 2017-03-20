@@ -7,18 +7,25 @@ import Selector from 'components/smash-up/selector'
 
 export const FactionsSelector = ({
 	isSelected,
+	tier,
 	title,
 	toggleFaction,
 }) => (
 	<Selector
+		key="selector"
 		isSelected={isSelected}
 		onClick={() => toggleFaction(title)}
+		tier={tier}
 		title={title}
 	/>
 )
 
 FactionsSelector.propTypes = {
 	isSelected: PropTypes.bool,
+	tier: PropTypes.shape({
+		name: PropTypes.string.isRequired,
+		rank: PropTypes.number.isRequired,
+	}).isRequired,
 	title: PropTypes.string.isRequired,
 	toggleFaction: PropTypes.func,
 }

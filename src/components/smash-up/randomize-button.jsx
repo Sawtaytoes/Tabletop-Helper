@@ -2,13 +2,19 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 
 import { generateDecks } from 'ducks/smash-up-randomizer'
+import { stylesLoader } from 'utils/styles-loader'
 
 export const RandomizeButton = ({
 	generateDecks,
 	numberOfPlayers,
 	filteredFactions,
 }) => (
-	<button onClick={() => generateDecks(filteredFactions, numberOfPlayers)}>Randomize</button>
+	<div
+		className="randomize-button"
+		onClick={() => generateDecks(filteredFactions, numberOfPlayers)}
+	>
+		Randomize
+	</div>
 )
 
 RandomizeButton.propTypes = {
@@ -35,4 +41,6 @@ const mapDispatchToProps = dispatch => ({
 	),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(RandomizeButton)
+export default connect(mapStateToProps, mapDispatchToProps)(
+	stylesLoader(require('./randomize-button.styl'))(RandomizeButton)
+)

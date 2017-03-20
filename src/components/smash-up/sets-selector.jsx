@@ -11,9 +11,9 @@ export const SetsSelector = ({
 	toggleSet,
 }) => (
 	<Selector
+		isHeader={true}
 		isSelected={isSelected}
 		onClick={() => toggleSet(title)}
-		styles={{ fontWeight: 'bold' }}
 		title={title}
 	/>
 )

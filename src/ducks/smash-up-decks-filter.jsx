@@ -19,8 +19,8 @@ export const toggleSet = title => ({
 })
 
 export const initialState = {
-	...(factions.reduce((combined, { title }) => ({ ...combined, [title]: false }), {})),
-	...(sets.reduce((combined, { title }) => ({ ...combined, [title]: false }), {})),
+	...(factions.reduce((combined, { title }) => ({ ...combined, [title]: true }), {})),
+	...(sets.reduce((combined, { title }) => ({ ...combined, [title]: true }), {})),
 }
 
 export default (state = initialState, { type, title }) => {
