@@ -5,12 +5,27 @@ import {
 	addPlayer,
 	removePlayer,
 } from 'ducks/players-counter'
+import { stylesLoader } from 'utils/styles-loader'
 
 export const PlayersSelector = ({
 	addPlayer,
 	removePlayer,
 	numberOfPlayers,
 }) => (
+	<div className="players-selector">
+		<div className="player-selector__wrapper">
+			<div className="players-selector__players">
+				{numberOfPlayers}
+			</div>
+			<div className="players-selector__controls">
+				<div className="players-selector__control player-selector__arrow-up" onClick={addPlayer}>
+					<i className="fa fa-arrow-up" />
+				</div>
+				<div className="players-selector__control player-selector__arrow-down" onClick={removePlayer}>
+					<i className="fa fa-arrow-down" />
+				</div>
+			</div>
+		</div>
 	</div>
 )
 
@@ -31,4 +46,4 @@ export default connect(({ playersCounter }) => ({
 }), dispatch => ({
 	addPlayer: () => dispatch(addPlayer()),
 	removePlayer: () => dispatch(removePlayer()),
-}))(PlayersSelector)
+}))(stylesLoader(require('./players-selector.styl'))(PlayersSelector))
