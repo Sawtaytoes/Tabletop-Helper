@@ -32,8 +32,8 @@ PlayersSelector.defaultProps = {
 	numberOfPlayers: 2,
 }
 
-export default connect(({ playerCounter }) => ({
-	numberOfPlayers: playerCounter.numberOfPlayers,
+export default connect(({ playersCounter }) => ({
+	numberOfPlayers: playersCounter.numberOfPlayers,
 }), dispatch => ({
 	addPlayer: () => dispatch(addPlayer()),
 	removePlayer: () => dispatch(removePlayer()),

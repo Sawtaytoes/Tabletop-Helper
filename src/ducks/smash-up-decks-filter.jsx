@@ -1,9 +1,9 @@
 import { sets, factions } from 'content/smash-up-decks'
 
-export const SELECT_ALL_DECKS = 'SELECT_ALL_DECKS'
-export const DESELECT_ALL_DECKS = 'DESELECT_ALL_DECKS'
-export const TOGGLE_FACTION = 'TOGGLE_FACTION'
-export const TOGGLE_SET = 'TOGGLE_SET'
+export const SELECT_ALL_DECKS = 'SMASH_UP_SELECT_ALL_DECKS'
+export const DESELECT_ALL_DECKS = 'SMASH_UP_DESELECT_ALL_DECKS'
+export const TOGGLE_FACTION = 'SMASH_UP_TOGGLE_FACTION'
+export const TOGGLE_SET = 'SMASH_UP_TOGGLE_SET'
 
 export const selectAll = () => ({ type: SELECT_ALL_DECKS })
 export const deselectAll = () => ({ type: DESELECT_ALL_DECKS })

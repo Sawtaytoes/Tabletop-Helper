@@ -31,11 +31,12 @@ module.exports = (req, res) => {
 	const initialState = getInitialState()
 	const store = compose()(createStore)(rootReducer, initialState)
 
+	const context = {}
 	const renderedContent = renderToString(
 		<Provider store={store}>
 			<Router
 				location={req.url}
-				context={{}}
+				context={context}
 			>
 				<Routes />
 			</Router>
@@ -45,11 +46,18 @@ module.exports = (req, res) => {
 	store.dispatch(updatePageMeta(req.originalUrl))
 	const renderedPage = renderFullPage(renderedContent, store.getState())
 
+	if (context.url) {
+		res.writeHead(301, { Location: context.url }).end()
+
+	} else {
+		res.status(200).send(renderedPage).end()
+	}
+
 	// if (result.missed) {
 	// 	res.status(404).send(renderedPage).end()
 
 	// } else {
 	// 	res.status(200).send(renderedPage).end()
 	// }
-	res.status(200).send(renderedPage).end()
+	// res.status(200).send(renderedPage).end()
 }

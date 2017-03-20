@@ -5,7 +5,7 @@ import SetsSelector from 'components/smash-up/sets-selector'
 
 import { sets } from 'content/smash-up-decks'
 
-export const SmashUpDecksSelector = () => (
+export const smashUpDecksFilter = () => (
 	<div>
 		{sets
 			.map(({ title, decks }) => (
@@ -22,4 +22,4 @@ export const SmashUpDecksSelector = () => (
 	</div>
 )
 
-export default SmashUpDecksSelector
+export default smashUpDecksFilter

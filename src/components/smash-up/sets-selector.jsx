@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import { toggleSet } from 'ducks/smash-up-decks-selector'
+import { toggleSet } from 'ducks/smash-up-decks-filter'
 
 import Selector from 'components/smash-up/selector'
 
@@ -30,8 +30,8 @@ SetsSelector.defaultProps = {
 }
 
 const mapStateToProps = (_, initialProps) => {
-	return ({ smashUpDecksSelector }) => ({
-		isSelected: smashUpDecksSelector[initialProps.title],
+	return ({ smashUpDecksFilter }) => ({
+		isSelected: smashUpDecksFilter[initialProps.title],
 		toggleSet: () => {},
 	})
 }

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import { toggleFaction } from 'ducks/smash-up-decks-selector'
+import { toggleFaction } from 'ducks/smash-up-decks-filter'
 
 import Selector from 'components/smash-up/selector'
 
@@ -29,8 +29,8 @@ FactionsSelector.defaultProps = {
 }
 
 const mapStateToProps = (_, initialProps) => {
-	return ({ smashUpDecksSelector }) => ({
-		isSelected: smashUpDecksSelector[initialProps.title],
+	return ({ smashUpDecksFilter }) => ({
+		isSelected: smashUpDecksFilter[initialProps.title],
 	})
 }
 
