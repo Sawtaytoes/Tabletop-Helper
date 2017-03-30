@@ -15,9 +15,7 @@ const middleware = [
 const enhancer = compose(applyMiddleware(...middleware), persistState([
 	'itemHolder',
 	'numberCounters',
-	'playersCounter',
-	'smashUpDecksFilter',
-	'smashUpRandomizer',
+	'smashUp',
 ]))
 
 const store = enhancer(
