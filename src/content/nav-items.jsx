@@ -16,14 +16,14 @@ export default [{
 	subitems: [{
 		name: 'Smash Up',
 		to: 'smash-up',
-		// description: "Wanna play Smash Up? Use this app to set your players and sets and have it randomly choose your deck combinations.",
+		description: "Wanna play Smash Up? Use this app to set your players and sets and have it randomly choose your deck combinations.",
 		subitems: [{
 			name: 'Select Players',
 			to: 'players-selector',
 			description: "",
 		}, {
 			name: 'Filter Decks',
-			to: 'decks-filter',
+			to: 'factions-filter',
 			description: "",
 		}, {
 			name: 'Configure Ranking',
