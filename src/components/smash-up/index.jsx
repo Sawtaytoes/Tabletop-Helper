@@ -9,7 +9,8 @@ import { stylesLoader } from 'utils/styles-loader'
 
 const SmashUpRandomizer = ({ match: { url } }) => (
 	<article className="smash-up-randomizer">
-		<Route exact path={`${url}/`} render={() => <Redirect to={`${url}/players-selector`} />} />
+		<Redirect exact from={`${url}/`} to={`${url}/randomizer`} />
+		<Redirect exact from={`${url}/randomizer`} to={`${url}/players-selector`} />
 
 		<Route path={`${url}/players-selector`} render={() => (
 			<article>

@@ -11,12 +11,12 @@ export default [{
 	name: 'Score Keeper',
 	to: 'score-keeper',
 }, {
-	name: 'Randomizer',
-	to: 'randomizer',
+	name: 'Smash Up',
+	to: 'smash-up',
+	description: "Wanna play Smash Up? Use this app to set your players and sets and have it randomly choose your deck combinations.",
 	subitems: [{
-		name: 'Smash Up',
-		to: 'smash-up',
-		description: "Wanna play Smash Up? Use this app to set your players and sets and have it randomly choose your deck combinations.",
+		name: 'Randomizer',
+		to: 'randomizer',
 		subitems: [{
 			name: 'Select Players',
 			to: 'players-selector',
