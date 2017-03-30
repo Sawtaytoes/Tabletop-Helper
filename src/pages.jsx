@@ -1,7 +1,7 @@
 import React from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
 
-import SiteLayout from 'layouts/site-layout'
+import SiteLayout from 'components/site-layout/site-layout'
 import About from 'components/pages/about'
 import Home from 'components/pages/home'
 import RandomizerSmashUp from 'components/pages/randomizer-smash-up'

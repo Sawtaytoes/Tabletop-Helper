@@ -10,10 +10,10 @@ const stylesLoader = StylesLoader.create()
 .add(require('./site-layout.styl'))
 
 export const SiteLayout = ({ children }) => (
-	<div>
+	<article>
 		{children}
 		{/*<GoogleAnalytics id="UA-????????-?" />*/}
-	</div>
+	</article>
 )
 
 SiteLayout.propTypes = {
