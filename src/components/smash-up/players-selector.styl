@@ -1,0 +1,46 @@
+@charset 'UTF-8'
+@require '~utils/style-vars'
+
+shadow-distance = -0.06em
+
+.players-selector
+	display flex
+	justify-content center
+	align-items center
+	width 100%
+	font-size rem(16)
+
+	@media small-up
+		font-size rem(24)
+
+.players-selector__players
+	position relative
+	left shadow-distance
+	color smash-up--dark
+	font-weight bold
+	font-size 8em
+	text-shadow -3px -3px 0 smash-up--bold,
+		3px -3px 0 smash-up--bold,
+		-3px 3px 0 smash-up--bold,
+		3px 3px 0 smash-up--bold,
+		shadow-distance shadow-distance 0 smash-up--bold
+
+.players-selector__control
+	font-size 4em
+	text-shadow -2px -2px 0 smash-up--bold,
+		2px -2px 0 smash-up--bold,
+		-2px 2px 0 smash-up--bold,
+		2px 2px 0 smash-up--bold,
+		shadow-distance shadow-distance 0 smash-up--bold
+
+	&:hover
+		color smash-up--dark
+
+	&:active
+		color smash-up--wild
+
+.player-selector__arrow-up
+	color smash-up--light
+
+.player-selector__arrow-down
+	color smash-up--medium

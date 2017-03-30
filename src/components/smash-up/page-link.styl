@@ -1,0 +1,24 @@
+@charset 'UTF-8'
+@require '~utils/style-vars'
+
+shadow-distance = -0.1em
+
+.page-link
+	color smash-up--light
+	font-weight bold
+	text-decoration none
+	text-shadow -1px -1px 0 smash-up--bold,
+		1px -1px 0 smash-up--bold,
+		-1px 1px 0 smash-up--bold,
+		1px 1px 0 smash-up--bold,
+		shadow-distance shadow-distance 0 smash-up--bold
+
+	@media small-up
+		font-size 1.7em
+
+	&:visited
+		color smash-up--light
+
+	&:hover
+	&:focus
+		color smash-up--dark

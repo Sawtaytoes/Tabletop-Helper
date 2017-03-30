@@ -1,0 +1,32 @@
+@charset 'UTF-8'
+@require '~utils/style-vars'
+
+selector-padding = em(10)
+
+.selector
+	margin em(2 0)
+	padding em(10)
+	display flex
+	justify-content space-between
+	align-items center
+	color smash-up--contrast-dark
+	background-color smash-up--light
+
+.selector__filter
+	font-size em(24)
+
+.selector__content
+	display flex
+	flex-direction column
+
+.selector__title
+	font-size em(24)
+
+.selector__title--header
+	font-weight bold
+
+.selector__expander
+	align-items flex-start
+	position absolute
+	left 0
+	padding selector-padding
