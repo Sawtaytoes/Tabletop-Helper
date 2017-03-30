@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import { Route, Redirect } from 'react-router-dom'
+import { Redirect, Route } from 'react-router-dom'
 
 import DecksFilter from 'components/smash-up/factions-filter'
 import GameOverview from 'components/smash-up/game-overview'
@@ -7,26 +7,26 @@ import PageLink from 'components/smash-up/page-link'
 import PlayersSelector from 'components/smash-up/players-selector'
 import { stylesLoader } from 'utils/styles-loader'
 
-const SmashUpRandomizer = ({ match }) => (
+const SmashUpRandomizer = ({ match: { url } }) => (
 	<article className="smash-up-randomizer">
-		<Route exact path={`${match.url}/`} render={() => <Redirect to={`${match.url}/players-selector`} />} />
+		<Route exact path={`${url}/`} render={() => <Redirect to={`${url}/players-selector`} />} />
 
-		<Route path={`${match.url}/players-selector`} render={() => (
+		<Route path={`${url}/players-selector`} render={() => (
 			<article>
 				<div className="smash-up-randomizer__page-links">
 					<div />
-					<PageLink to={`${match.url}/factions-filter`}>Choose Factions</PageLink>
+					<PageLink to={`${url}/factions-filter`}>Choose Factions</PageLink>
 				</div>
 
 				<PlayersSelector />
 			</article>
 		)} />
 
-		<Route path={`${match.url}/factions-filter`} render={() => (
+		<Route path={`${url}/factions-filter`} render={() => (
 			<article>
 				<div className="smash-up-randomizer__page-links">
-					<PageLink to={`${match.url}/players-selector`}>Choose Players</PageLink>
-					<PageLink to={`${match.url}/game-overview`}>Filter Factions</PageLink>
+					<PageLink to={`${url}/players-selector`}>Choose Players</PageLink>
+					<PageLink to={`${url}/game-overview`}>Filter Factions</PageLink>
 				</div>
 
 				<DecksFilter />
@@ -34,20 +34,20 @@ const SmashUpRandomizer = ({ match }) => (
 		)} />
 
 		{/*
-		<Route path={`${match.url}/ranking-selector`} render={() => (
+		<Route path={`${url}/ranking-selector`} render={() => (
 			<div>
-				<div><Link to={`${match.url}/factions-filter`}>Back</Link></div>
+				<div><Link to={`${url}/factions-filter`}>Back</Link></div>
 				<RankingSelector />
-				<div><Link to={`${match.url}/game-overview`}>Submit</Link></div>
+				<div><Link to={`${url}/game-overview`}>Submit</Link></div>
 			</div>
 		)} />
 		*/}
 
-		<Route path={`${match.url}/game-overview`} render={() => (
+		<Route path={`${url}/game-overview`} render={() => (
 			<article>
 				<div className="smash-up-randomizer__page-links">
-					<PageLink to={`${match.url}/factions-filter`}>Filter Factions</PageLink>
-					<PageLink to={`${match.url}/players-selector`}>Start Over</PageLink>
+					<PageLink to={`${url}/factions-filter`}>Filter Factions</PageLink>
+					<PageLink to={`${url}/players-selector`}>Start Over</PageLink>
 				</div>
 
 				<GameOverview />
