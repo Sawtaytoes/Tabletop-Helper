@@ -9,7 +9,7 @@ import smashUpRandomizer, {
 	initialState,
 	pairFactions,
 	randomizeFactions,
-} from 'ducks/smash-up-randomizer'
+} from './randomizer'
 
 const testHelper = {}
 

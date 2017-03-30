@@ -9,7 +9,7 @@ import smashUpDecksFilter, {
 	selectAll,
 	toggleFaction,
 	toggleSet,
-} from 'ducks/smash-up-decks-filter'
+} from './decks-filter'
 
 const testHelper = {}
 

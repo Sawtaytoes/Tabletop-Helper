@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import { generateDecks } from 'ducks/smash-up-randomizer'
+import { generateDecks } from 'ducks/smash-up/randomizer'
 import { stylesLoader } from 'utils/styles-loader'
 
 export const RandomizeButton = ({
@@ -30,8 +30,8 @@ RandomizeButton.defaultProps = {
 	filteredFactions: {},
 }
 
-const mapStateToProps = ({ playersCounter, smashUpDecksFilter }) => ({
-	filteredFactions: smashUpDecksFilter,
+const mapStateToProps = ({ smashUp: { playersCounter, decksFilter } }) => ({
+	filteredFactions: decksFilter,
 	numberOfPlayers: playersCounter.numberOfPlayers,
 })
 

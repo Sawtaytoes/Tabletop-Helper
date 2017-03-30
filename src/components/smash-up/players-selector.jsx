@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import {
 	addPlayer,
 	removePlayer,
-} from 'ducks/players-counter'
+} from 'ducks/smash-up/players-counter'
 import { stylesLoader } from 'utils/styles-loader'
 
 export const PlayersSelector = ({
@@ -39,7 +39,7 @@ PlayersSelector.defaultProps = {
 	numberOfPlayers: 2,
 }
 
-export default connect(({ playersCounter }) => ({
+export default connect(({ smashUp: { playersCounter } }) => ({
 	numberOfPlayers: playersCounter.numberOfPlayers,
 }), dispatch => ({
 	addPlayer: () => dispatch(addPlayer()),

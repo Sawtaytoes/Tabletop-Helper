@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import {
 	selectAll,
 	deselectAll,
-} from 'ducks/smash-up-decks-filter'
+} from 'ducks/smash-up/decks-filter'
 
 import Selector from 'components/smash-up/selector'
 
@@ -32,8 +32,8 @@ AllSelector.defaultProps = {
 	deselectAll: () => {},
 }
 
-const mapStateToProps = ({ smashUpDecksFilter }) => ({
-	isSelected: Object.values(smashUpDecksFilter).every(filter => filter),
+const mapStateToProps = ({ smashUp: { decksFilter } }) => ({
+	isSelected: Object.values(decksFilter).every(filter => filter),
 })
 
 const mapDispatchToProps = dispatch => ({

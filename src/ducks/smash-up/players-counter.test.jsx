@@ -7,7 +7,7 @@ import playersCounter, {
 	addPlayer,
 	initialState,
 	removePlayer,
-} from 'ducks/players-counter'
+} from './players-counter'
 
 const testHelper = {}
 

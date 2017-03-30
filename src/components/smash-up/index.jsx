@@ -7,13 +7,13 @@ import PageLink from 'components/smash-up/page-link'
 import PlayersSelector from 'components/smash-up/players-selector'
 import { stylesLoader } from 'utils/styles-loader'
 
-const RandomizerSmashUp = ({ match }) => (
-	<article className="randomizer-smash-up">
+const SmashUpRandomizer = ({ match }) => (
+	<article className="smash-up-randomizer">
 		<Route exact path={`${match.url}/`} render={() => <Redirect to={`${match.url}/players-selector`} />} />
 
 		<Route path={`${match.url}/players-selector`} render={() => (
 			<article>
-				<div className="randomizer-smash-up__page-links">
+				<div className="smash-up-randomizer__page-links">
 					<div />
 					<PageLink to={`${match.url}/factions-filter`}>Choose Factions</PageLink>
 				</div>
@@ -24,7 +24,7 @@ const RandomizerSmashUp = ({ match }) => (
 
 		<Route path={`${match.url}/factions-filter`} render={() => (
 			<article>
-				<div className="randomizer-smash-up__page-links">
+				<div className="smash-up-randomizer__page-links">
 					<PageLink to={`${match.url}/players-selector`}>Choose Players</PageLink>
 					<PageLink to={`${match.url}/game-overview`}>Filter Factions</PageLink>
 				</div>
@@ -45,7 +45,7 @@ const RandomizerSmashUp = ({ match }) => (
 
 		<Route path={`${match.url}/game-overview`} render={() => (
 			<article>
-				<div className="randomizer-smash-up__page-links">
+				<div className="smash-up-randomizer__page-links">
 					<PageLink to={`${match.url}/factions-filter`}>Filter Factions</PageLink>
 					<PageLink to={`${match.url}/players-selector`}>Start Over</PageLink>
 				</div>
@@ -56,10 +56,10 @@ const RandomizerSmashUp = ({ match }) => (
 	</article>
 )
 
-RandomizerSmashUp.propTypes = {
+SmashUpRandomizer.propTypes = {
 	match: PropTypes.shape({
 		url: PropTypes.string.isRequired,
 	}).isRequired,
 }
 
-export default stylesLoader(require('./randomizer-smash-up.styl'))(RandomizerSmashUp)
+export default stylesLoader(require('./index.styl'))(SmashUpRandomizer)

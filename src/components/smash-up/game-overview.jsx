@@ -59,8 +59,8 @@ GameOverview.defaultProps = {
 	decks: [],
 }
 
-const mapStateToProps = ({ smashUpRandomizer }) => ({
-	decks: smashUpRandomizer,
+const mapStateToProps = ({ smashUp: { randomizer } }) => ({
+	decks: randomizer,
 })
 
 export default connect(mapStateToProps)(stylesLoader(require('./game-overview.styl'))(GameOverview))

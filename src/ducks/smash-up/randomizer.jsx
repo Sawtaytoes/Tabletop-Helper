@@ -1,6 +1,6 @@
 import { sets } from 'content/smash-up-decks'
 
-export const PAIR_FACTIONS = 'SMASH_UP_PAIR_FACTIONS'
+export const PAIR_FACTIONS = 'SMASH_UP::PAIR_FACTIONS'
 
 export const generateDecks = (availableFactions, numberOfPlayers) => ({
 	type: PAIR_FACTIONS,
