@@ -19,19 +19,18 @@
 html
 body
 	height 100%
-	-webkit-tap-highlight-color transparent
 
 html
-	-webkit-font-smoothing antialiased
-	-moz-osx-font-smoothing grayscale
 	font-family font-family--roboto
 	font-size font-size--base
+	-webkit-font-smoothing antialiased
+	-moz-osx-font-smoothing grayscale
 
 	@media xlarge-up
-		font-size font-size--base + 4
+		font-size font-size--base + 2
 
 	@media xxlarge-up
-		font-size font-size--base + 8
+		font-size font-size--base + 4
 
 	@media print-only
 		font-size font-size--base--print
@@ -42,26 +41,12 @@ body
 
 
 //-------------------------------------------
-// Form Fields
+// iFrames
 //-------------------------------------------
 
-input[type=number]
-	-moz-appearance textfield
-
-	&::-webkit-inner-spin-button
-	&::-webkit-outer-spin-button
-		-webkit-appearance none
-		-moz-appearance none
-		appearance none
-		margin 0
-
-
-//-------------------------------------------
-// Mobile is King
-//-------------------------------------------
-
-article
-	height 100%
+iframe
+	width 100%
+	border 0
 
 
 //-------------------------------------------
@@ -112,21 +97,10 @@ p
 	& .no-text-underline
 		text-decoration none
 
-:focus
-	outline none
-
 
 //-------------------------------------------
 // Media Query Viewport Width
 //-------------------------------------------
 
-// @-webkit-viewport
-// 	width device-width
-// @-moz-viewport
-// 	width device-width
-@-ms-viewport
-	width device-width
-// @-o-viewport
-// 	width device-width
 @viewport
 	width device-width

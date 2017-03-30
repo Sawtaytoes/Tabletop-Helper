@@ -2,7 +2,7 @@ import React, { PureComponent, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
 // Components
-import NumberCounter from 'components/number-counter'
+import NumberCounter from 'components/number-counter/number-counter'
 
 // Actions
 import {

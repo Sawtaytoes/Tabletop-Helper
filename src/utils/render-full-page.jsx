@@ -3,7 +3,6 @@
 import React from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 
-// Utils
 import {
 	htmlMeta,
 	dnsPrefetches,
@@ -15,18 +14,20 @@ const cacheAge = 604800 // 1wk -> 60s x 60m x 24h x 7d
 const prod = process.env.NODE_ENV === 'production'
 
 module.exports = (renderedContent = undefined, state = {}) => {
+	const { pageMeta: { description = '', title = '' } } = state
+
 	return '<!DOCTYPE html>' + renderToStaticMarkup(
 		<html lang="en">
 		<head>
 			{/* Document Info */}
 			<meta charSet="utf-8" />
 			<meta httpEquiv="content-language" content="en-us" />
-			<title>{`${state.location && state.location.title}${htmlMeta.titlePostfix}`}</title>
+			<title>{`${title}${htmlMeta.titlePostfix}`}</title>
 
 			{/* Site Info */}
 			<meta name="author" content={htmlMeta.author} />
 			<meta name="copyright" content={htmlMeta.copyright} />
-			<meta name="description" content={state.location && state.location.description} />
+			<meta name="description" content={description} />
 			<meta name="keywords" content={htmlMeta.keywords} />
 
 			{/* Cache */}
@@ -66,9 +67,9 @@ module.exports = (renderedContent = undefined, state = {}) => {
 
 			{/* App */}
 			<script dangerouslySetInnerHTML={{__html: `window.__INITIAL_STATE__ = ${JSON.stringify(state)}`}} />
-			<script src="/manifest.bundle.js"></script>
-			{prod && <script src="/vendor.bundle.js"></script>}
-			<script src="/main.bundle.js"></script>
+			<script src="/manifest.bundle.js" />
+			{prod && <script src="/vendor.bundle.js" />}
+			<script src="/main.bundle.js" />
 
 			{/* 3rd Party Styles */}
 			{thirdPartyAssets}

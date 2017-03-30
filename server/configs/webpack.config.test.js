@@ -1,31 +1,23 @@
+const BellOnBundlerErrorPlugin = require('bell-on-bundler-error-plugin')
 const HappyPack = require('happypack')
 const webpack = require('webpack')
 
 // Configs
 const dir = require(`${global.baseDir}/global-dirs`)
 const config = require(`${dir.configs}config-settings`)
-const paths = require(`${dir.includes}paths`)
 const webpackDefaultConfig = require(`${dir.configs}webpack.config.default`)
 
-const threadPool = HappyPack.ThreadPool({ size: 2 })
+const threadPool = HappyPack.ThreadPool({ size: 4 })
 
 const webpackConfig = {
-	entry: `./${paths.root.src}server`,
-	output: {
-		filename: 'backend.js',
-		libraryTarget: 'commonjs2',
-		path: `${global.baseDir}/web/`,
-		pathinfo: false,
-		publicPath: '/',
-	},
+	// devtool: 'inline-source-map',
+	devtool: 'cheap-module-source-map',
+	node: { fs: 'empty' },
 	plugins: [
-		new webpack.LoaderOptionsPlugin({
-			minimize: true,
-		}),
 		new webpack.ProgressPlugin((percentage, msg) => {
-			console.info(Math.round(percentage * 100), `prod-server ${msg}`)
+			!msg.includes('building modules') && console.info(Math.round(percentage * 100), `dev ${msg}`)
 		}),
-		new webpack.NoEmitOnErrorsPlugin(),
+		new BellOnBundlerErrorPlugin(),
 		new webpack.IgnorePlugin(/^\.\/locale$/, [/moment$/]),
 		new webpack.WatchIgnorePlugin([
 			'./conf/',
@@ -37,7 +29,8 @@ const webpackConfig = {
 		new webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify(config.getEnv()) }),
 		new HappyPack({
 			id: 'jsx', threadPool, loaders: [
-				'babel-loader?presets[]=latest,presets[]=stage-0,presets[]=react',
+				'babel-loader',
+				'eslint-loader',
 			]
 		}),
 		new HappyPack({
@@ -55,22 +48,10 @@ const webpackConfig = {
 				'stylus-loader?linenos=false&compress=true',
 			]
 		}),
-		new webpack.optimize.CommonsChunkPlugin({ async: true }),
-		new webpack.optimize.AggressiveMergingPlugin(),
-		new webpack.optimize.UglifyJsPlugin({
-			compress: { warnings: false },
-			mangle: { except: ['$super', '$', 'exports', 'require'] },
-			output: {
-				comments: false,
-				screw_ie8: true,
-			},
-			sourceMap: config.isDev(),
-		}),
 	],
-	target: 'node',
 }
 
 module.exports = Object.assign({},
-	webpackDefaultConfig.getProd(),
+	webpackDefaultConfig.getDev(),
 	webpackConfig
 )
