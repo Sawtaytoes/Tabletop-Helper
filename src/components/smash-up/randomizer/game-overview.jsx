@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import RandomizeButton from 'components/smash-up/randomize-button'
+import RandomizeButton from 'components/smash-up/randomizer/randomize-button'
 import { factions } from 'content/smash-up-decks'
 import { stylesLoader } from 'utils/styles-loader'
 

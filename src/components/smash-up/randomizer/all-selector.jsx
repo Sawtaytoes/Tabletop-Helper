@@ -6,7 +6,7 @@ import {
 	deselectAll,
 } from 'ducks/smash-up/decks-filter'
 
-import Selector from 'components/smash-up/selector'
+import Selector from 'components/smash-up/randomizer/selector'
 
 export const AllSelector = ({
 	isSelected,
