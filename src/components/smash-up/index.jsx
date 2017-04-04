@@ -1,12 +1,14 @@
 import React, { PropTypes } from 'react'
-import { Redirect, Route } from 'react-router-dom'
+import { Redirect, Route, Switch } from 'react-router-dom'
 
 import SmashUpRandomizer from 'components/smash-up/randomizer/'
 
 const SmashUp = ({ match: { url } }) => (
 	<article>
-		<Redirect exact from={`${url}/`} to={`${url}/randomizer`} />
-		<Route path={`${url}/randomizer`} component={SmashUpRandomizer} />
+		<Switch>
+			<Route path={`${url}/randomizer`} component={SmashUpRandomizer} />
+			<Redirect exact from={`${url}`} to={`${url}/randomizer`} />
+		</Switch>
 	</article>
 )
 
