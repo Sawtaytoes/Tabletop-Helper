@@ -19,6 +19,7 @@ test('Smash Up Randomizer: Initial', t => {
 	t.end()
 })
 
+
 testHelper.getNormalizedFactions = (t, { availableFactions, expectedFactions }) => {
 	const normalizedFactions = getNormalizedFactions(availableFactions)
 	t.ok(normalizedFactions instanceof Array, 'normalizing factions turns the container into an array')
@@ -26,7 +27,6 @@ testHelper.getNormalizedFactions = (t, { availableFactions, expectedFactions }) 
 		'normalized factions remove unselected factions and sets'
 	)
 }
-
 
 test('Smash Up Randomizer: Normalize Factions', t => {
 	testHelper.getNormalizedFactions(t, {
