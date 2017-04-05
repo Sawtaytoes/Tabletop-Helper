@@ -11,7 +11,8 @@
     "web": "node index.js",
     "web:watch": "nodemon --config nodemon.json index.js",
     "compile": "node index.js compile",
-    "server": "node index.js server"
+    "server": "node index.js server",
+    "test": "node index.js test"
   },
   "engines": {
     "node": "7.2.0",
@@ -41,7 +42,6 @@
     "murmurhash-js": "^1.0.0",
     "nodemailer": "^3.1.7",
     "normalize.css": "^5.0.0",
-    "phantomjs": "^2.1.7",
     "postcss-loader": "^1.3.3",
     "react": "^15.4.2",
     "react-cookie": "^1.0.4",
@@ -74,6 +74,7 @@
     "karma-tap-pretty-reporter": "^3.0.5",
     "karma-webpack": "^2.0.3",
     "nodemon": "^1.11.0",
+    "phantomjs": "^2.1.7",
     "react-addons-test-utils": "^15.4.2",
     "tap-dev-tool": "^1.3.0",
     "tape": "^4.6.3",
