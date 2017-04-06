@@ -3,7 +3,7 @@ import test from 'tape-catch'
 // Utils
 import mockStore from 'utils/mocks/store.mock'
 
-import smashUpRandomizer, {
+import randomizer, {
 	generateDecks,
 	getNormalizedFactions,
 	initialState,
@@ -14,7 +14,7 @@ import smashUpRandomizer, {
 const testHelper = {}
 
 test('Smash Up Randomizer: Initial', t => {
-	const store = mockStore(smashUpRandomizer, initialState)
+	const store = mockStore(randomizer, initialState)
 	t.equal(store.getState(), initialState)
 	t.end()
 })
@@ -253,7 +253,7 @@ test('Smash Up Randomizer: Pair Factions', t => {
 
 
 testHelper.generateDecks = (t, { numberOfPlayers, filteredFactions, previousDecks = [] }) => {
-	const store = mockStore(smashUpRandomizer, [
+	const store = mockStore(randomizer, [
 		...initialState,
 		...previousDecks,
 	])

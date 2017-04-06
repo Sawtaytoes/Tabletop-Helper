@@ -39,7 +39,8 @@ export default (state = initialState, { type, title }) => {
 				[title]: setState,
 				...(
 					sets
-					.find(set => title === set.title).decks
+					.find(set => title === set.title)
+					.decks
 					.reduce((combined, { title }) => ({ ...combined, [title]: setState }), {})
 				),
 			}

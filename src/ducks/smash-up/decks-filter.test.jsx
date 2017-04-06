@@ -3,7 +3,7 @@ import test from 'tape-catch'
 // Utils
 import mockStore from 'utils/mocks/store.mock'
 
-import smashUpDecksFilter, {
+import decksFilter, {
 	deselectAll,
 	initialState,
 	selectAll,
@@ -14,13 +14,13 @@ import smashUpDecksFilter, {
 const testHelper = {}
 
 test('Smash Up Decks Selector: Initial', t => {
-	const store = mockStore(smashUpDecksFilter, initialState)
+	const store = mockStore(decksFilter, initialState)
 	t.equal(store.getState(), initialState)
 	t.end()
 })
 
 testHelper.toggleFaction = (t, { title, initial, final }) => {
-	const store = mockStore(smashUpDecksFilter, {
+	const store = mockStore(decksFilter, {
 		...initialState,
 		[title]: initial,
 	})
@@ -62,7 +62,7 @@ test('Smash Up Decks Selector: Toggle Faction', t => {
 
 
 testHelper.toggleSet = (t, { title, decks, initial, final }) => {
-	const store = mockStore(smashUpDecksFilter, {
+	const store = mockStore(decksFilter, {
 		...initialState,
 		[title]: initial,
 	})
@@ -115,7 +115,7 @@ test('Smash Up Decks Selector: Toggle Set', t => {
 
 
 testHelper.selectAll = t => {
-	const store = mockStore(smashUpDecksFilter, {
+	const store = mockStore(decksFilter, {
 		...initialState,
 		"Ghosts": true,
 		"Killer Plants": false,
@@ -137,7 +137,7 @@ test('Smash Up Decks Selector: Select All', t => {
 
 
 testHelper.deselectAll = t => {
-	const store = mockStore(smashUpDecksFilter, {
+	const store = mockStore(decksFilter, {
 		...initialState,
 		"Ghosts": true,
 		"Killer Plants": false,
