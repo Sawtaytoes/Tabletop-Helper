@@ -83,6 +83,6 @@
     "tape": "^4.6.3",
     "tape-catch": "^1.0.6",
     "transform-loader": "^0.2.4",
-    "webpack-dev-server": "^2.4.2"
+    "webpack-dev-server": "^3.1.11"
   }
 }
