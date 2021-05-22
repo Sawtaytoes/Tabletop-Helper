@@ -11,4 +11,4 @@ git pull
 yarn
 yarn compile
 chown -R www-data:www-data .
-pm2 gracefulReload ${PWD##*/}
+pm2 reload ${PWD##*/}
