@@ -5970,7 +5970,7 @@ react-fastclick@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/react-fastclick/-/react-fastclick-3.0.1.tgz#e438f9a63cad77c0bb61bb7fa4fd6668451ed83d"
 
-react-hot-loader@next:
+react-hot-loader@3.0.0-beta.6:
   version "3.0.0-beta.6"
   resolved "https://registry.yarnpkg.com/react-hot-loader/-/react-hot-loader-3.0.0-beta.6.tgz#463fac0bfc8b63a8385258af20c91636abce75f4"
   dependencies:
@@ -5997,14 +5997,14 @@ react-redux@^5.0.3:
     lodash-es "^4.2.0"
     loose-envify "^1.1.0"
 
-react-router-dom@next:
+react-router-dom@4.0.0-beta.8:
   version "4.0.0-beta.8"
   resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-4.0.0-beta.8.tgz#907a5a0a36e9190652c80f2feead0eadbbba262e"
   dependencies:
     history "^4.5.1"
     react-router "^4.0.0-beta.8"
 
-react-router-redux@next:
+react-router-redux@5.0.0-alpha.4:
   version "5.0.0-alpha.4"
   resolved "https://registry.yarnpkg.com/react-router-redux/-/react-router-redux-5.0.0-alpha.4.tgz#0f64a8633ee78e14ee3eb96c6354ee134aa6ce4f"
   dependencies:
@@ -7315,8 +7315,8 @@ typedarray@^0.0.6, typedarray@~0.0.5:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
 ua-parser-js@^0.7.9:
-  version "0.7.12"
-  resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.12.tgz#04c81a99bdd5dc52263ea29d24c6bf8d4818a4bb"
+  version "0.7.31"
+  resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.31.tgz#649a656b191dffab4f21d5e053e27ca17cbff5c6"
 
 uglify-js@^2.7.5:
   version "2.8.13"
